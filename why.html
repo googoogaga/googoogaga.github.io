@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Why GOO has GOO</title>
+  </head>
+
+  <body>
+    <h1>
+Why GOO has GOO (Generic Object-Orientation)? </h1>
+
+<p>
+This message is a response to Paul Graham's: <a
+href="http://www.paulgraham.com/noop.html">Why Arc Isn't
+Especially</a> Object-Oriented. I acknowledge that GOO isn't the most
+conventional style of object-orientation as recently <a
+href="http://www.paulgraham.com/reesoo.html">detailed</a> by Jonathan
+Rees.
+</p>
+
+<h2>
+What is GOO?
+</h2>
+
+<p>
+The salient aspects of GOO are represented by Dylan's object system
+and comprise such qualities as: (1) objects all the way down, (2)
+class heterarchy, and (3) multimethod dispatch. Furthermore, GOO
+avoids being object-centric by providing powerful functional
+programming facilities that allow users to ignore the better
+portion of the object system if they choose and to instead program
+in a functional style. In other words, the base GOO provides a
+substrate upon which to write Scheme-style programs.
+</p>
+
+<p>
+My overriding contention is that these GOO qualities are already
+latent in Scheme and by bringing them to the surface we exact
+certain benefits. Taking the various qualities one by one, Scheme
+already has self identification of objects as the most basic level
+(e.g., integer?), has a class hierarchy or abstract data types
+organized into a tower of subtypes (e.g., number, integer), and
+has protocols and arguably rudimentary multimethod dispatch (e.g.,
++). Unfortunately, there is no easy way to harness this latent
+power.
+</p>
+
+<h2>
+Equal rights for users
+</h2>
+
+<p>
+It has always been a language design principle of mine that anything
+that's good for the language core libraries will most likely be
+good for users. Now it is not always possible for designers to
+provide mechanisms such that user libraries can look like system
+libraries, but i maintain that such mechanisms will not only
+provide the sort of advantages that recommended these designs to
+language designers in the first place but will also make user code
+interoperate more seamlessly with system code.
+</p>
+
+<p>
+Of course Scheme could be written in terms of typecase expressions,
+writing for example + as a big ole cascaded type
+case. Unfortunately, it is my belief that this is an awkward
+definition of + that fails on many counts, the first being that it
+does not allow for a factoring of code into natural categories and
+the second being that it creates sealed protocols.
+</p>
+
+<h2>
+Extensibility
+</h2>
+
+<p>
+Programmers and designers can not possibly think of all requirements
+on a language or library up front, so it is crucial to design for
+changing requirements. Guy Steele effectively articulated this point
+in his 1998 OOPSLA invited lecture entitled <a
+href="http://www.research.avayalabs.com/user/wadler/steele-oopsla98.pdf">Growing
+a Language</a> saying that it is potentially more (or at least equally)
+important that language designers provide extensibility mechanisms
+than to think of all possible features that might be used. Guy has
+said most of what I'm saying here, but the point is that it is my
+contention that GOO provides an excellent substrate with which to grow
+a language and to write libraries.
+</p>
+
+<p>
+Now going back to the running example of +, if Scheme implementers
+were to write + as a moby typecase, it would be difficult for
+Scheme users to extend + to handle new types of numbers, for
+instance. By writing + as a generic function and a bunch of
+builtin methods, the implementor has written + in such a way as to
+allow users to extend + on equal footing.
+</p>
+
+<h2>
+Efficiency
+</h2>
+
+<p>
+Now say that despite what I've said up to this point, you think that
+GOO is a fad and you really just want to provide a lambda-based
+substrate like Scheme upon which users can write their own
+GOO. This is certainly a worthy goal, but unfortunately, the sad
+fact is that there are no Scheme implementations available that
+can do this without exacting a cost.
+</p>
+
+<p>
+I also contend that implementing GOO efficiently and writing the
+system code in GOO forces a certain efficiency equality, that is,
+user code can run as fast as system code. In other words, most of
+the effort spent in bumming the GOO for system code will pay off
+for user code as well. The usual Scheme implementation trickery
+provides an unfair advantage to system code.
+</p>
+
+<h2>
+Go GOO
+</h2>
+
+<p>
+GOO provides an elegant framework with which to level the playing
+field giving users the power to define libraries in the spirit of
+the core libraries. Furthermore, users' libraries and even the
+core libraries can be extended without losing this original
+spirit. At the very least, GOO is a way to describe what is
+already latent in Scheme.
+</p>
+
+<p>
+Scheme would be an even smaller gem if it were entirely redefined in
+GOO style. For example, many of the type-specific functions would
+be replaced by protocols. In particular, integer? and number?
+would be replaced with isa? and vector-ref and string-ref would be
+replaced by elt. I'm not sure how to measure this shrinkage, but
+to my mind, it would impose a certain structure and consistency
+that would make the overall language and libraries simpler. Of
+course, there would be a small increase in complexity by adding
+GOO itself but I think that this would be a well spent one time
+cost.
+</p>
+
+<p>
+This self-representation advantage is only the beginning. For example,
+GOO protocols provide a mechanism to break free of the "use lists
+for everything" (ULFE) mentality that defeats the advantages of
+abstraction. Lisp and Scheme generally tends to encourage this
+practice because it is inordinately difficult to define and
+manipulate new abstract data types, certainly more difficult to do
+so than to just use a list. In GOO, new collection classes can be
+easily created by merely implementing a simple collection
+protocol. Paul Graham seems to argue (perhaps in a tongue in cheek
+manner) that creating new classes is busy work for mediocre
+programmers. I find the whole ULFE philosophy to be not too
+different from using raw integers for symbols or arrays for
+records (or objects). Sure you might get short term wins by
+avoiding the "busy work" of defining new data types, but don't you
+then create an unmaintainable code base. Even SICP encourages the
+creation of abstact data types. Why not make that even easier with
+GOO?
+</p>
+
+<h2>
+BACKGROUND
+</h2>
+
+<p>
+For more information on GOO, consult the <a
+href="http://www.gwydiondylan.org/drm/drm_1.htm">Dylan Reference
+Manual</a> and the <a
+href="http://www.googoogaga.org/manual/goomanual.html">GOO Reference
+Manual</a>. GOO and Dylan both stand on the shoulders of several
+giants including CLOS.
+</p>
+
+
+<hr>
+<address><a href="mailto:jrb@csail.mit.edu">Jonathan Bachrach</a></address>
+<!-- Created: Tue Jan 31 23:21:42 EST 2006 -->
+<!-- hhmts start -->
+Last modified: Wed Feb  1 00:01:06 EST 2006
+<!-- hhmts end -->
+  </body>
+</html>
