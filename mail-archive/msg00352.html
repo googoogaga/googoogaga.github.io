@@ -1,0 +1,125 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: goo and FreeBSD -->
+<!--X-From-R13: "F. Yheg Pbaq" <gxoNgxo.zcy.pbz> -->
+<!--X-Date: Wed, 21 Jan 2004 12:33:38 &#45;0500 (EST) -->
+<!--X-Message-Id: 16398.47078.691876.704104@tkb.mpl.com -->
+<!--X-Content-Type: multipart/mixed -->
+<!--X-Derived: bin00123.bin -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>goo and FreeBSD</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00351.html">Date Prev</a>][<a href="msg00353.html">Date Next</a>][<a href="msg00351.html">Thread Prev</a>][<a href="msg00353.html">Thread Next</a>][<a href="index.html#00352">Date Index</a>][<a href="threads.html#00352">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>goo and FreeBSD</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: goo and FreeBSD</li>
+<li><em>From</em>: &quot;T. Kurt Bond&quot; &lt;<A HREF="mailto:tkb@DOMAIN.HIDDEN">tkb@xxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Wed, 21 Jan 2004 12:33:26 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Here are some notes on compiling and using goo-0_155-any-dev on
+FreeBSD. I'm using FreeBSD 4.8, but later versions shouldn't be that
+different.
+
+1. FreeBSD 4.8 comes with version 2.0.1 of gmp.  This is too old to
+   work with goo.  (Some later versions of FreeBSD don't include gmp at
+   all, apparently.)  Install the libgmp-4.1.2 port from 
+   /usr/ports/math/libgmp4.
+
+2. Install the boehm-gc port from /usr/ports/devel/boehm-gc. 
+
+3. FreeBSD ports install under /usr/local, but the FreeBSD gcc doesn't
+   look in /usr/local/include by default when compiling nor does it
+   look in /usr/local/lib by default when linking.  You'll have to run
+   configure with the environment variables 
+       CFLAGS='-I/usr/local/include' LDFLAGS='-L/usr/local/include'
+
+4. On FreeBSD /usr/include/values.h warns that it is obsolete and
+   should be replaced with limits.h.  The compilation of goo fails
+   because there are no definitions for LONG_MAX or LONG_MIN in
+   values.h.  The solution is to replace values.h with limits.h
+   everywhere:
+
+       ./c/g2c/goo/bignum.c:781:#include &lt;values.h&gt;
+       ./src/goo/bignum.goo:7:#include &lt;values.h&gt;
+       ./src/goo/bignum/%gmp.c:2:#include &lt;values.h&gt;
+       ./src/goo/bignum/gmp.goo:9:#include &lt;values.h&gt;
+
+5. As far as I can tell, the goo configure script does not save the
+   values of CFLAGS and LDFLAGS anywhere to be used when compiling the
+   C code generated at the repl, so those compilations fail with an
+   error about not being able to include gc/gc.h.  Changing the
+   variable `bv' in the function `YgooSsystemYPcompile' in
+   c/g2c/goo/%system.c and src/goo/%system.c to include
+   &quot;-I/usr/local/include&quot; as one of its elements fixes that problem,
+   but it would probably be better to specify this through the
+   configure script somehow, either by saving the value of CFLAGS or
+   by an argument to the configure script.
+
+Here's a patch, but don't apply it blindly, since it includes the
+change to `YgooSsystemYPcompile' mentioned in #5.
+
+</pre>
+<p><strong>Attachment:
+<a href="bin00123.bin" ><tt>goo.patch</tt></a></strong><br>
+<em>Description:</em> ugly patches for FreeBSD; use only for reference</p>
+<pre>
+
+-- 
+T. Kurt Bond, tkb@tkb.mpl.com
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00351.html">followup to the script patch.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00353.html">Problems with goo CVS?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00351.html">followup to the script patch.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00353.html">Problems with goo CVS?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00352"><strong>Date</strong></a></li>
+<li><a href="threads.html#00352"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

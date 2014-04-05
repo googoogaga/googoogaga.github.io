@@ -1,0 +1,149 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Win32 and Dynamic Compilation working -->
+<!--X-From-R13: Quevf Rbhoyr <puevfNqbhoyr.pb.am> -->
+<!--X-Date: Wed, 24 Jul 2002 22:14:31 &#45;0400 (EDT) -->
+<!--X-Message-Id: uvg74bll8.fsf@double.co.nz -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Win32 and Dynamic Compilation working</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00083.html">Date Prev</a>][<a href="msg00085.html">Date Next</a>][<a href="msg00080.html">Thread Prev</a>][<a href="msg00085.html">Thread Next</a>][<a href="index.html#00084">Date Index</a>][<a href="threads.html#00084">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Win32 and Dynamic Compilation working</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Win32 and Dynamic Compilation working</li>
+<li><em>From</em>: Chris Double &lt;<A HREF="mailto:chris@DOMAIN.HIDDEN">chris@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 25 Jul 2002 14:14:11 +1200</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+I have dynamic compilation (g2c-eval) working under Win32 using the
+Visual C++ compiler. I had to make a number of changes to get it going
+and I'm not sure it works for all cases. I'll outline the changes here
+to get feedback on what the best approach might be to support this
+(assuming you want to support it in the mainline Goo release).
+
+I've taken the approach of building the Goo executable with most of
+the functions 'exported'. This is a special tag to the C compiler that
+makes that function or variable usable from another DLL.
+
+The shared DLL that gets created by the g2c-eval 'imports' these
+functions from the main executable via an import library. This allows
+it to link since Win32 DLL's can't have unresolved references when
+linking. And the references are linked back to the executables correct
+function/variables.
+
+I had to change the way I did the Win32 Thread Local Storage
+support. When using DLL's you can't use the declspec(thread) variable
+type, instead you have to fall back to the Win32 Tls functions.
+
+Here are the main changes made:
+
+1) Created an IMPORTEXPORT define that has the correct 'import' or
+   'export' tag depending on whether building a DLL or the main Goo
+   executable. I'm open to better suggestions for the name. It looks
+   like this:
+
+   #if defined(_MSC_VER)
+     #if defined(BUILD_DLL)
+       #define IMPORTEXPORT __declspec(dllimport)
+     #else
+       #define IMPORTEXPORT __declspec(dllexport)
+     #endif
+   #else
+     #define IMPORTEXPORT
+   #endif
+
+2) Changed references to 'extern ...' to be 'IMPORTEXPORT extern...'
+   so they get the correct linkage. eg:
+
+   IMPORTEXPORT extern P YPsb(P);
+   IMPORTEXPORT extern P YPlb(P);
+   IMPORTEXPORT extern P YPlu(P);
+
+3) Changed RTVDEF and others to include IMPORTEXPORT:
+
+   #define RTVDEF(x, m, n)  IMPORTEXPORT extern P x; P x = PNUL;
+   #define RTVEXT(x, m, n)  IMPORTEXPORT extern P x;
+
+   #define DYNDEF(x, m, n)  IMPORTEXPORT extern P x; P x = PNUL;
+   #define DYNEXT(x, m, n)  IMPORTEXPORT extern P x;
+
+4) Implemented the compile and load functions in grt.c.
+
+5) Rebuilt the world, set eval/top:$g2c-eval? to #t and it works.
+
+I'll post the changed files on my website shortly. 
+
+Is there a way of unloading the shared libraries that are loaded? Will
+I run out of file handles and/or address space eventually?
+
+Chris.
+
+
+
+
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00086" href="msg00086.html">Re: Win32 and Dynamic Compilation working</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+<li><strong><a name="00085" href="msg00085.html">Re: Win32 and Dynamic Compilation working</a></strong>
+<ul><li><em>From:</em> Chris Double</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00083.html">Re: Trouble building goo-0_0140</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00085.html">Re: Win32 and Dynamic Compilation working</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00080.html">Trouble building goo-0_0140</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00085.html">Re: Win32 and Dynamic Compilation working</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00084"><strong>Date</strong></a></li>
+<li><a href="threads.html#00084"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: goo on Mac OS X -->
+<!--X-From-R13: Dbo [lref <ebozlrefNznp.pbz> -->
+<!--X-Date: Fri, 7 Mar 2003 03:53:43 &#45;0500 (EST) -->
+<!--X-Message-Id: 498E39B6&#45;507A&#45;11D7&#45;B39F&#45;00306590A6B6@mac.com -->
+<!--X-Content-Type: multipart/alternative -->
+<!--X-Reference: 782BA9E0&#45;5042&#45;11D7&#45;B8F0&#45;003065CCCEE6@mac.com -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: goo on Mac OS X</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00276.html">Date Prev</a>][<a href="msg00278.html">Date Next</a>][<a href="msg00276.html">Thread Prev</a>][<a href="msg00278.html">Thread Next</a>][<a href="index.html#00277">Date Index</a>][<a href="threads.html#00277">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: goo on Mac OS X</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Raffael Cavallaro &lt;<A HREF="mailto:raffaelcavallaro@DOMAIN.HIDDEN">raffaelcavallaro@xxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: goo on Mac OS X</li>
+<li><em>From</em>: Rob Myers &lt;<A HREF="mailto:robmyers@DOMAIN.HIDDEN">robmyers@xxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 7 Mar 2003 08:53:38 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+On Friday, March 7, 2003, at 02:14 AM, Raffael Cavallaro wrote:<br>
+<br>
+<BLOCKQUOTE>I noticed from the goo mailing list that you were trying to get it to run under Mac OS X. If you've managed to succeeed, could you share your experience with me. Specifically, instructions on what one needs to do to get it to install properly assuming one has the latest developer tools installed.<br>
+</BLOCKQUOTE><br>
+I've got goo building and running but (use tests) (test alll) fails because it's having problems calling out to the c compiler. I'm working on this at the moment. Here's the changes I've had to make so far.<br>
+<br>
+- Rob.<br>
+<br>
+BUILDING GOO on X<br>
+<br>
+<FONT face="Hiragino Kaku Gothic Pro">･</FONT> Get dlcompat installed: http://www.opendarwin.org/projects/dlcompat/<br>
+<br>
+<FONT face="Hiragino Kaku Gothic Pro">･</FONT> c/Makefile.in:<br>
+CFLAGS = $(CPPFLAGS) -g -O2 -dynamic<br>
+LDFLAGS  += -Wl,-L/usr/local/lib,-ldl<br>
+<br>
+<FONT face="Hiragino Kaku Gothic Pro">･</FONT>src/Makefile.in<br>
+install: all<br>
+$(top_srcdir)/mkinstalldirs $(GOO_MODS)<br>
+find . -name \*.goo -exec perl -e"system 'mkinstalldirs ' . ('$(GOO_MODS)/{}' =~ /(.+)\/[^\/]+/);" \;<br>
+find . -name \*.goo -exec $(INSTALL_DATA) {} $(GOO_MODS)/{} \;<br>
+<br>
+<FONT face="Hiragino Kaku Gothic Pro">･</FONT>c/makefile.in<br>
+ifeq ($(build_gc), yes)<br>
+cd $(top_srcdir)/gc/include/ &amp;&amp; find . -name \*.h -exec perl -e"system 'mkinstalldirs ' . ('$(GOO_LIB)/gc/{}' =~ /(.+)\/[^\/]+/);" \;<br>
+cd $(top_srcdir)/gc/include/ &amp;&amp; find . -name \*.h -exec $(INSTALL_DATA) {} $(GOO_LIB)/gc/{} \;<br>
+endif<br>
+<br>
+<FONT face="Hiragino Kaku Gothic Pro">･</FONT>src/goo/%system.c<br>
+<FONT face="Hiragino Kaku Gothic Pro">･</FONT>c/g2c/goo/%system.c<br>
+char *v[] = {"cc", /*"-shared"*/,  "-bundle", "-g", "-O", "-fPIC",  buf, "-o", sofile, cfile, NULL};<br>
+<br>
+<FONT face="Hiragino Kaku Gothic Pro">･</FONT>grt.h:<br>
+#if defined()<br>
+#define CALLN(args...) _CALLN(regs, args)<br>
+#define XCALL0(args...) _CALL0(REGSREF(), args)<br>
+#define XCALL1(args...) _CALL1(REGSREF(), args)<br>
+#define XCALL2(args...) _CALL2(REGSREF(), args)<br>
+#define XCALL3(args...) _CALL3(REGSREF(), args)<br>
+#define XCALL4(args...) _CALL4(REGSREF(), args)<br>
+#define XCALL5(args...) _CALL5(REGSREF(), args)<br>
+#define XCALLN(args...) _CALLN(REGSREF(), args)<br>
+#define XXCALL0(args...) _CALL0(REGSREF(), args)<br>
+#define XXCALL1(args...) _CALL1(REGSREF(), args)<br>
+#define XXCALL2(args...) _CALL2(REGSREF(), args)<br>
+#define XXCALL3(args...) _CALL3(REGSREF(), args)<br>
+#define XXCALL4(args...) _CALL4(REGSREF(), args)<br>
+#define XXCALL5(args...) _CALL5(REGSREF(), args)<br>
+#define XXCALLN(args...) _CALLN(REGSREF(), args)<br>
+#elif ! defined(_MSC_VER)<br>
+// Original headers<br>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00276" href="msg00276.html">goo on Mac OS X</a></strong>
+<ul><li><em>From:</em> Raffael Cavallaro</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00276.html">goo on Mac OS X</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00278.html">Re: goo on Mac OS X</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00276.html">goo on Mac OS X</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00278.html">Re: goo on Mac OS X</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00277"><strong>Date</strong></a></li>
+<li><a href="threads.html#00277"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

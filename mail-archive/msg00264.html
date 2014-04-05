@@ -1,0 +1,129 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: case sensitivity -->
+<!--X-From-R13: wz <wnazneNvcevzhf.pbz.nh> -->
+<!--X-Date: Sat, 1 Mar 2003 23:53:41 &#45;0500 (EST) -->
+<!--X-Message-Id: GEZUG3Z4XVRFCSO1VG3X64KI2X955Z.3e629a17@abe -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 09D61BA3&#45;4BE8&#45;11D7&#45;9466&#45;00306590A6B6@mac.com -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: case sensitivity</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00263.html">Date Prev</a>][<a href="msg00265.html">Date Next</a>][<a href="msg00262.html">Thread Prev</a>][<a href="msg00265.html">Thread Next</a>][<a href="index.html#00264">Date Index</a>][<a href="threads.html#00264">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: case sensitivity</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: case sensitivity</li>
+<li><em>From</em>: jm &lt;<A HREF="mailto:janmar@DOMAIN.HIDDEN">janmar@xxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sun, 02 Mar 2003 15:56:07 -0800</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+&gt;This is bad practice, though, as it's confusing and introduces 
+&gt;potential for errors. IMVHO, whatever  is decided, bad practice from 
+&gt;thirty-year-old programming languages is a problem for wrapper 
+&gt;generators rather than new programming languages.
+
+this sounds like an argument for designing goo in a vacuum. however, 
+I don't think we can ignore the computing landscape in which goo has
+to operate. the fact is that a very large number of libraries are
+written in c and some of them will use bad coding standards and
+some of these will need to be wrapped. I consider wrapping a library
+for use in goo as part of the 'goo experience' so weaknesses in
+wrapper generators are weaknesses in goo.
+
+anyway...
+
+so how much work can be saved by making goo case sensitive?
+to answer this we need to know which libraries are going to be wrapped
+and then which of those actually have name conflicts: my guess is
+there won't be many, but this could be based on false assumptions.
+
+then we need to consider how much work it is to resolve name conflicts 
+and document the changes: a perl script could automate most the work.
+
+still, could this extra work be the difference between a library being
+wrapped or not? after all, most good programmers are lazy, right?
+
+
+now lets consider the benefits of case insensitivity.
+robustness. useability. historical.
+someone else will have to make the case for these, they sound
+theoretical to me. I'd like to see an example of how it can be 
+put to good use.
+after a quick browse though the sources and sample code, it seems 
+to me that most people are using the lisp standard of all lower case 
+with '-' as word seperators.
+
+--
+ jan
+
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00266" href="msg00266.html">Re: case sensitivity</a></strong>
+<ul><li><em>From:</em> Rob Myers</li></ul></li>
+<li><strong><a name="00265" href="msg00265.html">Re: case sensitivity</a></strong>
+<ul><li><em>From:</em> Bryn Keller</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00262" href="msg00262.html">Re: case sensitivity</a></strong>
+<ul><li><em>From:</em> Rob Myers</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00263.html">Re: case sensitivity</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00265.html">Re: case sensitivity</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00262.html">Re: case sensitivity</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00265.html">Re: case sensitivity</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00264"><strong>Date</strong></a></li>
+<li><a href="threads.html#00264"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

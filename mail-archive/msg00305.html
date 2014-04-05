@@ -1,0 +1,145 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: rough first impressions -->
+<!--X-From-R13: @rry Yevfuanfjnzv <arryxNnyhz.zvg.rqh> -->
+<!--X-Date: Tue, 15 Apr 2003 09:32:22 &#45;0400 (EDT) -->
+<!--X-Message-Id: 16028.2707.30208.875793@h00045a4799d6.ne.client2.attbi.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 1050251823.1331.24.camel@snagret -->
+<!--X-Reference: E1176B94&#45;6E93&#45;11D7&#45;BFF8&#45;000A95A0424C@ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: rough first impressions</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00304.html">Date Prev</a>][<a href="msg00306.html">Date Next</a>][<a href="msg00298.html">Thread Prev</a>][<a href="msg00306.html">Thread Next</a>][<a href="index.html#00305">Date Index</a>][<a href="threads.html#00305">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: rough first impressions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: rough first impressions</li>
+<li><em>From</em>: Neel Krishnaswami &lt;<A HREF="mailto:neelk@DOMAIN.HIDDEN">neelk@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Tue, 15 Apr 2003 09:35:15 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Jonathan Bachrach writes:
+&gt; &gt; * collection stuff
+&gt; &gt; Probably my favorite thing about Ruby is the elegance of it's iteration
+&gt; &gt; mechanisms and corresponding syntax.  This feature alone makes me twice
+&gt; &gt; as productive in Ruby as in Python.  Building this in is a smart move.
+&gt; &gt; Goo's iteration seems to have an even more imperative flavor than
+&gt; &gt; Ruby's, which is a bit ironic given Goo's roots.
+&gt; 
+&gt; yeah i've thought about more declarative ways of specifying an 
+&gt; iteration protocol, perhaps with a macro that expands into the various 
+&gt; methods. i definitely wasn't ready though to add coroutine support.
+
+I haven't programmed very much Ruby, but looking at the Ruby book it
+seems like its iterators are mostly just sugar for higher-order
+functions -- the &quot;yield&quot; keyword lets you pass a function as an
+implicit argument to a method -- ie, you just write
+
+  foo(x) {|n| n + n}
+
+rather than
+
+  foo(x, {|n| n + n })
+
+I think jrb's new closure syntax gets you 90% of the way there without
+the weird semantics. The other 10% could come from some macros for
+defining collections, plus some higher-order functions for iterating
+over them.
+
+&gt; you can pretty much do this.  the only exception is local functions.  
+&gt; these could be done as generic functions as well and allow users to 
+&gt; have multiple methods on a given local generic.
+
+I would love this feature! It would let you write code in a pattern
+matching style, as you destructure objects and then dispatch on their
+guts. It would be supremely cool if you could extend the terse closure
+syntax to define generics and a set of methods, eg:
+
+ { x|&lt;num&gt; y|&lt;num&gt; \ (+ x y)
+ | x|&lt;str&gt; y|&lt;str&gt; \ (cat x y) }
+
+or
+
+ { (x|&lt;num&gt; y|&lt;num&gt; \ (+ x y))
+   (x|&lt;str&gt; y|&lt;str&gt; \ (cat x y)) }
+
+&gt; of course, internally i need to have non generic functions to
+&gt; bootstrap the system.  it's open for debate.
+
+\begin{silly}
+You could use dg/dm for methods, and define-function for non-generics.
+Then you could rely on people's laziness to use dg by default. :)
+\end{silly}
+
+-- 
+Neel Krishnaswami
+neelk@alum.mit.edu
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00306" href="msg00306.html">Re: rough first impressions</a></strong>
+<ul><li><em>From:</em> Steven Shaw</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00282" href="msg00282.html">rough first impressions</a></strong>
+<ul><li><em>From:</em> Miles Egan</li></ul></li>
+<li><strong><a name="00286" href="msg00286.html">Re: rough first impressions</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00304.html">Re: rough first impressions</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00306.html">Re: rough first impressions</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00298.html">Re: rough first impressions</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00306.html">Re: rough first impressions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00305"><strong>Date</strong></a></li>
+<li><a href="threads.html#00305"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

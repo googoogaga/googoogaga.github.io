@@ -1,0 +1,109 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: RE: Threads -->
+<!--X-From-R13: "Perag Thytunz" <oerag.shytunzNkcflfgrzf.pbz> -->
+<!--X-Date: Mon, 13 May 2002 13:58:54 &#45;0400 (EDT) -->
+<!--X-Message-Id: BE6EE24E3C118B4CAF54769CDA66F361A1ED76@ivory.corp.xpsystems.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>RE: Threads</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00057.html">Date Prev</a>][<a href="msg00059.html">Date Next</a>][<a href="msg00057.html">Thread Prev</a>][<a href="msg00064.html">Thread Next</a>][<a href="index.html#00058">Date Index</a>][<a href="threads.html#00058">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>RE: Threads</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;Jonathan Bachrach&quot; &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: RE: Threads</li>
+<li><em>From</em>: &quot;Brent Fulgham&quot; &lt;<A HREF="mailto:brent.fulgham@DOMAIN.HIDDEN">brent.fulgham@xxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Mon, 13 May 2002 10:59:13 -0700</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+&gt; If your threads are lightweight (i.e. a single native thread exists
+&gt; that manages a number of lightweight thread objects, perhaps more
+&gt; typical in VM-based implementations), the choices are limited. You
+&gt; pretty much have to farm out native calls to other native threads
+&gt; dedicated to that chore in order to keep moving. Once the generic
+&gt; infrastructure's in place though, writing native methods in that
+&gt; environment isn't much more difficult than it is anywhere else.
+&gt; 
+
+This reminded me of the &quot;Stackless Python&quot; extension, with its so-
+called microthreading implementation (see <A  HREF="http://www.stackless.com/">http://www.stackless.com/</A>.)
+I don't recall all the details now, but they effectively implemented
+a (micro)threading system similar to Jonathan's description.
+
+I don't know how useful this work would be, but it might stimulate
+some ideas.
+
+A few questions:
+
+1.  Can the availability of multiple processors (on SMP machines)
+be taken advantage of without resorting to native threads?
+
+2.  What problems are created when trying to interface with non-Goo
+code if Goo's threads are not implemented as &quot;native&quot; threads (e.g.,
+if I have, say, a server thread running in Goo that needs to call
+a native OS system routine, is it possible to confuse the OS when 
+these &quot;micro&quot; threads both call the OS-level routine from within
+Goo?
+
+Thanks,
+
+-Brent
+
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00057.html">Re: Threads</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00059.html">html version of goo manual available</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00057.html">Re: Threads</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00064.html">Re: Threads</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00058"><strong>Date</strong></a></li>
+<li><a href="threads.html#00058"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

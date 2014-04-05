@@ -1,0 +1,134 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: swig questions -->
+<!--X-From-R13: wz <wnazneNvcevzhf.pbz.nh> -->
+<!--X-Date: Fri, 28 Feb 2003 06:55:08 &#45;0500 (EST) -->
+<!--X-Message-Id: SQ85YHBJHONUT72NJNKIC86WTVS2UFD.3e6059dc@abe -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>swig questions</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00259.html">Date Prev</a>][<a href="msg00261.html">Date Next</a>][<a href="msg00259.html">Thread Prev</a>][<a href="msg00268.html">Thread Next</a>][<a href="index.html#00260">Date Index</a>][<a href="threads.html#00260">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>swig questions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: swig questions</li>
+<li><em>From</em>: jm &lt;<A HREF="mailto:janmar@DOMAIN.HIDDEN">janmar@xxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 28 Feb 2003 22:57:32 -0800</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+hi,
+
+i've got a few questions about gooSwig.
+
+1.
+where can i get the lastest version,
+the wiki web links to an old version.
+
+
+2. 
+are these issues easily fixed or are they limitations of swig
+
+a. hex defs aren't recognised as constants
+#define SDL_INIT_VIDEO 0x00000020
+
+b. enums in macros prevent constants from being generated
+enum { SDL_PRESSED = 0x01, SDL_RELEASED = 0x00 };
+#define SDL_BUTTON(X) (SDL_PRESSED&lt;&lt;(X-1))
+#define SDL_BUTTON_LEFT 1
+#define SDL_BUTTON_LMASK SDL_BUTTON(SDL_BUTTON_LEFT)
+
+c. variable length arg lists
+extern DECLSPEC void SDLCALL SDL_SetError(const char *fmt, ...);
+
+
+3.
+when creating new_* functions wouldn't it be better to use
+GC_malloc() or allocate() instead of calloc()?
+
+
+4.
+when i swigify these functions ii_set works,
+but ff_set hangs the top-level, does anyone
+else get this behaviour?
+
+int ii = 0;
+int ii_get () { return ii; }
+int ii_set (int i) { ii = i; return ii; }
+
+float ff = 0.f;
+float ff_get () { return ff; }
+float ff_set (float f) { ff = f; return ff; }
+
+also, it would be nice if
+export float ff;
+automatically generated the get/set functions.
+
+thanks.
+
+--
+ jan 
+
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00268" href="msg00268.html">Re: swig questions</a></strong>
+<ul><li><em>From:</em> Andrew Sutherland</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00259.html">case sensitivity</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00261.html">Re: case sensitivity</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00259.html">case sensitivity</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00268.html">Re: swig questions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00260"><strong>Date</strong></a></li>
+<li><a href="threads.html#00260"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

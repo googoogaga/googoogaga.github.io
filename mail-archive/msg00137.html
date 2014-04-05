@@ -1,0 +1,137 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: immutability and == -->
+<!--X-From-R13: Oyyra Eubeg <jnfubegNgjvfgrqzngevk.pbz> -->
+<!--X-Date: Mon, 5 Aug 2002 15:21:07 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20020805.142832.884027367.washort@twistedmatrix.com -->
+<!--X-Content-Type: multipart/signed -->
+<!--X-Reference: uqzbs8jzv1q.fsf@bongo.ai.mit.edu -->
+<!--X-Reference: 52AFDC02&#45;A812&#45;11D6&#45;8F54&#45;003065D63222@fuhm.net -->
+<!--X-Reference: 20020805101353.GA21540@vomjom -->
+<!--X-Derived: pgp03639.pgp -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: immutability and ==</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00136.html">Date Prev</a>][<a href="msg00138.html">Date Next</a>][<a href="msg00136.html">Thread Prev</a>][<a href="msg00145.html">Thread Next</a>][<a href="index.html#00137">Date Index</a>][<a href="threads.html#00137">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: immutability and ==</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:vomjom@DOMAIN.HIDDEN">vomjom@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: immutability and ==</li>
+<li><em>From</em>: Allen Short &lt;<A HREF="mailto:washort@DOMAIN.HIDDEN">washort@xxxxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Mon, 05 Aug 2002 14:28:32 -0500 (CDT)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+&gt;&gt;&gt;&gt;&gt; &quot;Jonathan&quot; == Jonathan Hseu &lt;vomjom@vomjom.org&gt; writes:
+
+    &gt; Following previous discussion of immutability and ==: If ==
+    &gt; returns true for equivalent immutable objects, then there should
+    &gt; be a way to specify classes (or properties?) as immutable.
+    &gt; Overriding == for &lt;tup&gt; and &lt;str&gt; won't be enough.  Also, if a
+    &gt; programmer makes immutable objects, then they will have to
+    &gt; remember to override == every time...  which might become a
+    &gt; pain.
+
+yes, being able to add immutable properties would be quite useful. and
+as Baker points out, most of the time you can get away with not
+defining an equality predicate for your classes; just compare objects
+according to the contents of their slots. only when you have mutable
+slots does an equality predicate become necessary, i think.
+
+    &gt; If they forget, unexpected behavior will occur for anyone that
+    &gt; uses their code.
+
+right: the point of having a mutability model is to reduce surprises :)
+
+    &gt; On the subject, I had a bug in my code recently because of
+    &gt; unexpected behavior: Let's say I have a vector called 'test'.
+    &gt; If I (as &lt;vec&gt; test), it will return the same object.  If I (as
+    &gt; &lt;lst&gt; test), it will return a new object.
+
+    &gt; If I _always_ want a new object, then I have to (dup) it.  It
+    &gt; seems somewhat wasteful to create two new copies in the second
+    &gt; case...
+
+    &gt; Plus, an unsuspecting programmer may use (as) believing it will
+    &gt; always return a new object.
+
+    &gt; My opinion is: (as) should always return a new object.
+    &gt; Thoughts?
+
+I'd say your expectations aren't taking into account the difference
+between mutable and immutable objects :) I'd say that if you want to
+write non-destructive code, it should operate on immutable
+objects. Furthermore, it seems to me that no function should
+implicitly copy -- i.e., if one is operating on mutable data structures, it
+makes sense to only copy them on request; if one is operating on
+immutable data structure, &quot;copy&quot; isn't defined for it since it should
+be compared for structural equality only, not pointer comparison.
+
+Allen
+
+</pre>
+<p><strong>Attachment:
+<a href="pgp03639.pgp" ><tt>pgp03639.pgp</tt></a></strong><br>
+<em>Description:</em> PGP signature</p>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00126" href="msg00126.html">Re: CVS update: goo/src/goo/cols</a></strong>
+<ul><li><em>From:</em> Andrew Sutherland</li></ul></li>
+<li><strong><a name="00133" href="msg00133.html">Re: CVS update: goo/src/goo/cols</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+<li><strong><a name="00136" href="msg00136.html">immutability and ==</a></strong>
+<ul><li><em>From:</em> Jonathan Hseu</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00136.html">immutability and ==</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00138.html">Two bugs....</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00136.html">immutability and ==</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00145.html">Re: CVS update: goo/src/goo/cols</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00137"><strong>Date</strong></a></li>
+<li><a href="threads.html#00137"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

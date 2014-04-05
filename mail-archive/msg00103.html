@@ -1,0 +1,123 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Goo porting questions -->
+<!--X-From-R13: "Quevf Rbhoyr" <puevf.qbhoyrNqbhoyr.pb.am> -->
+<!--X-Date: Sun, 28 Jul 2002 19:27:34 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20020728232726.20E1A6D9DA@www.fastmail.fm -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Goo porting questions</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00102.html">Date Prev</a>][<a href="msg00104.html">Date Next</a>][<a href="msg00100.html">Thread Prev</a>][<a href="msg00105.html">Thread Next</a>][<a href="index.html#00103">Date Index</a>][<a href="threads.html#00103">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Goo porting questions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;goo list&quot; &lt;<A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Goo porting questions</li>
+<li><em>From</em>: &quot;Chris Double&quot; &lt;<A HREF="mailto:chris.double@DOMAIN.HIDDEN">chris.double@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sun, 28 Jul 2002 23:27:26 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On 28 Jul 2002 18:39:39 -0400, &quot;Jonathan Bachrach&quot; &lt;jrb@ai.mit.edu&gt;
+said:
+&gt; no this is too heavy handed.  the bigger problem is that some
+&gt; primitive functions in boot are defined INLINE and do not occur in a
+&gt; header and it would be a bit more complicated to produce a header file
+&gt; c file produced.  
+
+This leads to something about the .NET port as well. When compiling C
+code for .NET it requires all functions to have prototypes (ie. be
+declared before use). That means somehow generating the prototypes in a
+header file that gets included by other files. Currently I manually add
+the prototypes as needed. 
+
+The approach of generating header files though is likely to be a huge
+pain and complicate the build process. I'm beginning to think that for
+a serious .NET port it'd be better to eventually go for a C# backend
+rather than modify the g2c backend to fit into something that's so
+different to a standard C build. But that's a whole lotta work!
+
+&gt; i do now have a mechanism for doing my own inlining
+&gt; of ast but this is a bit slower than the c compiler at this stage of
+&gt; goo's life so i would like to know if this is indeed a problem.
+
+I think punting to the C compiler for inlining is a good approach in
+that you get the advantage of all the heuristics the C compiler uses as
+to whether to actually in line or not. On the downside, inlining in 'C'
+is not standard (did it make it into C99?) so it's possible some
+platforms won't support it.
+
+&gt; i would hate to have target specific builds as this compromises our
+&gt; ability to produce one set of c-files / makefiles per platform.  
+
+I agree with this. 
+
+&gt; given that this isn't possible, would it be
+&gt; possible to either produce all makefiles or perhaps write a program
+&gt; that can translate a platform independent makefile (say using sexprs)
+&gt; producing other platform specific makefiles?  
+
+I like this approach. Perhaps generate the GNU makefile and a platform
+independant one that contains the same information you are throwing
+into the GNU makefile. Then another program (or Goo routine) could do
+the conversion to MSVC makefile, Symbian MMP file, etc.
+
+Chris.
+-- 
+  Chris Double
+  chris.double@double.co.nz
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00102.html">Re: Goo on a cellphone..almost</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00104.html">Re: Goo on a cellphone..almost</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00100.html">Re: Goo porting questions</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00105.html">Re: Goo porting questions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00103"><strong>Date</strong></a></li>
+<li><a href="threads.html#00103"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

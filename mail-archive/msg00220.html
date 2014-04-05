@@ -1,0 +1,143 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Proposed numeric type hierarchy -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Sat, 19 Oct 2002 15:51:47 &#45;0400 (EDT) -->
+<!--X-Message-Id: 31E1E789&#45;E39C&#45;11D6&#45;B61E&#45;003065F305CC@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Proposed numeric type hierarchy</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00219.html">Date Prev</a>][<a href="msg00221.html">Date Next</a>][<a href="msg00218.html">Thread Prev</a>][<a href="msg00221.html">Thread Next</a>][<a href="index.html#00220">Date Index</a>][<a href="threads.html#00220">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Proposed numeric type hierarchy</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Proposed numeric type hierarchy</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sat, 19 Oct 2002 15:51:44 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+So, a complete number type hierarchy for GOO with all the standard 
+common-lispish types, plus quantities (numbers with a unit) looks 
+something like the following (at the bottom). Unfortunately there's a 
+lot of types here, and I'm really bad at coming up with short names 
+(jrb maybe you can help out here..)
+
+This proposal changes the meaning of &lt;num&gt; pretty drastically (and 
+makes it a lot less useful). A bunch of methods that used to take &lt;num&gt; 
+should really be taking &lt;real&gt;, as they don't want to deal with numbers 
+which are not magnitudes (complex numbers are not comparable with &quot;&lt;&quot;). 
+A bunch more methods that used to take &lt;num&gt; should really be taking 
+&lt;scalar&gt; as they are able to deal with quantities just fine (this 
+includes many of the math functions).
+
+So far, I've got &lt;bignum&gt; working, and a somewhat-working &lt;qty&gt; type 
+(but it'll need more work). That leaves &lt;complex&gt;, &lt;ratio&gt;, and more 
+precise (or arbitrarily big with the GMP mpf set of functions) floats. 
+Introducing complex numbers will probably be the most difficult, 
+because getting all the algorithms correct will take some work. 
+Compilers/libraries that support C99 can do complex calculations on 
+single and double floats though, so maybe that'll be good enough.
+
+Comments?
+
+James
+
+---- type hierarchy ----
+
+;; I hope this is the right use of the term 'scalar'
+(dc &lt;scalar&gt; (&lt;any&gt;))
+
+;; scalars are either numbers (unitless) or quantities (composed
+;; of a &lt;num&gt; and a unit)
+(dc &lt;qty&gt; (&lt;scalar&gt;))
+(dc &lt;num&gt; (&lt;scalar&gt;))
+
+;; numbers are either real or complex. complex numbers are
+;; composed of two &lt;real&gt;s.
+(dc &lt;real&gt; (&lt;num&gt; &lt;mag&gt;))
+(dc &lt;complex&gt; (&lt;num&gt;))
+
+;; real numbers are either rational (and thus precisely representable),
+;; or a floating point approximations of a (possibly irrational) number.
+(dc &lt;rational&gt; (&lt;real&gt;))
+(dc &lt;flo&gt; (&lt;real&gt;))
+
+;; rational numbers are either integers or a ratio composed of two 
+&lt;int&gt;s.
+(dc &lt;int&gt; (&lt;rational&gt;))
+(dc &lt;ratio&gt; (&lt;rational&gt;))
+
+;; ints are either small or big, but most of the time users don't have 
+to care.
+(dc &lt;fixnum&gt; (&lt;int&gt;))
+(dc &lt;bignum&gt; (&lt;int&gt;))
+
+;; different precision floats.
+(dc &lt;shortflo&gt; (&lt;flo&gt;)) ;; 32bit
+(dc &lt;longflo&gt; (&lt;flo&gt;))  ;; 64bit
+(dc &lt;arbitrary-precision-float-name&gt; (&lt;flo&gt;))
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00222" href="msg00222.html">Re: Proposed numeric type hierarchy</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+<li><strong><a name="00221" href="msg00221.html">Proposed numeric type hierarchy</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00219.html">Re: Re: [Fwd: Questions on goo / samurui]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00221.html">Proposed numeric type hierarchy</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00218.html">Bigint support</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00221.html">Proposed numeric type hierarchy</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00220"><strong>Date</strong></a></li>
+<li><a href="threads.html#00220"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

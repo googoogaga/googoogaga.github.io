@@ -1,0 +1,130 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: continuations and linear types -->
+<!--X-From-R13: Oyyra Eubeg <jnfubegNgjvfgrqzngevk.pbz> -->
+<!--X-Date: Wed, 17 Apr 2002 14:56:22 &#45;0400 (EDT) -->
+<!--X-Message-Id: 1019069927.1679.768.camel@ghostwheel -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: Pine.LNX.4.30.0204161532340.13514&#45;100000@cable.beta4.com -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>continuations and linear types</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00018.html">Date Prev</a>][<a href="msg00020.html">Date Next</a>][<a href="msg00015.html">Thread Prev</a>][<a href="msg00024.html">Thread Next</a>][<a href="index.html#00019">Date Index</a>][<a href="threads.html#00019">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>continuations and linear types</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: continuations and linear types</li>
+<li><em>From</em>: Allen Short &lt;<A HREF="mailto:washort@DOMAIN.HIDDEN">washort@xxxxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 17 Apr 2002 13:58:47 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+i'm very excited about the possibilities goo presents; it's almost
+everything i've wanted from a language.
+
+my primary interest is in distributed and concurrent apps; hence, i've
+been quite interested in the disucssions of continuations and threads so
+far. I propose adding linear types to goo; that is, adding a kind of
+object whose reference count can never exceed 1. Henry Baker describes
+the advantages and ramifications of such objects in his paper
+&quot;'Use-Once' Variables and Linear Objects&quot;:
+<A  HREF="http://www.pipeline.com/~hbaker1/Use1Var.html">http://www.pipeline.com/~hbaker1/Use1Var.html</A>
+
+Linear objects have two major advantages: because a linear object can
+only have one &quot;owner&quot; at a time, it never needs synchronisation; by the
+same token, its lifetime can be statically determined and thus it avoids
+garbage collection. Since goo has already adopted type annotation of
+functions, and because of its commitment to efficiency and static
+analysis, I believe they would be a sensible addition.
+
+
+Additionally, linear continuations have unique advantages; they allow
+continuations to be stack allocated (since they cannot be captured), and
+avoid the bad interactions shareable continuations have with
+unwind-protect and tail recursion (for a detailed discussion of this
+issue, see <A  HREF="http://lists.tunes.org/archives/tunes/1999-August/002235.html">http://lists.tunes.org/archives/tunes/1999-August/002235.html</A>
+) while providing most of the control advantages of shareable
+continuations such as coroutines and microthreading.
+
+Of course, some applications require non-linear continuations;
+Queinnec-style use of continuations for web apps most notably, as well
+as prolog-style backtracking. My own feelings are that only allowing
+linear continuations is a sufficient tradeoff between expressitivity and
+clean semantics/efficient implementation.
+
+Other related links:
+<A  HREF="http://www.pipeline.com/~hbaker1/LinearLisp.html">http://www.pipeline.com/~hbaker1/LinearLisp.html</A>
+<A  HREF="http://www.pipeline.com/~hbaker1/ObjectIdentity.html">http://www.pipeline.com/~hbaker1/ObjectIdentity.html</A>
+
+-- 
+Allen Short        Programmer-Archaeologist       
+washort@twistedmatrix.com
+One of the most overlooked advantages to computers is...  If they do
+foul up, there's no law against whacking them around a little.  -- Joe
+Martin
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00024" href="msg00024.html">Re: continuations and linear types</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00006" href="msg00006.html">Re: kickoff</a></strong>
+<ul><li><em>From:</em> Avi Bryant</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00018.html">Re: Continuations</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00020.html">Integers</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00015.html">Re: Prototypes (was Re: kickoff)</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00024.html">Re: continuations and linear types</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00019"><strong>Date</strong></a></li>
+<li><a href="threads.html#00019"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

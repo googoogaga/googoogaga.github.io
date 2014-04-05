@@ -1,0 +1,141 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Sample code for I/O ideas -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Tue, 19 Nov 2002 16:58:18 &#45;0500 (EST) -->
+<!--X-Message-Id: 01484F82&#45;FC0A&#45;11D6&#45;BC87&#45;003065F305CC@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20021119130232.A6190@prodigy.Redbrick.DCU.IE -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Sample code for I/O ideas</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00232.html">Date Prev</a>][<a href="msg00234.html">Date Next</a>][<a href="msg00232.html">Thread Prev</a>][<a href="msg00234.html">Thread Next</a>][<a href="index.html#00233">Date Index</a>][<a href="threads.html#00233">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Sample code for I/O ideas</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: Sample code for I/O ideas</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Tue, 19 Nov 2002 16:58:15 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+I know there's two schools of thought on this, but I believe exceptions 
+should (at least in most cases) only be used for *exceptional* 
+conditions. Exceptions should not be used for indicating EOF, or for 
+indicating end-of-iterator, or anything like that where you *know* it's 
+going to happen. For instance, you could write a loop over an array as:
+(dv v #(1 2 3))
+
+(esc break
+   (try &lt;range-error&gt; (fun (c r) (break #f))
+     (rep loop ((i 0))
+       (post &quot;%s\n&quot; (elt v i))
+       (loop (+ i 1)))))
+
+but that's very ugly to me. But, I bring up this particular case 
+(looping over an array), because, interestingly, you *can* write code 
+with either explicit checking (&lt; i (len v)) or by waiting for an 
+exception to be thrown. Under some conditions where you know more about 
+the expected structure of the array (e.g. maybe it's length is always a 
+multiple of two and you put each pair of elements into some other 
+structure), it might significantly simplify the code to assume that the 
+array has certain elements and throw an exception if it doesn't.
+
+So, it's possible that for consistancy, a similar situation should 
+occur with the stream functions. That is, normally, in a loop, you 
+would write
+(until (eof? port)
+   ...(gets port)...)
+
+But, if for whatever reason, in your code you didn't check for EOF, the 
+next stream reading call should throw an exception. That is, any I/O 
+call that would return no data because the stream is at EOF should 
+throw an exception if read. Block reads such as gets/etc should still 
+be allowed to return less data than requested without throwing an 
+exception; only if they would return no data because of EOF should an 
+exception be thrown. (note that if we support non-blocking streams in 
+the future, the calls might return no data *not* because of EOF so 
+don't just check for length=0)
+
+So in conclusion, basically I agree with smelly's conclusion.
+
+James
+
+On Tuesday, November 19, 2002, at 08:02  AM, Smelly Pooh wrote:
+
+&gt; I've put together examples of how a unix cat function would look like 
+&gt; in
+&gt; the current scheme and each of the proposed schemes.
+...
+&gt; My preference is leaning toward using exceptions, it'll be great if 
+&gt; both
+&gt; that and the current scheme can work together, I don't know how that'll
+&gt; work as you add more I/O methods such as block reads and writes or even
+&gt; asynchronous I/O, will methods be written for both schemes or will one
+&gt; take precedence?
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00234" href="msg00234.html">Re: Sample code for I/O ideas</a></strong>
+<ul><li><em>From:</em> Smelly Pooh</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00232" href="msg00232.html">Sample code for I/O ideas</a></strong>
+<ul><li><em>From:</em> Smelly Pooh</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00232.html">Sample code for I/O ideas</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00234.html">Re: Sample code for I/O ideas</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00232.html">Sample code for I/O ideas</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00234.html">Re: Sample code for I/O ideas</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00233"><strong>Date</strong></a></li>
+<li><a href="threads.html#00233"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

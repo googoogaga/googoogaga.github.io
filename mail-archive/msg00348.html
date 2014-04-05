@@ -1,0 +1,121 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: configure's __thread test -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Mon, 24 Nov 2003 17:11:30 &#45;0500 (EST) -->
+<!--X-Message-Id: 24FF8D68&#45;1ECB&#45;11D8&#45;A0D2&#45;000A95A0424C@ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20031122235652.GA29212@nilpotent.org -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: configure's __thread test</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00347.html">Date Prev</a>][<a href="msg00349.html">Date Next</a>][<a href="msg00347.html">Thread Prev</a>][<a href="msg00349.html">Thread Next</a>][<a href="index.html#00348">Date Index</a>][<a href="threads.html#00348">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: configure's __thread test</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Faried Nawaz &lt;<A HREF="mailto:silence-goo@DOMAIN.HIDDEN">silence-goo@xxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: configure's __thread test</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Mon, 24 Nov 2003 17:11:25 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+if i recall correctly, we ended up not using thread local variables 
+because they weren't available in gcc at the time, but stubbed them out 
+for the future.  we could revisit them and perhaps get a faster 
+implementation by using them for the language registers.  i'm not 
+convinced it would improve over the current strategy though.
+
+in the meanwhile, i should disable the configure scripts tests for 
+thread local variables...
+
+jonathan
+
+On Nov 22, 2003, at 6:56 PM, Faried Nawaz wrote:
+
+&gt; __thread isn't used in any .c files, but the configure script tests for
+&gt; it.  gcc's docs say
+&gt;
+&gt;     The `__thread' specifier may be applied to any global, file-scoped
+&gt;     static, function-scoped static, or static data member of a class.  
+&gt; It
+&gt;     may not be applied to block-scoped automatic or non-static data 
+&gt; member.
+&gt;
+&gt; The code that the configure script tries to compile is
+&gt;
+&gt; #include &quot;confdefs.h&quot;
+&gt;
+&gt; int main() {
+&gt; __thread int testvar;
+&gt; ; return 0; }
+&gt;
+&gt; which, given the above, fails to compile with any recent gcc.
+&gt;
+&gt;
+&gt; Faried.
+&gt; -- 
+&gt; The Great GNU has arrived, infidels, behold his wrath !
+&gt; &quot;If a MOO runs on a port no one accesses, does it run?&quot;
+&gt;
+&gt;
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00346" href="msg00346.html">configure's __thread test</a></strong>
+<ul><li><em>From:</em> Faried Nawaz</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00347.html">Re: configure's __thread test</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00349.html">minor patches, random questions.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00347.html">Re: configure's __thread test</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00349.html">minor patches, random questions.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00348"><strong>Date</strong></a></li>
+<li><a href="threads.html#00348"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

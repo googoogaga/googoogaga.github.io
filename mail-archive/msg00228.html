@@ -1,0 +1,119 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: gets ambiguity and enum suggestion -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Sun, 17 Nov 2002 11:45:46 &#45;0500 (EST) -->
+<!--X-Message-Id: uo88yzsb0w7.fsf@djundjun.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20021116141609.A14412@prodigy.Redbrick.DCU.IE -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: gets ambiguity and enum suggestion</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00227.html">Date Prev</a>][<a href="msg00229.html">Date Next</a>][<a href="msg00226.html">Thread Prev</a>][<a href="msg00229.html">Thread Next</a>][<a href="index.html#00228">Date Index</a>][<a href="threads.html#00228">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: gets ambiguity and enum suggestion</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Smelly Pooh &lt;<A HREF="mailto:plop%2Bgoo@DOMAIN.HIDDEN">plop+goo@xxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: gets ambiguity and enum suggestion</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 17 Nov 2002 11:45:44 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Smelly Pooh &lt;plop+goo@redbrick.dcu.ie&gt; writes:
+
+&gt; Version .146
+&gt; 
+&gt; The gets method returns an empty string &quot;&quot; whether we're at EOF or
+&gt; reading an empty line, 
+
+gets is defined to return a &lt;str&gt;.  the protocol is set up to require
+that the user call eof? to disambiguate these cases. 
+
+&gt; peek never seems to return EOF and I don't want to mix get with gets
+&gt; calls.
+&gt;
+&gt; There also seems to be a bug when calling peek just before and after EOF
+&gt; is returned by get.  Each time peek is called #\ is returned, then
+&gt; calling get on the port also returns #\ instead of EOF
+
+i'm not sure why this is from looking at the implementation:
+
+  src/goo/io/port.goo and src/goo/io/%port.c
+
+it would seem peek should return ``(eof-object)'' based on its
+``fgetc'' implementation.  it is merely a wrapper for ``fgetc'' and
+``ungetc''.  are you running on windows or linux?
+
+&gt; On the topic of the enum method, can it be made to be more generic than
+&gt; taking &lt;col&gt; as its first argument?  That would allow types such as
+&gt; &lt;port&gt; to work with the enum protocol, and simplify cases where people
+&gt; want to create enums, but not necessarily a full fledged collection
+
+i'm sympathetic.  i'll respond more fully to your next message.
+
+jonathan
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00229" href="msg00229.html">Re: gets ambiguity and enum suggestion</a></strong>
+<ul><li><em>From:</em> Smelly Pooh</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00226" href="msg00226.html">gets ambiguity and enum suggestion</a></strong>
+<ul><li><em>From:</em> Smelly Pooh</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00227.html">enum protocol suggestion</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00229.html">Re: gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00226.html">gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00229.html">Re: gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00228"><strong>Date</strong></a></li>
+<li><a href="threads.html#00228"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

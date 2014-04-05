@@ -1,0 +1,149 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Writing Goo libraries -->
+<!--X-From-R13: Oaqerj Ehgureynaq <fbzoerebNnv.zvg.rqh> -->
+<!--X-Date: Fri, 26 Jul 2002 17:32:38 &#45;0400 (EDT) -->
+<!--X-Message-Id: uqzk7niyy2z.fsf@bongo.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: u8z40nu0o.fsf@double.co.nz -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Writing Goo libraries</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00093.html">Date Prev</a>][<a href="msg00095.html">Date Next</a>][<a href="msg00089.html">Thread Prev</a>][<a href="msg00088.html">Thread Next</a>][<a href="index.html#00094">Date Index</a>][<a href="threads.html#00094">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Writing Goo libraries</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: Writing Goo libraries</li>
+<li><em>From</em>: Andrew Sutherland &lt;<A HREF="mailto:sombrero@DOMAIN.HIDDEN">sombrero@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 26 Jul 2002 17:32:36 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+I throw my code under my goo 'src' directory.  James pointers are
+probably more consistent with regards to how goo likes to be
+structured, but I find that if you brutalize the Makefile, and symlink
+$GOO_ROOT/mods to $GOO_ROOT/src (and $GOO_ROOT/lib to $GOO_ROOT/c),
+things work out fairly nicely.
+
+In terms of building code, I've got a few different mix of strategies
+going on depending on the modules involved.  First, it should be noted
+that James is living in the past vis-a-vis the SWIG'ed stuff; since
+Goo v140 (thanks to Jonathan) I've been able to statically compile and
+link my GTK SWIG bindings in, and my GUI layer as well.  (This is done
+by adding the relevant uses to src/eval/main, then g2c-top'ing a new
+image after using (g2c-test #) followed by make sub=g2c-# to make sure
+I don't thrash my primary image.)
+
+Then, as I develop things that use the GUI layer, I tend to just 'use'
+the application module, let it dynamically compile everything, and see
+how it goes.  Once it fails, I bail out of goo and go back in again; I
+know that's against the spirit of interactive programming, but:
+
+1) The GUI layer sadly has no clean way to re-initialize its state and
+   the GTK's state (some day...)
+
+2) Once a module is succesfully use'd, goo won't let you re-use it;
+   it'll just bypass loading the module.  This means that you'll end
+   you having to use &quot;,in module&quot; to get into the proper module and
+   enter the proper redefinitions to the repl.  One alternative to
+   that problem is to just use (load &quot;blah&quot;) instead, and keep
+   everything in goo/user.  In any event, as long as the modules
+   you're using aren't too big, you have a fast machine, and you've
+   statically compiled in the constant stuff, it's generally just
+   faster/easier to exit goo, re-enter, and 'use' again.
+
+So that's how I develop things that build on the GUI.  The core GUI
+layer was developed before we could statically link things in, so that
+was all done dynamically, but it's my intention now to stick with
+statically compiling that portion because the incremental changes
+should be small and static compilation catches typo's and other
+stupidity because the bindings are done statically.  If you don't
+close the goo image that you g2c-top from, if you run g2c-top again,
+it will only rebuild the .goo files which have changed, making its
+speed comparable to dynamic compilation.  The big win again is that
+you don't discover 2-seconds into your run after a 1-minute
+compilation that you made a typo, thus requiring another compile.
+(The core GUI development would be a great place to be doing the
+incremental dev stuff, but I need to put some legwork in to get that
+to happen, and it's just one of those things where it just hasn't
+seemed like the hassle is worth it yet.)
+
+In summary, ideally you want to keep your modules small, and
+statically compile in those things that hold constant.  Then you can
+dynamically compile the stuff that you're working on, and generally
+not even have to worry about pasting in new definitions.  In your
+case, since you have a big functional background, I'm sure you're all
+about keeping the image live and just pasting in new definitions, but
+I'm lazy and paranoid about getting hassled by odd side effects of
+dynamicly updating core bits of code.
+
+I use emacs, but for no good reason, I don't use the goo inferior
+mode.  If we hack in GNU readline that should be less of an issue, but
+the inferior mode is nice.
+
+Hope this wasn't too much of a rant and was helpful.  There are a few
+useful compilation hints scattered in there at least.
+
+Andrew
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00087" href="msg00087.html">Writing Goo libraries</a></strong>
+<ul><li><em>From:</em> Chris Double</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00093.html">Re: More on loop problem</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00095.html">Re: image saving</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00089.html">Re: Writing Goo libraries</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00088.html">image saving</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00094"><strong>Date</strong></a></li>
+<li><a href="threads.html#00094"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

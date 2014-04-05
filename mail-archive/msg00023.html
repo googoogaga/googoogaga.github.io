@@ -1,0 +1,118 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Predicate dispatch -->
+<!--X-From-R13: "Quevf Rbhoyr" <puevf.qbhoyrNqbhoyr.pb.am> -->
+<!--X-Date: Thu, 18 Apr 2002 22:40:52 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20020419024040.2DF886D99F@fastmail.fm -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Predicate dispatch</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00022.html">Date Prev</a>][<a href="msg00024.html">Date Next</a>][<a href="msg00020.html">Thread Prev</a>][<a href="msg00034.html">Thread Next</a>][<a href="index.html#00023">Date Index</a>][<a href="threads.html#00023">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Predicate dispatch</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;goo list&quot; &lt;<A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Predicate dispatch</li>
+<li><em>From</em>: &quot;Chris Double&quot; &lt;<A HREF="mailto:chris.double@DOMAIN.HIDDEN">chris.double@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 19 Apr 2002 02:40:40 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+&gt;From the various Goo documents Cecil is listed as being an influence on
+some Goo ideas. Cecil has the ability to create predicate objects. An
+example from the Cecil documentation is:
+
+---------------8&lt;---------------
+For example, predicate objects could be used to implement a bounded
+buffer abstraction: 
+  object buffer isa collection; 
+    field elements(b@buffer); нн a queue of elements 
+    field max_size(b@buffer); нн an integer 
+    method length(b@buffer) { b.elements.length } 
+    method is_empty(b@buffer) { b.length = 0 } 
+    method is_full(b@buffer) { b.length = b.max_size } 
+
+  predicate empty_buffer isa buffer when buffer.is_empty; 
+    method get(b@empty_buffer) { ... } нн raise error or block caller 
+
+  predicate non_empty_buffer isa buffer when not(buffer.is_empty); 
+    method get(b@non_empty_buffer) { remove_from_front(b.elements) } 
+
+  predicate full_buffer isa buffer when buffer.is_full; 
+    method put(b@full_buffer, x) { ... } нн raise error or block caller 
+
+  predicate non_full_buffer isa buffer when not(buffer.is_full); 
+    method put(b@non_full_buffer, x) { add_to_back(b.elements, x); } 
+
+  predicate partially_full_buffer isa non_empty_buffer,
+  non_full_buffer; 
+---------------8&lt;---------------
+
+Goo has some predicate-type types (singleton, union, product, etc). Is
+or will there be the ability to define other types to emulate something
+like the Cecil example above?
+
+Chris.
+-- 
+  Chris Double
+  chris.double@double.co.nz
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00034" href="msg00034.html">Re: Predicate dispatch</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00022.html">Re: Integers</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00024.html">Re: continuations and linear types</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00020.html">Integers</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00034.html">Re: Predicate dispatch</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00023"><strong>Date</strong></a></li>
+<li><a href="threads.html#00023"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

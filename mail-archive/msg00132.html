@@ -1,0 +1,115 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Some more nitpicks -->
+<!--X-From-R13: Xbanguna Vfrh <ibzwbzNibzwbz.bet> -->
+<!--X-Date: Sun, 4 Aug 2002 15:02:02 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20020804190200.GA15286@vomjom -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20020804000159.GA8122@vomjom -->
+<!--X-Reference: uo8elded0id.fsf@djundjun.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Some more nitpicks</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00131.html">Date Prev</a>][<a href="msg00133.html">Date Next</a>][<a href="msg00129.html">Thread Prev</a>][<a href="msg00128.html">Thread Next</a>][<a href="index.html#00132">Date Index</a>][<a href="threads.html#00132">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Some more nitpicks</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Some more nitpicks</li>
+<li><em>From</em>: Jonathan Hseu &lt;<A HREF="mailto:vomjom@DOMAIN.HIDDEN">vomjom@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sun, 4 Aug 2002 14:02:00 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Sun, Aug 04, 2002 at 12:58:18PM -0400, Jonathan Bachrach wrote:
+&gt; &gt; Also, (new) is currently like:
+&gt; &gt; (new &lt;my-class&gt; prop1 value1 prop2 value2)
+&gt; &gt;
+&gt; &gt; Would it not be better to have it:
+&gt; &gt; (new &lt;my-class&gt; (prop1 value1) (prop2 value2))
+&gt; 
+&gt; no, because new is not a special form.  users can write methods on new
+&gt; and take initializers as a rest argument.  as an example, consider the
+&gt; new method for threads:
+&gt; 
+&gt;   (dm new (x|(t&lt; &lt;thread&gt;) args|... =&gt; &lt;thread&gt;)
+&gt;     (def t (app-sup x args))
+&gt;     (unless (== (thread-function t) main-thread-key) ...)
+&gt;     t)
+&gt; 
+&gt; i accept that the prop value's run together a bit too much for my
+&gt; liking.  i'm trying to avoid using keywords instead of real generics
+&gt; for tagging the properties.  using real generics allows one to limit
+&gt; prop initialization through namespace hiding, whereas keywords don't
+&gt; have that control.
+
+Well, howabout making a new special form for this purpose:
+(new &lt;my-class&gt; (vals (prop1 value1) (prop2 value2)))
+
+(vals) could return something that it would parse (a tuple maybe?)
+
+-- 
+Jonathan Hseu &lt;vomjom@vomjom.org, vomjom@debian.org, jh4@cec.wustl.edu&gt;
+GPG ID:          5228D713
+GPG fingerprint: 220B A4EF 70FE B884 CB38  F93F EA8A 1024 5228 D713
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00127" href="msg00127.html">Some more nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Hseu</li></ul></li>
+<li><strong><a name="00129" href="msg00129.html">Re: Some more nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00131.html">Re: please resend your googoogaga msg -- Re: Trouble building goo-0_0140</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00133.html">Re: CVS update: goo/src/goo/cols</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00129.html">Re: Some more nitpicks</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00128.html">Even more nitpicks</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00132"><strong>Date</strong></a></li>
+<li><a href="threads.html#00132"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

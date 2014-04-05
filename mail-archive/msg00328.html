@@ -1,0 +1,143 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Whither Dylan? -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Thu, 15 May 2003 11:57:00 &#45;0400 (EDT) -->
+<!--X-Message-Id: DA880BFF&#45;86ED&#45;11D7&#45;A391&#45;000A95A0424C@ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 3EA04CB5.8030207@netscape.net -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Whither Dylan?</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00327.html">Date Prev</a>][<a href="msg00329.html">Date Next</a>][<a href="msg00323.html">Thread Prev</a>][<a href="msg00318.html">Thread Next</a>][<a href="index.html#00328">Date Index</a>][<a href="threads.html#00328">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Whither Dylan?</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Bob Cassels &lt;<A HREF="mailto:bobcassels@DOMAIN.HIDDEN">bobcassels@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Whither Dylan?</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Thu, 15 May 2003 11:56:56 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+as far as dylan macros go i'd say that the current dylan macros could 
+be improved dramatically by adding template calls as discussed in 
+appendix b of keith playford and my paper on dylan macros:
+
+    <A  HREF="http://www.ai.mit.edu/~jrb/Projects/dexprs.pdf">http://www.ai.mit.edu/~jrb/Projects/dexprs.pdf</A>
+
+i think this would go a long way towards making dylan macros easier to 
+use.
+
+we also discussed a scheme for procedural macros.  the main missing 
+piece was a macro plugin and module system.  this turned out to be 
+easier in java because they already have an api for dynamic loading of 
+code.  we just used the CLASSPATH to load macros into the compiler.  
+there was some reason to believe that a separate CLASSPATH would be 
+nice for macros.  the mapping of macros to classes made procedural 
+macros pretty straightforward in java.
+
+i'm not sure i have any real answers on how to do it better in Dylan 
+though.  one would definitely need a strong dynamic code loading api.
+
+i would say that the system described in the dexprs paper still seems 
+like a good design (modulo the macro loading and module issues).  the 
+main question is whether that added complexity is really needed 
+especially when you've got template calls.
+
+jonathan
+
+On Friday, April 18, 2003, at 03:06 PM, Bob Cassels wrote:
+
+&gt; andreas@andreas.org wrote:
+&gt;
+&gt;&gt; Jonathan Bachrach &lt;jrb@ai.mit.edu&gt; writes:
+&gt;&gt;
+&gt;&gt;
+&gt;&gt;&gt; goo is a stripped down rethought dylan which is simpler and more
+&gt;&gt;&gt; dynamic.  it's meant to be implementable in on the order of 10k lines
+&gt;&gt;&gt; of code.  i did it originally as a teaching and research vehicle
+&gt;&gt;&gt; finding it easier to teach and play with ideas in the much smaller
+&gt;&gt;&gt; code base.  it's not a competitor.
+&gt;&gt;&gt;
+&gt;&gt;
+&gt;&gt; Imagine that work would be underway to refurbish the Dylan standard,
+&gt;&gt; working title &quot;Dylan 2.0&quot;.  What would you suggest to change in Dylan,
+&gt;&gt; especially given the experience with goo?
+&gt;&gt;
+&gt; A simple one is to adopt (as GOO did) the C3 class linearization, 
+&gt; described in 
+&gt; &lt;<A  HREF="http://www.webcom.com/haahr/dylan/linearization-oopsla96.html">http://www.webcom.com/haahr/dylan/linearization-oopsla96.html</A>&gt;.  We 
+&gt; (the Apple Dylan group) would have done it ourselves, but we ran out 
+&gt; of time.
+&gt;
+&gt; Harder is to do a better job with macros.  I don't actually know what 
+&gt; state they are in, but I know that the last time I looked they were 
+&gt; &quot;unfinished&quot;.  Of course GOO's sexp syntax means it doesn't have to 
+&gt; deal with some of the harder issues.  Jonathan -- did your work on 
+&gt; Java macros give you any ideas about how to do them better in Dylan?
+&gt;
+&gt; Bob
+&gt;
+&gt;
+&gt;
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00323" href="msg00323.html">Re: Whither Dylan?</a></strong>
+<ul><li><em>From:</em> Bob Cassels</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00327.html">Re: CVS working?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00329.html">goo interoperability with c</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00323.html">Re: Whither Dylan?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00318.html">Goo editor for Eclispe 2.1?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00328"><strong>Date</strong></a></li>
+<li><a href="threads.html#00328"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

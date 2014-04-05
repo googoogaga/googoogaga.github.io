@@ -1,0 +1,152 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: continuations and linear types -->
+<!--X-From-R13: Oyyra Eubeg <jnfubegNgjvfgrqzngevk.pbz> -->
+<!--X-Date: Fri, 19 Apr 2002 15:17:39 &#45;0400 (EDT) -->
+<!--X-Message-Id: 1019244010.8481.30.camel@ghostwheel -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 512F720D&#45;536C&#45;11D6&#45;9A51&#45;003065D63222@fuhm.net -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: continuations and linear types</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00025.html">Date Prev</a>][<a href="msg00027.html">Date Next</a>][<a href="msg00025.html">Thread Prev</a>][<a href="msg00031.html">Thread Next</a>][<a href="index.html#00026">Date Index</a>][<a href="threads.html#00026">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: continuations and linear types</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: continuations and linear types</li>
+<li><em>From</em>: Allen Short &lt;<A HREF="mailto:washort@DOMAIN.HIDDEN">washort@xxxxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 19 Apr 2002 14:20:10 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Fri, 2002-04-19 at 03:06, James Knight wrote:
+
+&gt; After an initial reading of that paper, I'm quite unconvinced that 
+&gt; linear types as described there are a useful concept. As far as I can 
+&gt; tell, the main argument for them is to make it impossible for one to be 
+&gt; accessed by multiple threads. However, this is a _*great*_ cost in 
+&gt; complexity for single-threaded programs. I can tell you right now I'd 
+&gt; hate to use a language that makes me go through the hoops described in 
+&gt; that paper.
+
+well, yes -- *non*-linear types are extremely useful as well, i'm
+certainly not advocating a linear-types-only language, as Mr Baker does
+in the &quot;lively linear lisp&quot; paper. 
+
+&gt; The rest of the 
+&gt; arguments seem to me like they're basically premature optimizations 
+&gt; exposed to the programmer.
+
+Hmm. how so? to my mind, linearity is a property that would be hard to
+recover via inference. I dont see any disadvantages to allowing its
+explicit declaration.
+
+&gt; 
+&gt; However, I do believe that a similar concept, not applied to number of
+&gt; references, but rather, to number of *different threads that have 
+&gt; references* is a great idea. In fact, I'm currently a proponent of the
+&gt;concept that objects should *always* be linear-with-respect-to-threads.
+&gt; That is, two threads cannot ever hold a reference to the same object 
+&gt; [[at least, as far as they can tell]]. Make RPC the only method of 
+&gt; communication, but make it very optimized. In my experience, when 
+&gt; writing a threaded program, you pretty much need to work that way 
+&gt;anyways if you're going to stay sane, but its just a lot easier toscrew
+&gt; up and allow a reference to escape to another thread when you didn't 
+&gt; intend to.
+&gt; 
+
+Hmm. How would this &quot;linearity-with-respect-to-threads&quot; be accomplished?
+what do you mean by &quot;as far as they can tell&quot;?
+
+
+&gt; Single-shot continuations have a lot going for them, but unless I'm 
+&gt; missing something, being able to be stack-allocated is not one of them. 
+
+Linear continuations are different from single-shot continuations:
+single-shot continuations are still capturable and can be referenced
+multiple times; I have been told that multi-shot continuations can be
+built from single-shot ones (but still cannot track down the paper in
+which this is demonstrated). However, linear continuations have no
+implicit continuation -- that is, the function called by call/lc cannot
+return, it must call the continuation passed to it at some point.
+Thus, you dont have the time-travel effects that prevent
+stack-allocation of continuations.
+
+&gt; it makes me think that what you really want to have for web-applications 
+&gt; is fork().
+
+Exactly. in a linear-continuations system, you'd have to explicitly copy
+the current continuation to get a new thread.
+
+-- 
+Allen Short        Programmer-Archaeologist       
+washort@twistedmatrix.com
+&quot;Campus sidewalks never exist as the straightest line
+            between two points.&quot; -- M. M. Johnston
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00032" href="msg00032.html">Re: linear types</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+<li><strong><a name="00031" href="msg00031.html">Re: linear continuations</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00024" href="msg00024.html">Re: continuations and linear types</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00025.html">Re: continuations and linear types</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00027.html">re: df versus dm</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00025.html">Re: continuations and linear types</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00031.html">Re: linear continuations</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00026"><strong>Date</strong></a></li>
+<li><a href="threads.html#00026"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

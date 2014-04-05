@@ -1,0 +1,143 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: case sensitivity -->
+<!--X-From-R13: Dbo [lref <ebozlrefNznp.pbz> -->
+<!--X-Date: Sun, 2 Mar 2003 15:10:11 &#45;0500 (EST) -->
+<!--X-Message-Id: F58FA25A&#45;4CEA&#45;11D7&#45;8598&#45;00306590A6B6@mac.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: GEZUG3Z4XVRFCSO1VG3X64KI2X955Z.3e629a17@abe -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: case sensitivity</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00265.html">Date Prev</a>][<a href="msg00267.html">Date Next</a>][<a href="msg00265.html">Thread Prev</a>][<a href="msg00270.html">Thread Next</a>][<a href="index.html#00266">Date Index</a>][<a href="threads.html#00266">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: case sensitivity</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: case sensitivity</li>
+<li><em>From</em>: Rob Myers &lt;<A HREF="mailto:robmyers@DOMAIN.HIDDEN">robmyers@xxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sun, 2 Mar 2003 20:10:05 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Sunday, March 2, 2003, at 11:56 PM, jm wrote:
+
+&gt; this sounds like an argument for designing goo in a vacuum. however,
+&gt; I don't think we can ignore the computing landscape in which goo has
+&gt; to operate.
+
+I agree, but there are different ways of respecting the prevailing 
+landscape. C wasn't designed with line numbers to aid Fortran 
+interoperability. :-)
+
+&gt; the fact is that a very large number of libraries are
+&gt; written in c and some of them will use bad coding standards and
+&gt; some of these will need to be wrapped. I consider wrapping a library
+&gt; for use in goo as part of the 'goo experience' so weaknesses in
+&gt; wrapper generators are weaknesses in goo.
+
+Mapping names is a strong solution. The &quot;melange&quot; interface generator 
+for Dylan handles this explicitly. You can change names, prefix them, 
+mangle them, do whatever. If the only difference between two macros or 
+a function and a constant is the case, this is a design decision that 
+is easy to represent using name mapping. As I mentioned, it's also 
+probably bad design and this is a good opportunity to &quot;correct&quot; it. :-)
+
+So
+#define VERSION		Version()
+int Version()			{ return version; }
+void Version( int v )		{ version = v; }
+const int version = 1;
+
+can be mapped as any of:
+
+kVERSION, $VERSION, VERSION-define
+Version(), GetVersion(), Version-getter()
+Version2(), SetVersion(), Version-setter()
+gVersion, *version*, version-global,
+
+&gt; now lets consider the benefits of case insensitivity.
+&gt; robustness.
+
+If you make a mistake in case you don't have to grep for the correct 
+casing.
+You aren't tempted to use case alone to differentiate similar bindings.
+
+&gt; useability.
+
+Case-insensitive file systems are easier to use and search (for 
+newbies), although I recognize they have their security problems. 
+AppleScript, a language designed for end-users, is case-insensitive 
+(although the IDE &quot;corrects&quot; your casing to match the first occurrence 
+of an identifier).
+
+&gt; historical.
+
+Lisp and Dylan are case insensitive.
+
+- Rob.
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00270" href="msg00270.html">Re: case sensitivity</a></strong>
+<ul><li><em>From:</em> Ken Anderson</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00264" href="msg00264.html">Re: case sensitivity</a></strong>
+<ul><li><em>From:</em> jm</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00265.html">Re: case sensitivity</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00267.html">Re: case sensitivity</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00265.html">Re: case sensitivity</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00270.html">Re: case sensitivity</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00266"><strong>Date</strong></a></li>
+<li><a href="threads.html#00266"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

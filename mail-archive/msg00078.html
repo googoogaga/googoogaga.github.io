@@ -1,0 +1,114 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: v0_139 available -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Wed, 24 Jul 2002 01:42:06 &#45;0400 (EDT) -->
+<!--X-Message-Id: 0A65D719&#45;9EC8&#45;11D6&#45;B16F&#45;003065D63222@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: uo8d6tdkgbl.fsf@djundjun.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: v0_139 available</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00077.html">Date Prev</a>][<a href="msg00079.html">Date Next</a>][<a href="msg00077.html">Thread Prev</a>][<a href="msg00079.html">Thread Next</a>][<a href="index.html#00078">Date Index</a>][<a href="threads.html#00078">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: v0_139 available</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: v0_139 available</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Wed, 24 Jul 2002 01:41:45 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Tuesday, July 23, 2002, at 10:30  PM, Jonathan Bachrach wrote:
+
+&gt; Chris Double &lt;chris@double.co.nz&gt; writes:
+&gt;
+&gt;&gt; Jonathan Bachrach &lt;jrb@ai.mit.edu&gt; writes:
+&gt;&gt;
+&gt;&gt; Visual C++ doesn't like the variable argument #define
+&gt;&gt; unfortunately. Would there be any problem with the g2c code generator
+&gt;&gt; being changed to emit the _CALLN(regs, ...) instead of the CALLN? I'm
+&gt;&gt; going to try the change but thought I'd run it by everyone here in
+&gt;&gt; case there's a reason for it not being done that way.
+&gt;
+&gt; sounds reasonable.  i did the threads port in such a way as to
+&gt; minimize the compiler changes, that is, to not depend on the
+&gt; implementation of language state (e.g., regs).  it's not a big deal
+&gt; though since it only shows up in one place.  surprising that vc++
+&gt; isn't ansi compliant.
+
+That is a new feature in C99, so its not all *that* surprising that VC++ 
+doesn't support it, after all its only 2002.
+
+&gt;&gt; Also, anyone think of a way of working around VC++'s lack of
+&gt;&gt; variable arg macros without going the 'change the code generation'
+&gt;&gt; route?
+
+Might try using the older syntax for vararg macros:
+#define CALLN(args...) _CALLN(regs, args)
+I have no idea if that's supported, but its worth a try. Or maybe they 
+use yet another syntax...could be worth looking through the 
+documentation.
+
+James
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00075" href="msg00075.html">Re: v0_139 available</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00077.html">Re: v0_139 available</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00079.html">Win32 version of Goo distribution with threads</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00077.html">Re: v0_139 available</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00079.html">Win32 version of Goo distribution with threads</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00078"><strong>Date</strong></a></li>
+<li><a href="threads.html#00078"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

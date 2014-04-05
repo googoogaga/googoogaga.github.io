@@ -1,0 +1,102 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Looping then crash -->
+<!--X-From-R13: "Quevf Rbhoyr" <puevf.qbhoyrNqbhoyr.pb.am> -->
+<!--X-Date: Thu, 25 Jul 2002 22:47:23 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20020726024712.F388A6DB7B@www.fastmail.fm -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Looping then crash</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00090.html">Date Prev</a>][<a href="msg00092.html">Date Next</a>][<a href="msg00088.html">Thread Prev</a>][<a href="msg00092.html">Thread Next</a>][<a href="index.html#00091">Date Index</a>][<a href="threads.html#00091">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Looping then crash</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;goo list&quot; &lt;<A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Looping then crash</li>
+<li><em>From</em>: &quot;Chris Double&quot; &lt;<A HREF="mailto:chris.double@DOMAIN.HIDDEN">chris.double@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 26 Jul 2002 02:47:12 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+When I do long loops in Goo 140 using the Win32 build I eventually get
+a crash. I also get the crash doing the same loops on the 133 build
+using the cygwin build. I can't test a 140 build under cygwin or linux
+where I am and I was wondering if anyone can confirm the behaviour on
+those systems.
+
+On the 133 cygwin build the following code:
+
+  (let ((i 0)) (while #t (msg out &quot;%s\n&quot; (incf i))))
+
+Crashes after about 2,700 iterations with:
+
+      0 [main] goo 553 handle_exceptions: Exception:
+      STATUS_ACCESS_VIOLATION
+
+Same with code like:
+
+  (rep loop ((i 0)) (msg out &quot;%s\n&quot; i) (loop (+ i 1)))
+
+On the Win32 build I did for the 140 distribution it's the same, but
+after only 1700 repetitions or so. Can someone try on a Linux or cygwin
+build?
+
+Chris.
+-- 
+  Chris Double
+  chris.double@double.co.nz
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00090.html">Re: image saving</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00092.html">More on loop problem</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00088.html">image saving</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00092.html">More on loop problem</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00091"><strong>Date</strong></a></li>
+<li><a href="threads.html#00091"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

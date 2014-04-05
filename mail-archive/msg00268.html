@@ -1,0 +1,209 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: swig questions -->
+<!--X-From-R13: Oaqerj Ehgureynaq <fbzoerebNnv.zvg.rqh> -->
+<!--X-Date: Sun, 2 Mar 2003 21:37:49 &#45;0500 (EST) -->
+<!--X-Message-Id: uqzu1elrx8k.fsf@oroboros.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: SQ85YHBJHONUT72NJNKIC86WTVS2UFD.3e6059dc@abe -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: swig questions</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00267.html">Date Prev</a>][<a href="msg00269.html">Date Next</a>][<a href="msg00260.html">Thread Prev</a>][<a href="msg00276.html">Thread Next</a>][<a href="index.html#00268">Date Index</a>][<a href="threads.html#00268">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: swig questions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: swig questions</li>
+<li><em>From</em>: Andrew Sutherland &lt;<A HREF="mailto:sombrero@DOMAIN.HIDDEN">sombrero@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 02 Mar 2003 21:37:47 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+1.  I tar'ed up my current SWIG dir and cleaned it.  Same location as
+before, new file name though.  It's
+<A  HREF="http://www.ai.mit.edu/projects/dynlangs/goo/files/gooSWIG-1.3.10-2.tgz">http://www.ai.mit.edu/projects/dynlangs/goo/files/gooSWIG-1.3.10-2.tgz</A>
+
+The actual mechanism for Goo integration is now more, well,
+integrated.  Specifically, you should use the samurui/gtk* stuff as
+your guide more or less.  I've also put my gtk swigging directory in
+that same directory too (it's gooswiggtk.tgz).  Er, but with more on
+how it works now, the output is actually gtk.goo which contains
+trivial goo definitions, and then gtk.swig.c which includes the actual
+SWIG'ed code.  There are upsides to this new approach and downsides.
+The upside is that you can built a new image that has your SWIG'ed
+support built-in.  The downside is that you must do this and there is
+no longer a way to do it dynamically, at least without a little
+hacking.  The reason is that in the new approach, Goo builds up the
+environment data using the .goo file, whereas previously I faked it in
+the .c file.
+
+2.
+
+a.  I'd assume this is my fault, as I don't see how SWIG couldn't
+support it.  My brain is deathly asleep so I'm not able to intuit
+where the glitch is.  The three potential stages are that I actually
+generate the Unsupported constant value error (in which case my
+blatant cutting and pasting of other code is at fault), I break it in
+an internal transform in the wrapper, or I pass it straight through to
+Goo without transforming it into the proper reader syntax (very
+possible).  What I'm doing wrong now might have changed since the
+version you have.
+
+b.  This is definitely SWIG.  Although it's possible SWIG is more
+Turing complete in more recent versions vis a vis macros, 1.3.10 only
+determines something a constant if it's defined that way in C, or is a
+very simple #define BOB 0 type format.  If SWIG supports that in later
+versions, we can update my language module to work with that.
+However, the best solution is probably if you just do it by hand if
+there are only a few cases like this, or try and get the preprocessor
+to pre-chew it a bit more if there are a lot of them.
+
+c. SWIG doesn't support varargs, at least as of 1.3.10.  However,
+assuming there are a limited number of these vararg versions, you can
+probably write C helper functions that get wrapped, or direct Goo/C
+helper functions to do what you want.
+
+3. Probably.  The SWIG wrapper has thus far only been used for GTK
+   wrapping purposes.  For that case, it really didn't matter all that
+   much, as I wasn't looking for things to disappear when I wasn't
+   paying attention, especially if they had backing state in the GTK
+   libraries.  I am not as familiar with Boehm as I should be, but in
+   my experience it seems like Boehm ignores GTK when it's looking for
+   live references, so I probably am avoiding GC bugs by doing so
+   right now...
+
+4. Get/set are currently only generated for structures out of
+   laziness, and the aforementioned GTK specialization.  It would make
+   sense for any exposed globals to have magic wrappers.  (Although as
+   in the parallel thread to this, one could debate whether they
+   should already getter/setter functions in C for abstraction
+   purposes ;) I can't provide an explanation for the hanging, at
+   least in my current tired state.  All that is happening there
+   should be boxing and unboxing...
+
+
+I fear the code is your best reference on this for now, as it's been
+quite a while since I've worked with this stuff.  However, I'm more
+than happy to answer any further questions, especially when I'm awake
+and make sense.  Jonathan can also speak more to the ideal
+implementation stuff.  If something looks like a hack in here, I'm
+sure it is a hack.  Hell, if something is in my wrapping code, I'm
+sure it is a hack.
+
+Andrew
+
+
+jm &lt;janmar@iprimus.com.au&gt; writes:
+
+&gt; hi,
+&gt; 
+&gt; i've got a few questions about gooSwig.
+&gt; 
+&gt; 1.
+&gt; where can i get the lastest version,
+&gt; the wiki web links to an old version.
+&gt; 
+&gt; 
+&gt; 2. 
+&gt; are these issues easily fixed or are they limitations of swig
+&gt; 
+&gt; a. hex defs aren't recognised as constants
+&gt; #define SDL_INIT_VIDEO 0x00000020
+&gt; 
+&gt; b. enums in macros prevent constants from being generated
+&gt; enum { SDL_PRESSED = 0x01, SDL_RELEASED = 0x00 };
+&gt; #define SDL_BUTTON(X) (SDL_PRESSED&lt;&lt;(X-1))
+&gt; #define SDL_BUTTON_LEFT 1
+&gt; #define SDL_BUTTON_LMASK SDL_BUTTON(SDL_BUTTON_LEFT)
+&gt; 
+&gt; c. variable length arg lists
+&gt; extern DECLSPEC void SDLCALL SDL_SetError(const char *fmt, ...);
+&gt; 
+&gt; 
+&gt; 3.
+&gt; when creating new_* functions wouldn't it be better to use
+&gt; GC_malloc() or allocate() instead of calloc()?
+&gt; 
+&gt; 
+&gt; 4.
+&gt; when i swigify these functions ii_set works,
+&gt; but ff_set hangs the top-level, does anyone
+&gt; else get this behaviour?
+&gt; 
+&gt; int ii = 0;
+&gt; int ii_get () { return ii; }
+&gt; int ii_set (int i) { ii = i; return ii; }
+&gt; 
+&gt; float ff = 0.f;
+&gt; float ff_get () { return ff; }
+&gt; float ff_set (float f) { ff = f; return ff; }
+&gt; 
+&gt; also, it would be nice if
+&gt; export float ff;
+&gt; automatically generated the get/set functions.
+&gt; 
+&gt; thanks.
+&gt; 
+&gt; --
+&gt;  jan 
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00260" href="msg00260.html">swig questions</a></strong>
+<ul><li><em>From:</em> jm</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00267.html">Re: case sensitivity</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00269.html">Re: case sensitivity</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00260.html">swig questions</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00276.html">goo on Mac OS X</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00268"><strong>Date</strong></a></li>
+<li><a href="threads.html#00268"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

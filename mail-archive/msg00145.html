@@ -1,0 +1,141 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: CVS update: goo/src/goo/cols -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Tue, 6 Aug 2002 23:09:00 &#45;0400 (EDT) -->
+<!--X-Message-Id: uo8wur3mk9u.fsf@djundjun.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 30A49D37&#45;A6BE&#45;11D6&#45;8F54&#45;003065D63222@fuhm.net -->
+<!--X-Reference: uqzbs8jzv1q.fsf@bongo.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: CVS update: goo/src/goo/cols</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00144.html">Date Prev</a>][<a href="msg00146.html">Date Next</a>][<a href="msg00137.html">Thread Prev</a>][<a href="msg00159.html">Thread Next</a>][<a href="index.html#00145">Date Index</a>][<a href="threads.html#00145">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: CVS update: goo/src/goo/cols</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Andrew Sutherland &lt;<A HREF="mailto:sombrero@DOMAIN.HIDDEN">sombrero@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: CVS update: goo/src/goo/cols</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 06 Aug 2002 23:15:41 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+andrew,
+
+i agree with your proposal.  let's do it.  i refer people to the dylan
+reference manual for more material on the subject:
+
+  <A  HREF="http://www.gwydiondylan.org/drm/drm_67.htm#HEADING67-0">http://www.gwydiondylan.org/drm/drm_67.htm#HEADING67-0</A>
+
+jonathan
+
+Andrew Sutherland &lt;sombrero@ai.mit.edu&gt; writes:
+
+&gt; Perhaps the best thing here would be to maintain a consistent
+&gt; distinction between == and =, with == remaining address equality and =
+&gt; indicating semantic equivalency.  We could then construct a new
+&gt; hash-table sub-class &lt;val-tab&gt; (or some other equally catchy name)
+&gt; that uses = for equivalency testing.
+&gt;
+&gt; Then the question is what to do about hashing vis a vis the two
+&gt; tables.  In Java (as you know), Object implements int hashCode(),
+&gt; which defaults to hashing on the address, which of course jives with
+&gt; equals() which defaults to an address-equivalency test.  Class
+&gt; designers may then override these with the constraint that a.equals(b)
+&gt; =&gt; (a.hashCode() == b.hashCode()).  Goo needs an equivalent to
+&gt; hashCode() for user purposes, and it seems like using id-hash which is
+&gt; currently used by the &lt;tab&gt; implementation would be a bad thing.
+&gt; 
+&gt; From an implementation perspective, I can see why having a hash table
+&gt; that works solely on addresses is beneficial; it allows you to
+&gt; basically tack meta-data onto specific instances of objects (with the
+&gt; caveat that tagged types such as integers can only have one-instance
+&gt; in the table).  If id-hash doubled as hashCode(), the result in &lt;tab&gt;
+&gt; would be inefficient collisions in hashSpace.
+&gt; 
+&gt; So here's my proposal:
+&gt; 
+&gt; - Cull the methods in the id-hash generic to those directly required
+&gt;   to hash on unique object instances.  (aka, revert my patch)
+&gt; 
+&gt; - Create a generic hash(o|&lt;any&gt;) or hashcode that is designed for
+&gt;   users to implement for their classes as well.  Provide defaults for
+&gt;   goo base-classes that maintains consistency for containers, strings,
+&gt;   etc.
+&gt; 
+&gt; - Create a class &lt;val-tab&gt; that uses hash as its hash function and =
+&gt;   as its equivalency function. (There's no reason for users to have to
+&gt;   create their own table subclasses.)
+&gt; 
+&gt; - Put it on the to-do list to revert the == behavior for &lt;col&gt; and
+&gt;   &lt;seq&gt; to be address equivalency again.  (Perhaps go so far as to
+&gt;   make == a function (df) so that people can't do bad/stupid things.)
+&gt;   I say to-do, because I'm sure there's a hack reason that == behaves
+&gt;   like = on those classes that will break goo if changed.
+&gt; 
+&gt; - Move &lt;str-tab&gt; like you suggested, as its need will be obviated by
+&gt;   &lt;val-tab&gt; and the fact that 'hash' will be implemented on strings.
+&gt; 
+&gt; Andrew
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00122" href="msg00122.html">Re: CVS update: goo/src/goo/cols</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+<li><strong><a name="00126" href="msg00126.html">Re: CVS update: goo/src/goo/cols</a></strong>
+<ul><li><em>From:</em> Andrew Sutherland</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00144.html">Re: Two more bugs</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00146.html">Another bug</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00137.html">Re: immutability and ==</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00159.html">&lt;val-tab&gt;</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00145"><strong>Date</strong></a></li>
+<li><a href="threads.html#00145"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: goo on Mac OS X -->
+<!--X-From-R13: Dbo [lref <ebozlrefNznp.pbz> -->
+<!--X-Date: Fri, 7 Mar 2003 10:14:06 &#45;0500 (EST) -->
+<!--X-Message-Id: 69D51A55&#45;50AF&#45;11D7&#45;9A51&#45;00306590A6B6@mac.com -->
+<!--X-Content-Type: multipart/alternative -->
+<!--X-Reference: 645B3D08&#45;50A5&#45;11D7&#45;B8F0&#45;003065CCCEE6@mac.com -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: goo on Mac OS X</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00280.html">Date Prev</a>][<a href="msg00282.html">Date Next</a>][<a href="msg00280.html">Thread Prev</a>][<a href="msg00282.html">Thread Next</a>][<a href="index.html#00281">Date Index</a>][<a href="threads.html#00281">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: goo on Mac OS X</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Raffael Cavallaro &lt;<A HREF="mailto:raffaelcavallaro@DOMAIN.HIDDEN">raffaelcavallaro@xxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: goo on Mac OS X</li>
+<li><em>From</em>: Rob Myers &lt;<A HREF="mailto:robmyers@DOMAIN.HIDDEN">robmyers@xxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 7 Mar 2003 15:13:55 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+On Friday, March 7, 2003, at 02:02 PM, Raffael Cavallaro wrote:<br>
+<br>
+<BLOCKQUOTE>1. Which is best (fewest conflicts/bugs?) for Mac OS X 10.2.4 (i.e., latest rev of Mac OS X)?<br>
+</BLOCKQUOTE><br>
+6.1 . The others either don't compile or don't run.<br>
+<br>
+<BLOCKQUOTE>2. Where should it be installed under Mac OS X - as a shared library somewhere (/usr/local/lib?), in <I><FONT face="Courier"><BIG>GOO_DIR/gc?</BIG></FONT></I>.<br>
+</BLOCKQUOTE><br>
+[Fetch and untar gc6.1]<br>
+cd gc6.1<br>
+./configure --prefix=/usr/<br>
+make<br>
+sudo make install<br>
+sudo mkdir /usr/include/gc<br>
+sudo cp includes/* /usr/include/gc<br>
+<br>
+<BLOCKQUOTE>3. Any changes to the makefile or installation process to make it work as goo expects under Mac OS X?<br>
+</BLOCKQUOTE><br>
+None I know of. Note that gc doesn't like shared libraries on X, this is being fixed at the moment according to the Beohm mailing list.<br>
+<br>
+- Rob.<br>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00280" href="msg00280.html">Re: goo on Mac OS X</a></strong>
+<ul><li><em>From:</em> Raffael Cavallaro</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00280.html">Re: goo on Mac OS X</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00282.html">rough first impressions</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00280.html">Re: goo on Mac OS X</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00282.html">rough first impressions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00281"><strong>Date</strong></a></li>
+<li><a href="threads.html#00281"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

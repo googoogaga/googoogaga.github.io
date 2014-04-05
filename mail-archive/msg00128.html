@@ -1,0 +1,108 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Even more nitpicks -->
+<!--X-From-R13: Xbanguna Vfrh <ibzwbzNibzwbz.bet> -->
+<!--X-Date: Sat, 3 Aug 2002 20:59:02 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20020804005911.GA8570@vomjom -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Even more nitpicks</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00127.html">Date Prev</a>][<a href="msg00129.html">Date Next</a>][<a href="msg00127.html">Thread Prev</a>][<a href="msg00130.html">Thread Next</a>][<a href="index.html#00128">Date Index</a>][<a href="threads.html#00128">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Even more nitpicks</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Even more nitpicks</li>
+<li><em>From</em>: Jonathan Hseu &lt;<A HREF="mailto:vomjom@DOMAIN.HIDDEN">vomjom@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sat, 3 Aug 2002 19:59:11 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Sorry, it seems as if my nitpicks may never end :)
+
+Will we have an equivalent of Python's dir()?
+
+What are your plans for big ints?
+
+Renames:
+eof-object? should be eof?... because zero? isn't called zero-num?
+port2str should be called port-to-str to follow convention.
+
+Now, a bigger issue:
+case calls currently look like:
+(case value
+  ((key1 key2) body)
+  ((key3 key4) body2))
+
+The key stuff looks fugly IMO.
+A better solution may be to use tuples for the keys:
+(case value 
+  (#(key1 key2) body)
+  (#(key3 key4) body2))
+
+It adds only one more character and uses an internal type.
+
+-- 
+Jonathan Hseu &lt;vomjom@vomjom.org, vomjom@debian.org, jh4@cec.wustl.edu&gt;
+GPG ID:          5228D713
+GPG fingerprint: 220B A4EF 70FE B884 CB38  F93F EA8A 1024 5228 D713
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00130" href="msg00130.html">Re: Even more nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00127.html">Some more nitpicks</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00129.html">Re: Some more nitpicks</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00127.html">Some more nitpicks</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00130.html">Re: Even more nitpicks</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00128"><strong>Date</strong></a></li>
+<li><a href="threads.html#00128"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

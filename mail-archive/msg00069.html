@@ -1,0 +1,160 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Thread Comments [non&#45;member submission] -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Mon, 10 Jun 2002 17:43:01 &#45;0400 (EDT) -->
+<!--X-Message-Id: uo8wut6956l.fsf@djundjun.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Thread Comments [non-member submission]</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00068.html">Date Prev</a>][<a href="msg00070.html">Date Next</a>][<a href="msg00068.html">Thread Prev</a>][<a href="msg00071.html">Thread Next</a>][<a href="index.html#00069">Date Index</a>][<a href="threads.html#00069">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Thread Comments [non-member submission]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Thread Comments [non-member submission]</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 10 Jun 2002 17:47:46 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+I'm (jb) forwarding this message from Alexander S A Kjeldaas:
+
+Hi, I'm new to this list, and new to the goo language, but from what
+I've read it looks like an interesting language.  Good job!
+
+&gt;From reading the mailing list archives I see that you have been
+discussing how threads could be implemented in goo.  From my
+experience with implementing threaded applications, there are two
+types of communication you need between threads.  One is the RPC type
+of communication that jonathan prefers, and the other is &quot;shared
+memory&quot; - data structures that are shared between processes.  I think
+basing goo threads on RPC + &quot;shared memory&quot; would fill my needs.
+However, having only RPC wouldn't be good enough.  I think a simple
+example explains the issue.
+
+It is often necessary to know the time of day (gettimeofday is one of
+the most popular system calls).  Having a separate thread that updates
+a shared memory area with the time of day every second can increase
+performance.  The whole idea is to _not_ have to synchronize with
+another process/thread, so if doing a RPC involves a context switch
+you could just as well do the gettimeofday system call.
+
+Some ideas wrt &quot;shared memory&quot;
+
+o I think that in a lot of cases, the shared memory can be read only
+for most threads, and only writeable for a single thread - if that
+helps.  Usually one thread does most of the writing anyways, and you
+can always get it to write stuff for you using RPC.
+
+o Tables usually don't need to refer to objects outside the shared
+memory area.  Enforcing a restriction like this shouldn't be a problem
+(in most parallell C programs you don't have pointers in shared memory
+anyways) should help GC a lot.
+
+o There was a thread about &quot;server programming&quot; on comp.lang.lisp
+where I argued that a programming language for servers should (even if
+it is single threaded) support &quot;heaps&quot; where the language enforces how
+objects in different heaps can refer to each other.  This is useful
+even in a single threaded application where you have N network
+connections being serviced simultaneously in an event-driven fashion.
+When a request has been serviced, you want to tear down the heap where
+you allocated all the objects associated with that request.  By
+servicing the request within a &quot;heap&quot; that only exports objects
+through RPC, this can be achieved and it virtually eliminates the need
+for GC.  This leads me to believe that maybe &quot;heaps&quot; should be a lower
+level abstraction than &quot;processes&quot; - that it should be possible to
+create &quot;heaps&quot; without creating a process.
+
+Also I want to comment on the need and the cost of supporting native
+threads.  I definitively think a new programming language _needs_ to
+support multiple CPUs in some way.  Already today, because of the ever
+increasing gap between the CPU speed and memory latency, Intel is
+making chips that pretend to be two separate CPUs so that two
+processes can be interleaved.  In a very short time, we will all have
+desktop CPUs where we can run two processes at basically the price of
+one.  There is a limit to the parallelism we can extract from
+programs, so the natural way forward is for the CPU to run several
+programs simultaneously.  Languages that do not deal wih this will
+lag behind. Languages that are well designed for this will benefit.
+
+Then one last comment.  It was mentioned here that one might have to
+pay with an extra indirection in the multi method dispatch in order to
+update a method atomically.  This is probably not needed.  I haven't
+read the goo source so this might be wrong, but let med just throw out
+some ideas for pay-as-you-go strategies:
+
+A method/function can be atomically updated by an atomic
+cmpare-and-exchange instruction.  You simply overwrite the first
+instruction of the old method with a jump to the new method. [On newer
+intel CPUs this is easy because you have a 8-byte compare-and-exchange
+instruction (a long jump is 6 bytes) - on older CPUs you need a local
+jump so you need to set aside space for a trampoline nearby the
+function].
+
+After having updated the old method you can update dispatch tables at
+various places in the code - but those updates now only need to be
+individually atomic operations.
+
+To update a generic function with a new method you could overwrite the
+first instruction of the method an &quot;old&quot; multi-method dispatch would
+end up in.  You could then dynamically add some code that would divert
+to the new method if the types matched the new method signature. 
+
+astor
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00068.html">Yet another xemacs fix</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00070.html">Re: Threads</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00068.html">Yet another xemacs fix</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00071.html">List archive?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00069"><strong>Date</strong></a></li>
+<li><a href="threads.html#00069"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

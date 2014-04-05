@@ -1,0 +1,112 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Sample code for I/O ideas -->
+<!--X-From-R13: Ezryyl Bbbu <cybc+tbbNerqoevpx.qph.vr> -->
+<!--X-Date: Tue, 19 Nov 2002 19:53:22 &#45;0500 (EST) -->
+<!--X-Message-Id: 20021120005319.A28708@prodigy.Redbrick.DCU.IE -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20021119130232.A6190@prodigy.Redbrick.DCU.IE -->
+<!--X-Reference: 01484F82&#45;FC0A&#45;11D6&#45;BC87&#45;003065F305CC@fuhm.net -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Sample code for I/O ideas</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00233.html">Date Prev</a>][<a href="msg00235.html">Date Next</a>][<a href="msg00233.html">Thread Prev</a>][<a href="msg00240.html">Thread Next</a>][<a href="index.html#00234">Date Index</a>][<a href="threads.html#00234">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Sample code for I/O ideas</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: Sample code for I/O ideas</li>
+<li><em>From</em>: Smelly Pooh &lt;<A HREF="mailto:plop%2Bgoo@DOMAIN.HIDDEN">plop+goo@xxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Wed, 20 Nov 2002 00:53:19 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+In reply to James Knight's flatulent wordings, 
+
+&gt; But, if for whatever reason, in your code you didn't check for EOF, the 
+&gt; next stream reading call should throw an exception. That is, any I/O 
+&gt; call that would return no data because the stream is at EOF should 
+&gt; throw an exception if read. Block reads such as gets/etc should still 
+&gt; be allowed to return less data than requested without throwing an 
+&gt; exception; only if they would return no data because of EOF should an 
+&gt; exception be thrown.
+
+I think this is the best solution, the get method will need to be
+changed since it can't choose to return EOF and signal EOF at the same
+time, however this doesn't make code any less elegant
+
+(rep loop ()
+  (def ch (get port))
+  (unless (eof-object? ch)
+    (put out ch) (loop)) )
+
+(rep loop ()
+  (unless (eof? port)
+    (put out (get port)) (loop)) )
+
+In fact the new scheme is more elegant since the return value of get
+doesn't need to be bound and checked before use
+
+Note that the semantics of eof? here is the method I defined earlier
+based on peek.  The C function feof() has different semantics
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00232" href="msg00232.html">Sample code for I/O ideas</a></strong>
+<ul><li><em>From:</em> Smelly Pooh</li></ul></li>
+<li><strong><a name="00233" href="msg00233.html">Re: Sample code for I/O ideas</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00233.html">Re: Sample code for I/O ideas</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00235.html">Re: enum protocol suggestion</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00233.html">Re: Sample code for I/O ideas</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00240.html">ffigen</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00234"><strong>Date</strong></a></li>
+<li><a href="threads.html#00234"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: CVS update: goo/src/goo/cols -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Sun, 4 Aug 2002 21:26:18 &#45;0400 (EDT) -->
+<!--X-Message-Id: 52AFDC02&#45;A812&#45;11D6&#45;8F54&#45;003065D63222@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: uqzbs8jzv1q.fsf@bongo.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: CVS update: goo/src/goo/cols</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00132.html">Date Prev</a>][<a href="msg00134.html">Date Next</a>][<a href="msg00126.html">Thread Prev</a>][<a href="msg00134.html">Thread Next</a>][<a href="index.html#00133">Date Index</a>][<a href="threads.html#00133">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: CVS update: goo/src/goo/cols</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: CVS update: goo/src/goo/cols</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sun, 4 Aug 2002 21:26:10 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Saturday, August 3, 2002, at 01:55  PM, Andrew Sutherland wrote:
+&gt; Perhaps the best thing here would be to maintain a consistent
+&gt; distinction between == and =, with == remaining address equality and =
+&gt; indicating semantic equivalency.  We could then construct a new
+&gt; hash-table sub-class &lt;val-tab&gt; (or some other equally catchy name)
+&gt; that uses = for equivalency testing.
+
+The need for &lt;val-tab&gt; is completely independent of whether or not *tup* 
+should override == and id-hash. (it should certainly override both, if 
+either). The argument for overriding == and id-hash for tup is that it 
+is an immutable type.
+
+There is *no way* (except address-of) to determine if two pointers I 
+have to a tup containing the same elements are distinct instances or 
+not. Therefore, it is logically consistent to treat them as exactly 
+equivalent. It would even be acceptable for the compiler to combine 
+&lt;tup&gt;s with the same elements to be the same exact in memory object.
+
+This is not true for most objects, e.g. &lt;vec&gt;, as mutating the object 
+will easily show whether two &lt;vec&gt;s are the same object or not.
+
+So, again, the question is whether == should be required to be a *fast* 
+operation or not. My opinion is that it is more valuable to have == be 
+defined as &quot;computationally equivalent&quot; than &quot;fast equals&quot;. And, under 
+the (currently specified!) definition, &lt;tup&gt; should override ==.
+
+
+
+On the other subject, another hash method corresponding to &quot;=&quot; is 
+absolutely necessary, and a hashtable variant that uses it should also 
+exist. A method called &quot;hash&quot; and a subclass called &quot;&lt;val-tab&gt;&quot; sound 
+like fine suggestions.
+
+&gt; - Put it on the to-do list to revert the == behavior for &lt;col&gt; and
+&gt;   &lt;seq&gt; to be address equivalency again.  (Perhaps go so far as to
+&gt;   make == a function (df) so that people can't do bad/stupid things.)
+&gt;   I say to-do, because I'm sure there's a hack reason that == behaves
+&gt;   like = on those classes that will break goo if changed.
+
+Revert? &quot;==&quot; already is only address equivalency. &quot;=&quot; is defined on 
+&lt;col&gt; and &lt;seq&gt;.
+
+&gt; - Move &lt;str-tab&gt; like you suggested, as its need will be obviated by
+&gt;   &lt;val-tab&gt; and the fact that 'hash' will be implemented on strings.
+
+Its need won't be obviated, as the general equality function for strings 
+does not (and should not) do case-insensitive comparisons, which the 
+symbol table must do.
+
+James
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00136" href="msg00136.html">immutability and ==</a></strong>
+<ul><li><em>From:</em> Jonathan Hseu</li></ul></li>
+<li><strong><a name="00135" href="msg00135.html">Object identity and immutable types</a></strong>
+<ul><li><em>From:</em> Allen Short</li></ul></li>
+<li><strong><a name="00134" href="msg00134.html">Re: CVS update: goo/src/goo/cols</a></strong>
+<ul><li><em>From:</em> Christopher Armstrong</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00126" href="msg00126.html">Re: CVS update: goo/src/goo/cols</a></strong>
+<ul><li><em>From:</em> Andrew Sutherland</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00132.html">Re: Some more nitpicks</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00134.html">Re: CVS update: goo/src/goo/cols</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00126.html">Re: CVS update: goo/src/goo/cols</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00134.html">Re: CVS update: goo/src/goo/cols</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00133"><strong>Date</strong></a></li>
+<li><a href="threads.html#00133"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: image saving -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Thu, 25 Jul 2002 21:20:06 &#45;0400 (EDT) -->
+<!--X-Message-Id: CC635B4B&#45;A035&#45;11D6&#45;B16F&#45;003065D63222@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20020725233804.AC9A76DA05@www.fastmail.fm -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: image saving</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00089.html">Date Prev</a>][<a href="msg00091.html">Date Next</a>][<a href="msg00088.html">Thread Prev</a>][<a href="msg00095.html">Thread Next</a>][<a href="index.html#00090">Date Index</a>][<a href="threads.html#00090">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: image saving</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;goo list&quot; &lt;<A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: image saving</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Thu, 25 Jul 2002 21:19:57 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Thursday, July 25, 2002, at 07:38  PM, Chris Double wrote:
+&gt; What does 'save-image' actually do? I don't have a linux machine to try
+&gt; it out on.
+&gt;
+&gt; Does it create a new executable that when run has the current state of
+&gt; the running process? How does it handle open files, running threads,
+&gt; etc? Or does it assume that all files, threads and other resources are
+&gt; shut down?
+&gt;
+&gt; I see that there is an 'unexec' version for Windows NT as well. Does
+&gt; this not work under Windows at the moment (hence image saving not
+&gt; working in windows) or is it just untested? Anyone working on getting
+&gt; it going? If not, I might have a stab at it.
+
+save-image simply copies the current heap into a new copy of the 
+executable, so that starting the new exe will be much faster as it 
+doesn't need to go through all the booting process. This has many 
+issues, none of which have been solved. 1) it doesn't copy 
+shared-libraries's heaps. 2) It doesn't handle open files/threads/etc at 
+all. 3) its not portable (although there is a libunexec now which I 
+haven't looked at yet but claims to abstract everything - it would 
+probably be a good idea to use that instead) 4) i'm sure there's more 
+cause this is such a big hack.
+
+It was taken essentially verbatim from GNU emacs, which uses it only to 
+boot the program once and create an image. It only allows this in batch 
+mode, ie: no windowing system, no user I/O, no threads, etc. It tries to 
+make sure the system is in a basic enough state that nothing will break 
+by saving the heap.
+
+I put that in GOO a long time ago, back when GOO took much much longer 
+to start up, way before threads or anything. Right now unexec is not 
+even enabled on linux. If it is resurrected, I'd suggest putting a 
+restriction similar to that of emacs: it should only ever be called very 
+early in the boot process, after all the core modules are loaded, but 
+before the REP loop starts, or any threads start, or any files that will 
+stay opened are opened. Emacs does this with a command-line argument.
+
+james
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00095" href="msg00095.html">Re: image saving</a></strong>
+<ul><li><em>From:</em> Chris Double</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00088" href="msg00088.html">image saving</a></strong>
+<ul><li><em>From:</em> Chris Double</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00089.html">Re: Writing Goo libraries</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00091.html">Looping then crash</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00088.html">image saving</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00095.html">Re: image saving</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00090"><strong>Date</strong></a></li>
+<li><a href="threads.html#00090"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

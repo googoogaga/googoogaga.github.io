@@ -1,0 +1,126 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: minor patches, random questions. -->
+<!--X-From-R13: Tnevrq @njnm <fvyrapr&#45;tbbNavycbgrag.bet> -->
+<!--X-Date: Thu, 27 Nov 2003 14:50:29 &#45;0500 (EST) -->
+<!--X-Message-Id: 20031127195011.GA64527@nilpotent.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>minor patches, random questions.</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00348.html">Date Prev</a>][<a href="msg00350.html">Date Next</a>][<a href="msg00346.html">Thread Prev</a>][<a href="msg00350.html">Thread Next</a>][<a href="index.html#00349">Date Index</a>][<a href="threads.html#00349">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>minor patches, random questions.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: minor patches, random questions.</li>
+<li><em>From</em>: Faried Nawaz &lt;<A HREF="mailto:silence-goo@DOMAIN.HIDDEN">silence-goo@xxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Thu, 27 Nov 2003 11:50:11 -0800</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+The diff file is at <A  HREF="http://web.nilpotent.org/tmp/goo-2003-11-26.txt">http://web.nilpotent.org/tmp/goo-2003-11-26.txt</A>
+
+c/grt.c: (app-args) was returning the args in reverse order.
+
+emacs/goo.el: I noticed that my code using (with-port ...) indented
+differently from the code in goo's sources.
+  
+src/goo/top.goo, src/goo/main.goo: This code lets you run goo scripts.
+You can create a file with
+
+== cut here ==
+#!/path/to/goo --
+
+(+ 2 3)
+== cut here ==
+
+make it executable, and run it.
+
+There are two problems with this.  The first one is that the first two
+elements of (app-args) are now &quot;--&quot; and the name of the script you're
+running.  Since scripts generally expect argv[1] and upwards to point
+to real arguments, argc/argv need to be mangled to skip these two args.
+Will a simple { Pargc += 2; Pargv += 2; } in read-script work?
+
+Other problem: the changes to main.goo.  They're not nice, but that's
+because i tried to keep the &quot;;;; GOO\n;;; JONATHAN BACHRACH\n ...&quot; 
+header when goo was started interactively.
+
+
+I thought about writing a file-access method --
+
+(file-access 'read &quot;/etc/passwd&quot;) =&gt; #t
+(file-access 'write &quot;/etc/shadow&quot;) =&gt; #f
+(file-access 'execute &quot;/bin/ls&quot;) =&gt; #t
+
+but I realized that instead of hacking src/goo/%system.c, I could
+simply write inline C code using the access(2) system call.  Which
+cases call for inline C and which cases call for %fns?
+
+Also -- I couldn't figure out how to build and return a tuple from C.
+
+
+Thanks,
+
+Faried.
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00350" href="msg00350.html">Re: minor patches, random questions.</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00348.html">Re: configure's __thread test</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00350.html">Re: minor patches, random questions.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00346.html">configure's __thread test</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00350.html">Re: minor patches, random questions.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00349"><strong>Date</strong></a></li>
+<li><a href="threads.html#00349"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

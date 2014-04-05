@@ -1,0 +1,101 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Errors in %event.c, %lock.c -->
+<!--X-From-R13: Quevf Rbhoyr <puevfNqbhoyr.pb.am> -->
+<!--X-Date: Sat, 27 Jul 2002 00:06:22 &#45;0400 (EDT) -->
+<!--X-Message-Id: u65z1izmc.fsf@double.co.nz -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Errors in %event.c, %lock.c</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00096.html">Date Prev</a>][<a href="msg00098.html">Date Next</a>][<a href="msg00096.html">Thread Prev</a>][<a href="msg00098.html">Thread Next</a>][<a href="index.html#00097">Date Index</a>][<a href="threads.html#00097">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Errors in %event.c, %lock.c</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Errors in %event.c, %lock.c</li>
+<li><em>From</em>: Chris Double &lt;<A HREF="mailto:chris@DOMAIN.HIDDEN">chris@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 27 Jul 2002 16:06:03 +1200</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Some mismatches in %event.c and event.goo:
+
+(dm event-broadcast (e|&lt;event&gt; l|&lt;lock&gt;)
+  (%event-broadcast (%lu (event-handle e)) (%lu (lock-handle l))) #t)
+
+P YtimeSeventYPevent_broadcast (P handle) { return PNUL; }
+
+The Goo definition sends two arguments to %event-broadcast. The C
+definition accepts only one. Ditto with event-signal.
+
+Some mismatches in %lock.c and lock.goo:
+
+(dm new (x|(t&lt; &lt;lock&gt;) args|... =&gt; &lt;lock&gt;)
+  (def l (app-sup x args))
+  (set (lock-handle l) (%lb (%lock-create)))
+  l)
+
+P YtimeSlockYPlock_create (P name) { return PNUL; }
+
+The Goo definition sends no arguments. The C definition takes a name.
+
+There's a few others too. A couple of the -setter C definitions only
+take one argument when they should take two.
+
+Chris.
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00096.html">Goo porting questions</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00098.html">.NET version and new Win32 version available</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00096.html">Goo porting questions</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00098.html">.NET version and new Win32 version available</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00097"><strong>Date</strong></a></li>
+<li><a href="threads.html#00097"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

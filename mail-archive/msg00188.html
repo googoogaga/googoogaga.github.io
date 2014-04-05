@@ -1,0 +1,139 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: goo is missing... -->
+<!--X-From-R13: "Xnzrf Yavtug" <wxavtugNshuz.arg> -->
+<!--X-Date: Mon, 23 Sep 2002 02:54:25 &#45;0400 (EDT) -->
+<!--X-Message-Id: 4984.24.91.160.204.1032764055.squirrel@languor.static.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20020923043614.GA4544@vomjom -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: goo is missing...</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00187.html">Date Prev</a>][<a href="msg00189.html">Date Next</a>][<a href="msg00187.html">Thread Prev</a>][<a href="msg00191.html">Thread Next</a>][<a href="index.html#00188">Date Index</a>][<a href="threads.html#00188">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: goo is missing...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &lt;<A HREF="mailto:vomjom@DOMAIN.HIDDEN">vomjom@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: goo is missing...</li>
+<li><em>From</em>: &quot;James Knight&quot; &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Mon, 23 Sep 2002 02:54:15 -0400 (EDT)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+&gt; So... my professor let me program my research this semester in goo.
+&gt; I've found that I've been needing the following:
+&gt; 1. egal == for strings and tuples (mostly because of the lack of #4 and
+&gt;                                   the advantages it would give for
+&gt; 				   &lt;tab&gt;)
+&gt;   I think == for immutables has far more advantages than disadvantages.
+&gt;   The only disadvantage I can think of is == will no longer be a fast
+&gt;   == operator.  Two options come to mind:
+&gt;   a. Make an object-== which basically does
+&gt;   (== (address-of x) (address-of y))
+&gt;   b. If someone wants a fast ==, just have them type that out.
+
+I totally agree. Even though == is the most often called function in all
+of GOO, it still needs to do the right thing. Having it be fast is not
+useful if it isn't producing the appropriate results. How often do you
+actually *want* to compare two tuples for pointer equality? There are
+various ways a structural test could be made fast such as storing a
+precomputed hashcode and testing that before iterating over all elements.
+&gt; 2. Something that produced bugs for me:
+&gt; (add!) and (add) do different things.  The first appends, while the
+&gt; second prepends.  (add!) for lists prepends.
+&gt;
+&gt; I think the behavior of add should be more consistent.  When I call
+&gt; add, I expect things to be added to the end.  Otherwise, when I make a
+&gt; function that takes a &lt;seq&gt; and uses add, if you pass it different
+&gt; types of &lt;seq&gt;'s, it will have a different result.
+&gt;
+&gt; This will make (add!) slower for lists, but who uses lists anyway?
+
+Definitely. I suspect that's just left over from the transition away from
+lists and was overlooked.
+&gt; 3. Reverse (pos) and reverse (finds)
+There must be some way of doing that which doesn't require duplicating
+every function that iterates over a sequence and returns the index.
+&gt; 4. Being able to define what equality function to use for mem?, split,
+&gt; pos, finds, and pretty much every other &lt;seq&gt; function that uses it.
+
+I have a few thoughts about that:
+a) if #1 was implemented is it still really necessary?
+b) actually adding that to the API would cause excessive bloat without
+optional keyword arguments, and perhaps even with.c) for some of those, it is not really even necessary. For instance,
+instead of mem?, use any? if you want to use an alternate test function.
+
+&gt; 5. case-sensitive string hashing
+You can do that, but it's not really well supported, or documented. As
+I've said before, &lt;str-tab&gt; really ought not be in the public API at all.
+All you need to do is make a subclass of &lt;tab&gt; and override the key-test
+and tab-hash functions, only one of which is exported from the
+goo/cols/tab module. :)
+&gt; There was a #6, but I have forgotten it by now :)
+
+
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00191" href="msg00191.html">Re: goo is missing...</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00187" href="msg00187.html">goo is missing...</a></strong>
+<ul><li><em>From:</em> Jonathan Hseu</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00187.html">goo is missing...</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00189.html">Compiling goo apps HOWTO anywhere ?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00187.html">goo is missing...</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00191.html">Re: goo is missing...</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00188"><strong>Date</strong></a></li>
+<li><a href="threads.html#00188"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

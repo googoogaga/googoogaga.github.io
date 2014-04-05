@@ -1,0 +1,140 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: enum protocol suggestion -->
+<!--X-From-R13: Ezryyl Bbbu <cybc+tbbNerqoevpx.qph.vr> -->
+<!--X-Date: Sat, 16 Nov 2002 21:35:08 &#45;0500 (EST) -->
+<!--X-Message-Id: 20021117023504.A535@prodigy.Redbrick.DCU.IE -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>enum protocol suggestion</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00226.html">Date Prev</a>][<a href="msg00228.html">Date Next</a>][<a href="msg00226.html">Thread Prev</a>][<a href="msg00235.html">Thread Next</a>][<a href="index.html#00227">Date Index</a>][<a href="threads.html#00227">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>enum protocol suggestion</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: enum protocol suggestion</li>
+<li><em>From</em>: Smelly Pooh &lt;<A HREF="mailto:plop%2Bgoo@DOMAIN.HIDDEN">plop+goo@xxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sun, 17 Nov 2002 02:35:04 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+In its current form I find the enum protocol inflexible and awkward.  It
+is geared toward only being used as a common interface for collection
+classes although it should be more generic
+
+Methods like now-key and now-setter do not belong in an enumerator.
+They assume that you are dealing with a collection, which is not
+necessarily the case (for example when using &lt;range&gt; as an enum)
+
+There are too many classes involved in creating an enum.  First you
+have the collection class, then an enumeration class corresponding to
+that collection class.  This forces enumerations such as range to define
+2 classes when they don't even need 1
+
+With a few minor changes enum could be used as a generic lazy iterator,
+much like the stream type from ML or generators from python
+(<A  HREF="http://www.python.org/doc/2.2.2/whatsnew/node5.html">http://www.python.org/doc/2.2.2/whatsnew/node5.html</A>)
+
+I believe that an enumerator should simply be a thunk.  Each time the
+thunk is called it returns the next item in the enumerator (keeping
+state in a closure if necessary) until it reaches the end of the
+enumeration, in which case an &lt;enum-end&gt; condition is signalled
+
+A syntactic form like for should then only need to be modified to handle
+an &lt;enum-end&gt; condition and call the thunk instead of using (fin?
+enum) (now enum) (next enum) in a loop
+
+The enum generic function for collections will look like
+
+(dg enum (x|&lt;any&gt; =&gt; &lt;Met&gt;))
+
+In order to make the interface to classless thunks look the same as
+those returned by classes such as collections all that is required is to
+add
+
+(dm enum (x|&lt;Met&gt; =&gt; &lt;Met&gt;) x)
+
+Now &lt;range&gt; and &lt;range-enum&gt; can be thrown away, implementing
+enumerators are trivial
+
+(dm below (lim|&lt;num&gt; =&gt; &lt;Met&gt;)
+  (def x 0)
+  { (if (&gt;= x lim)
+      (sig (new &lt;enum-end&gt;))
+      (- (set x (+ x 1)) 1)) } )
+
+Enumerations on existing collections are also quite trivial and do not
+require a separate enum class
+
+(dm enum (x|&lt;lst&gt; =&gt; &lt;Met&gt;)
+  (def now nul)
+  { (if (empty? x)
+      (sig (new &lt;enum-end&gt;))
+      (seq (set now (head x)) (set x (tail x)) now)) } )
+
+This should encourage many more orthogonal uses of the enum protocol.
+Files can be enumerated.  Enums over enums can be coded easily, I'd like
+to see methods that take enums and split them into words or lines lazily
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00238" href="msg00238.html">Re: enum protocol suggestion</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+<li><strong><a name="00235" href="msg00235.html">Re: enum protocol suggestion</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00226.html">gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00228.html">Re: gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00226.html">gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00235.html">Re: enum protocol suggestion</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00227"><strong>Date</strong></a></li>
+<li><a href="threads.html#00227"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

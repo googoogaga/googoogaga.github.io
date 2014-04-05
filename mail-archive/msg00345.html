@@ -1,0 +1,107 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: goo bignums -->
+<!--X-From-R13: Tnevrq @njnm <fvyrapr&#45;tbbNavycbgrag.bet> -->
+<!--X-Date: Thu, 20 Nov 2003 14:27:35 &#45;0500 (EST) -->
+<!--X-Message-Id: m3ekw24z9d.fsf@xpf.nilpotent.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: E0E96840&#45;1AD0&#45;11D8&#45;B40E&#45;000A95A0424C@ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: goo bignums</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00344.html">Date Prev</a>][<a href="msg00346.html">Date Next</a>][<a href="msg00344.html">Thread Prev</a>][<a href="msg00346.html">Thread Next</a>][<a href="index.html#00345">Date Index</a>][<a href="threads.html#00345">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: goo bignums</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: goo bignums</li>
+<li><em>From</em>: Faried Nawaz &lt;<A HREF="mailto:silence-goo@DOMAIN.HIDDEN">silence-goo@xxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 21 Nov 2003 00:26:54 +0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+I run goo on FreeBSD, and I've noticed a minor issue -- the code uses
+values.h in a few places.  It should use limits.h instead, which is
+part of the standard C library.  On both FreeBSD and Linux limits.h
+pulls in system-specific headers that define LONG_MAX and other
+defines used by the code.
+
+Also, I have a better fix on the install -D issue.
+
+--- src/Makefile.in~	Fri Nov 21 00:13:41 2003
++++ src/Makefile.in	Fri Nov 21 00:13:59 2003
+@@ -33,7 +33,7 @@
+ 
+ install: all
+ 	$(top_srcdir)/mkinstalldirs $(GOO_MODS)
+-	find . -name \*.goo -exec $(INSTALL_DATA) -D {} $(GOO_MODS)/{} \;
++	tar cf - `find . -name \*.goo` | (umask 022; cd ${GOO_MODS}; tar xvf -)
+ 
+ clean:
+ 
+It looks ugly, but it's portable.
+
+
+Faried.
+-- 
+^self
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00344" href="msg00344.html">goo bignums</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00344.html">goo bignums</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00346.html">configure's __thread test</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00344.html">goo bignums</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00346.html">configure's __thread test</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00345"><strong>Date</strong></a></li>
+<li><a href="threads.html#00345"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

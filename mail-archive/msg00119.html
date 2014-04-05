@@ -1,0 +1,154 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Goo Nitpicks -->
+<!--X-From-R13: Xbanguna Vfrh <ibzwbzNibzwbz.bet> -->
+<!--X-Date: Fri, 2 Aug 2002 18:50:14 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20020802225020.GA4332@vomjom -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 1028243951.6708.75.camel@radii -->
+<!--X-Reference: uo8fzxx2oyg.fsf@djundjun.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Goo Nitpicks</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00118.html">Date Prev</a>][<a href="msg00120.html">Date Next</a>][<a href="msg00117.html">Thread Prev</a>][<a href="msg00125.html">Thread Next</a>][<a href="index.html#00119">Date Index</a>][<a href="threads.html#00119">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Goo Nitpicks</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;, <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: Goo Nitpicks</li>
+<li><em>From</em>: Jonathan Hseu &lt;<A HREF="mailto:vomjom@DOMAIN.HIDDEN">vomjom@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 2 Aug 2002 17:50:20 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Fri, Aug 02, 2002 at 12:41:11PM -0400, Jonathan Bachrach wrote:
+&gt; 
+&gt; actually, what i had in mind which is very much like dylan and eulisp
+&gt; is the ability to do selective imports:  
+&gt; 
+&gt;   (use (each goo/math $pi))
+&gt; 
+&gt; with prefixing
+&gt; 
+&gt;   (use (prefix goo/math math/))
+&gt; 
+&gt; and combined
+&gt; 
+&gt;   (use (prefix (each goo/math $pi) math/))
+
+I like.
+
+&gt; 
+&gt; i would propose 
+&gt; 
+&gt;   (take x n) == (sub x 0 n) == x[0:n]
+&gt; 
+&gt; and 
+&gt; 
+&gt;   (drop x n) == (sub x n (len x)) == x[n:]
+
+This is good too.  Perhaps a keyword variable that allows negative
+numbers later on would be better than making sub* and such.
+
+Could you guys please consider the patches for bugs 8 and 9?
+9 is pretty serious.  I don't care what the environment variable is
+called in 8.
+
+Thanks.
+
+Some more nitpicks:
+Could we have a way to get the return value of the last evaluated
+expression?
+
+CMUCL's *, **, and *** work well IMO (well, maybe a different character,
+because * is a generic)
+
+Also, an evil bug (should I report to BTS?):
+goo/user 0&lt;= (dc &lt;testa&gt; (&lt;any&gt;))
+goo/user 0=&gt; #f
+goo/user 0&lt;= (dp asdf (&lt;testa&gt; =&gt; &lt;int&gt;) 5)
+goo/user 0=&gt; #{Prop #{Gen asdf (&lt;any&gt;)}}
+goo/user 0&lt;= (dc &lt;testb&gt; (&lt;testa&gt;))
+goo/user 0=&gt; #f
+goo/user 0&lt;= (dp asdf (&lt;testb&gt; =&gt; &lt;int&gt;) 6)
+goo/user 0=&gt; #{Prop #{Gen asdf (&lt;any&gt;)}}
+goo/user 0&lt;= (dv my-var (new &lt;testb&gt;))
+goo/user 0=&gt; #f
+goo/user 0&lt;= my-var
+goo/user 0=&gt; #{&lt;testb&gt; asdf: 5 asdf: 5}
+goo/user 0&lt;= (asdf my-var)
+goo/user 0=&gt; 5
+
+I swear I had more... oh well, I guess I'll just post again when I
+remember :)
+
+-- 
+Jonathan Hseu &lt;vomjom@vomjom.org, vomjom@debian.org, jh4@cec.wustl.edu&gt;
+GPG ID:          5228D713
+GPG fingerprint: 220B A4EF 70FE B884 CB38  F93F EA8A 1024 5228 D713
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00125" href="msg00125.html">Re: Goo Nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00111" href="msg00111.html">Re: Goo Nitpicks</a></strong>
+<ul><li><em>From:</em> Christopher Armstrong</li></ul></li>
+<li><strong><a name="00117" href="msg00117.html">Re: Goo Nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00118.html">[carmstro@twistedmatrix.com: Re: Goo Nitpicks]</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00120.html">Re: please resend your googoogaga msg -- Re: Trouble building goo-0_0140</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00117.html">Re: Goo Nitpicks</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00125.html">Re: Goo Nitpicks</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00119"><strong>Date</strong></a></li>
+<li><a href="threads.html#00119"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

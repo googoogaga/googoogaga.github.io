@@ -1,0 +1,114 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: inline C and calling in and out -->
+<!--X-From-R13: "Epbgg Uenunz" <fpbggtNu4px3e.arg> -->
+<!--X-Date: Wed, 24 Mar 2004 23:21:05 &#45;0500 (EST) -->
+<!--X-Message-Id: 001001c41220$8b33ae90$6500a8c0@behemoth -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>inline C and calling in and out</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00354.html">Date Prev</a>][<a href="msg00356.html">Date Next</a>][<a href="msg00353.html">Thread Prev</a>][<a href="msg00356.html">Thread Next</a>][<a href="index.html#00355">Date Index</a>][<a href="threads.html#00355">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>inline C and calling in and out</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &lt;<A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: inline C and calling in and out</li>
+<li><em>From</em>: &quot;Scott Graham&quot; &lt;<A HREF="mailto:scottg@DOMAIN.HIDDEN">scottg@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Wed, 24 Mar 2004 20:20:45 -0800</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Hi, newbie question :/
+
+I'm trying to use the nifty C interface. I'm using 0_154 on Win32
+(vcgoo154a.zip). When I try to run the following program (which I would
+expect to print &quot;weeee\nwaaaa\n&quot;) I get a C compiler error, saying:
+\tmp\exp-6252-1.c(35) : error C2065: 'YgooSuserYbacktogooV' : undeclared
+identifier
+
+---
+(use goo)
+(use goo/x)
+
+(df backtogoo ()
+    (post &quot;waaaa\n&quot;))
+
+#{
+  void doStuff(void)
+  {
+    printf(&quot;weeee\n&quot;);
+    $(backtogoo);
+  }
+}
+
+(df main ()
+    #{ doStuff(); }
+    )
+
+(main)
+---
+
+Do I need to &quot;forward declare&quot; the backtogoo goo function to C somehow?
+
+I also found <A  HREF="http://www.ai.mit.edu/~jrb/goo/wiki/index.php/OpenglGoox">http://www.ai.mit.edu/~jrb/goo/wiki/index.php/OpenglGoox</A>, which
+has same problem with the $(display) call in void display(void) {...} on my
+build. Perhaps a Win32-only problem, or something that was fixed in 155?
+
+Thanks for any suggestions/clarifications,
+scott
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00354.html">Re: Problems with goo CVS?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00356.html">Star-up Question</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00353.html">Problems with goo CVS?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00356.html">Star-up Question</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00355"><strong>Date</strong></a></li>
+<li><a href="threads.html#00355"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

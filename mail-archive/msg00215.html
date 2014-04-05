@@ -1,0 +1,191 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Continuations/coroutines in UNIX98 standard -->
+<!--X-From-R13: "Quevf Rbhoyr" <puevf.qbhoyrNqbhoyr.pb.am> -->
+<!--X-Date: Mon, 7 Oct 2002 18:29:08 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20021007222825.5B109936E3@server2.fastmail.fm -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Continuations/coroutines in UNIX98 standard</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00214.html">Date Prev</a>][<a href="msg00216.html">Date Next</a>][<a href="msg00214.html">Thread Prev</a>][<a href="msg00206.html">Thread Next</a>][<a href="index.html#00215">Date Index</a>][<a href="threads.html#00215">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Continuations/coroutines in UNIX98 standard</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;goo list&quot; &lt;<A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Continuations/coroutines in UNIX98 standard</li>
+<li><em>From</em>: &quot;Chris Double&quot; &lt;<A HREF="mailto:chris.double@DOMAIN.HIDDEN">chris.double@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Mon, 7 Oct 2002 22:28:25 UT</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Mon, 7 Oct 2002 14:45:39 -0700 (PDT), &quot;Avi Bryant&quot; &lt;avi@beta4.com&gt;
+said:
+&gt; But these are only one-shot continuations, right?  Is there any way to
+&gt; copy a Fiber?
+
+Yes, Fiber's are only one shot continuations and cannot be copied. The
+trick that 'Io' uses could probably do multi-shot continuations by
+copying the stack since full control/allocation of the stack is up to the
+programmer.
+
+Here's a paste of the code to create the coroutine:
+
+-----------8&lt;--------------
+/* This is the system dependent function.
+ * Setup a jmp_buf so when it is longjmp'ed it will invoke 'func' using
+ 'stack'.
+ * ('func' will not (and mustn't) return!)
+ */
+
+static void 
+setup_jmpbuf(jmp_buf buf, void *func, void *stack, size_t stacksize)
+{
+    setjmp(buf);
+#ifdef _BSD_PPC_SETJMP_H_
+    /* ppc-os-x */
+    #define setjmp _setjmp /* no need for signal masks */
+    #define longjmp _longjmp
+    memset(stack+stacksize-64, 0, 64);      /* very crude... */
+    buf[0] = ((int)stack + stacksize - 64 + 15) &amp; ~15;
+    buf[21] = (int)func;
+#elif JB_SP
+    /* x86-linux with glibc2 */
+    buf-&gt;__jmpbuf[JB_SP] = (int)stack + stacksize;
+    buf-&gt;__jmpbuf[JB_PC] = (int)func;
+#elif defined(_I386_JMP_BUF_H)
+    /* x86-linux with libc5 */
+    buf-&gt;__sp = stackend;
+    buf-&gt;__pc = func;
+#elif defined(__CYGWIN__) 
+    /* win32 */
+    buf[7] = (int)(stack + stacksize);
+    buf[8] = (int)func;
+#elif defined(__SYMBIAN32__)
+	buf[0] = 0;
+	buf[1] = 0;
+	buf[2] = 0;
+	buf[3] = (unsigned int)stack + SCHEDULER_STACKSIZE - 64;
+	buf[9] = (int)func;
+	buf[8] =  buf[3] + 32;
+#endif
+
+#if 0 /* untested... */
+    /* m68k-linux with glibc2 */
+    buf-&gt;__jmpbuf-&gt;__sp = stackend;
+    buf-&gt;__jmpbuf-&gt;__aregs[0] = (long)func;
+#endif
+}
+
+Coro *Scheduler_createCoro(Scheduler *self, void *aContext, void
+(*func)(void *))
+{
+  Coro *th;
+
+  if (self-&gt;nr_free)
+    th = self-&gt;freeCoros[--self-&gt;nr_free];
+   else
+    th = malloc(sizeof(*th) + SCHEDULER_STACKSIZE);
+
+    /* setjmp/longjmp is flakey under Symbian. If the setjmp is done
+       inside the setup_jmpbuf call then a crash occurs. inlining it
+	   here solves the problem 
+	*/
+#if !defined(__SYMBIAN32__)
+  setup_jmpbuf(th-&gt;env, start, th + 1, SCHEDULER_STACKSIZE);
+#else
+    setjmp(th-&gt;env);
+	th-&gt;env[0] = 0;
+	th-&gt;env[1] = 0;
+	th-&gt;env[2] = 0;
+	th-&gt;env[3] = (unsigned int)(th + 1) + SCHEDULER_STACKSIZE - 64;
+	th-&gt;env[9] = (int)start;
+	th-&gt;env[8] =  th-&gt;env[3] + 32;
+#endif
+
+  /* insert after currentCoro */
+  th-&gt;next = self-&gt;currentCoro-&gt;next;
+  th-&gt;prev = self-&gt;currentCoro;
+  th-&gt;next-&gt;prev = th;
+  th-&gt;prev-&gt;next = th;
+  self-&gt;coroCount++;
+
+  self-&gt;start_func = func;
+  self-&gt;context = aContext;
+  Scheduler_yield(self);
+
+  return th;
+}
+
+void Scheduler_yield(Scheduler *self)
+{
+#if defined(__SYMBIAN32)
+  ProcessUIEvent();
+#endif
+  if (setjmp(self-&gt;currentCoro-&gt;env) == 0)
+  {
+    self-&gt;currentCoro = self-&gt;currentCoro-&gt;next;
+    longjmp(self-&gt;currentCoro-&gt;env, 1);
+  }
+}
+
+-----------8&lt;--------------
+
+Chris.
+-- 
+  Chris Double
+  chris.double@double.co.nz
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00214.html">Re: Continuations/coroutines in UNIX98 standard</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00216.html">Re: [Fwd: Questions on goo / samurui]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00214.html">Re: Continuations/coroutines in UNIX98 standard</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00206.html">New Goo.NET release available</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00215"><strong>Date</strong></a></li>
+<li><a href="threads.html#00215"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

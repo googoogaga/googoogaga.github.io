@@ -1,0 +1,158 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Goo Nitpicks -->
+<!--X-From-R13: Xbanguna Vfrh <ibzwbzNibzwbz.bet> -->
+<!--X-Date: Thu, 1 Aug 2002 12:20:55 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20020801162100.GA29233@vomjom -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Goo Nitpicks</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00107.html">Date Prev</a>][<a href="msg00109.html">Date Next</a>][<a href="msg00107.html">Thread Prev</a>][<a href="msg00110.html">Thread Next</a>][<a href="index.html#00108">Date Index</a>][<a href="threads.html#00108">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Goo Nitpicks</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Goo Nitpicks</li>
+<li><em>From</em>: Jonathan Hseu &lt;<A HREF="mailto:vomjom@DOMAIN.HIDDEN">vomjom@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Thu, 1 Aug 2002 11:21:00 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Resending this e-mail because majordomo had problems:
+
+Most important is #1:
+1. Many programmers prefer mod:name over (use)ing everything into the
+namespace.  The problem with mod:name as it is is that directories can
+pile up:
+(foo/bar/baz/math:sin foo/bar/baz/math:$pi)
+
+Even a simple goo/math:$pi is a pain to type.
+
+My proposal is this:
+If the programmer types: (use goo/math)  , it imports everything as it
+  does now.
+If the programmer types: (use goo/math math)  , the second argument
+  becomes the shortened version and then the programmer can type
+  math:$pi
+
+This would replace the current mod:name system (because of possible name
+clashing).
+
+2. Why not replace swapf with Common Lisp's rotatef, which is generally
+more useful?
+
+3. Chris Armstrong's nitpick: Why is string formatting tied to ports?
+It'd be nice if there was a function ('format' maybe?) that returned a
+formatted string the way (msg) prints them.
+
+(msg) could still exist as a shortened version of (write port (format))
+
+4. We need a slicing function for sequences (I couldn't find one...).
+'slice' is a good name IMHO... we could possibly use _ to indicate
+either the end or beginning of the array.  For instance:
+(slice array 1 _) to slice from 1 -&gt; end.  (Or use Python's -1?)
+
+Also, an optional third argument for step size would be nice.
+
+5. Two things are incorrect on the web:
+Example for DS should use 'unless' and not 'when'
+(empty) has an incorrect signature
+
+6. Why is DS like: (ds (macro ,blah ,@asdf)) and not like:
+(ds macro (,blah ,@asdf))?
+
+It seems inconsistent with DF and DM.
+
+7. *-setter seems too long.  *! or *-set or *-set! may be better names.
+
+8. Some destructive functions don't have a !, such as set.
+
+9. Bugs: dv always returns #f.  push is broken for lists.
+
+10. Will we be able to import from the directory in which goo is run in
+the future?
+
+11. According to wiki, default values will look like:
+(dm function (a:0|&lt;int&gt; b:1|&lt;int&gt;))
+
+It may be just me, but I think default values should be consistent with
+rep's and let's variable assignments.
+
+So, maybe make default values look like:
+(dm function ((a 0)|&lt;int&gt; (b 0)|&lt;int&gt;))
+
+Or change let/rep to look like:
+(let (x:0 y:3))
+
+12. Functions like (trunc/) should IMO return one value.  If the
+programmer wanted a remainder, they would use (mod)
+
+It could still return one value, but be able to assign two much like
+Common Lisp's multiple-value-bind.
+
+That's about it.. so far :)
+
+-- 
+Jonathan Hseu &lt;vomjom@vomjom.org, vomjom@debian.org, jh4@cec.wustl.edu&gt;
+GPG ID:          5228D713
+GPG fingerprint: 220B A4EF 70FE B884 CB38  F93F EA8A 1024 5228 D713
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00110" href="msg00110.html">Re: Goo Nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00107.html">Goo Nitpicks</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00109.html">please resend your googoogaga msg -- Re: Trouble building goo-0_0140</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00107.html">Goo Nitpicks</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00110.html">Re: Goo Nitpicks</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00108"><strong>Date</strong></a></li>
+<li><a href="threads.html#00108"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

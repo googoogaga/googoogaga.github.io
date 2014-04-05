@@ -1,0 +1,103 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Continuations -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Wed, 17 Apr 2002 13:59:22 &#45;0400 (EDT) -->
+<!--X-Message-Id: D60D45D0&#45;522C&#45;11D6&#45;85DD&#45;003065D63222@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Continuations</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00016.html">Date Prev</a>][<a href="msg00018.html">Date Next</a>][<a href="msg00012.html">Thread Prev</a>][<a href="msg00018.html">Thread Next</a>][<a href="index.html#00017">Date Index</a>][<a href="threads.html#00017">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Continuations</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &lt;<A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Continuations</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Wed, 17 Apr 2002 13:55:04 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Tuesday, April 16, 2002, at 06:43  PM, Avi Bryant wrote:
+&gt; On 16 Apr 2002, Jonathan Bachrach wrote:
+&gt; The wiki mentions call/cc as a wish.  Any idea what the realistic
+&gt; prospects of this being implemented are?  I'm interested not so much in
+&gt; microthreads as in the use of continuations in web apps, which I've come
+&gt; to see as essential.
+
+Well - so far, they have not been implemented because GOO uses a 
+standard C stack to call functions, and the C setjmp/longjmp to handle 
+the &quot;esc&quot; limited continuation construct. There is a clear path on how 
+to go forward and remove the dependence on the C stack, but I believe 
+doing so in a way that provides reasonable performance requires 
+asm-level trickery, which so far noone has felt up to confronting. I'm 
+sure the appropriate code could be hacked out of other lisp-runtimes, if 
+anyone can find it.
+
+When you say you're not interested in microthreads, you're interested in 
+web-app continuations, I presume this means you want continuations that 
+can be called multiple times, as well? (to support the back button) Damn 
+I was hoping we wouldn't actually need to do that. :)
+
+James
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00018" href="msg00018.html">Re: Continuations</a></strong>
+<ul><li><em>From:</em> Avi Bryant</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00016.html">Re: Sockets</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00018.html">Re: Continuations</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00012.html">Re: goo</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00018.html">Re: Continuations</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00017"><strong>Date</strong></a></li>
+<li><a href="threads.html#00017"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

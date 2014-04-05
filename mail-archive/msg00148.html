@@ -1,0 +1,188 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Another bug -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Wed, 7 Aug 2002 14:32:03 &#45;0400 (EDT) -->
+<!--X-Message-Id: uo8n0rycy4v.fsf@djundjun.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 15695.61.145268.980674@h00045a4799d6.ne.client2.attbi.com -->
+<!--X-Reference: D4BC0779&#45;A8E2&#45;11D6&#45;8F54&#45;003065D63222@fuhm.net -->
+<!--X-Reference: 15696.25870.580097.1972@h00045a4799d6.ne.client2.attbi.com -->
+<!--X-Reference: 15697.24150.647811.41461@h00045a4799d6.ne.client2.attbi.com -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Another bug</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00147.html">Date Prev</a>][<a href="msg00149.html">Date Next</a>][<a href="msg00147.html">Thread Prev</a>][<a href="msg00149.html">Thread Next</a>][<a href="index.html#00148">Date Index</a>][<a href="threads.html#00148">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Another bug</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Neel Krishnaswami &lt;<A HREF="mailto:neelk@DOMAIN.HIDDEN">neelk@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Another bug</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 07 Aug 2002 14:38:40 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Neel Krishnaswami &lt;neelk@alum.mit.edu&gt; writes:
+
+&gt; Hi, I've found a problem with function redefinitions:
+
+here's the diff for the fix.  basically c functions (implementing goo
+code) need to be declared static to work with dynamic linking and not
+just always get the first defined version.  the only change is in
+goo/c/dlgrt.h and no recompile of goo is necessary.  it only affects
+the dynamic compilation.
+
+i'll hopefully get a new version of goo out early next week with in
+the very least a bunch of bug fixes.  thanks for all your bug
+reports. 
+
+jonathan
+
+Index: dlgrt.h
+===================================================================
+RCS file: /projects/dynlangs/cvsroot/goo/c/dlgrt.h,v
+retrieving revision 1.7
+diff -c -r1.7 dlgrt.h
+*** dlgrt.h	3 Jul 2002 22:14:33 -0000	1.7
+--- dlgrt.h	7 Aug 2002 18:16:11 -0000
+***************
+*** 1,21 ****
+  //// Copyright 2002, Jonathan Bachrach.  See file TERMS.
+  
+  #undef FUNFOR
+! 
+! #define FUNFOR(x)    extern P x##I(REGS)
+! 
+  #undef EXT
+  #undef DEF
+  #undef VARREF
+  #undef VARSET
+  #undef BOUNDP
+  
+! #define LOCNAM(x)    x##V
+! #define EXT(x, m, n) static DLVAR_DAT LOCNAM(x) = { n, m, PNUL };
+! #define DEF(x, m, n) static P x = PNUL; static DLVAR_DAT LOCNAM(x) = { n, m, PNUL };
+! #define BOUNDP(x)    (P)YevalSast_evalYPbinding_boundQ((P)&amp;LOCNAM(x))
+! #define VARREF(x)    YevalSast_evalYPbinding_value((P)&amp;LOCNAM(x))
+! #define VARSET(x, v) YevalSast_evalYPbinding_value_setter((P)v, (P)&amp;LOCNAM(x))
+  
+  
+  #undef DYNEXT
+--- 1,21 ----
+  //// Copyright 2002, Jonathan Bachrach.  See file TERMS.
+  
+  #undef FUNFOR
+! #undef FUNCODEDEF
+  #undef EXT
+  #undef DEF
+  #undef VARREF
+  #undef VARSET
+  #undef BOUNDP
+  
+! #define FUNFOR(x)     static P x##I(REGS)
+! #define FUNCODEDEF(x) static P x##I (REGS regs)
+! #define LOCNAM(x)     x##V
+! #define EXT(x, m, n)  static DLVAR_DAT LOCNAM(x) = { n, m, PNUL };
+! #define DEF(x, m, n)  static P x = PNUL; static DLVAR_DAT LOCNAM(x) = { n, m, PNUL };
+! #define BOUNDP(x)     (P)YevalSast_evalYPbinding_boundQ((P)&amp;LOCNAM(x))
+! #define VARREF(x)     YevalSast_evalYPbinding_value((P)&amp;LOCNAM(x))
+! #define VARSET(x, v)  YevalSast_evalYPbinding_value_setter((P)v, (P)&amp;LOCNAM(x))
+  
+  
+  #undef DYNEXT
+
+&gt; 
+&gt;   ;;; GOO
+&gt;   ;;; JONATHAN BACHRACH
+&gt;   ;;; MIT AI Lab
+&gt;   ;;; JUL 19, 2002
+&gt;   ;;; 
+&gt;   ;;; VERSION = 0.140
+&gt;   ;;; ROOT    = /tmp/goo/lib/goo/
+&gt; 
+&gt;   goo/user 0&lt;= (df foo () &quot;foo&quot;)
+&gt;   goo/user 0=&gt; #{Met foo ()}
+&gt;   goo/user 0&lt;= (foo)
+&gt;   goo/user 0=&gt; &quot;foo&quot;
+&gt;   goo/user 0&lt;= (df foo () &quot;bar&quot;) ;; &lt;-- I redefine foo
+&gt;   goo/user 0=&gt; #{Met foo ()}
+&gt;   goo/user 0&lt;= (foo)
+&gt;   goo/user 0=&gt; &quot;foo&quot; ;; &lt;-- now it should return &quot;bar&quot;
+&gt; 
+&gt; Incidentally, do you prefer I send bug reports to this mailing list,
+&gt; or report them directly via the bug tracker? 
+&gt; 
+&gt; -- 
+&gt; Neel Krishnaswami
+&gt; neelk@alum.mit.edu
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00149" href="msg00149.html">Re: Another bug</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00138" href="msg00138.html">Two bugs....</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+<li><strong><a name="00141" href="msg00141.html">Re: Two bugs....</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+<li><strong><a name="00143" href="msg00143.html">Two more bugs</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+<li><strong><a name="00146" href="msg00146.html">Another bug</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00147.html">Re: Another bug</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00149.html">Re: Another bug</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00147.html">Re: Another bug</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00149.html">Re: Another bug</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00148"><strong>Date</strong></a></li>
+<li><a href="threads.html#00148"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

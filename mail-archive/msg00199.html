@@ -1,0 +1,204 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Problems with libraries using C &#45; code -->
+<!--X-From-R13: Prarqvxg Uehaqznaa <Prarqvxg&#45;UehaqznaaNjro.qr> -->
+<!--X-Date: Thu, 3 Oct 2002 13:26:23 &#45;0400 (EDT) -->
+<!--X-Message-Id: 1033665878.806.8.camel@CoolLaptop -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20020923043614.GA4544@vomjom -->
+<!--X-Reference: 4984.24.91.160.204.1032764055.squirrel@languor.static.net -->
+<!--X-Reference: uo8lm5s1hmy.fsf@djundjun.ai.mit.edu -->
+<!--X-Reference: 1033160242.672.8.camel@CoolLaptop -->
+<!--X-Reference: uqzadm225qo.fsf@bongo.ai.mit.edu -->
+<!--X-Reference: 1033578760.987.2.camel@CoolLaptop -->
+<!--X-Reference: uo8smzoeohc.fsf@djundjun.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Problems with libraries using C - code</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00198.html">Date Prev</a>][<a href="msg00200.html">Date Next</a>][<a href="msg00198.html">Thread Prev</a>][<a href="msg00200.html">Thread Next</a>][<a href="index.html#00199">Date Index</a>][<a href="threads.html#00199">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Problems with libraries using C - code</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Problems with libraries using C - code</li>
+<li><em>From</em>: Benedikt Grundmann &lt;<A HREF="mailto:Benedikt-Grundmann@DOMAIN.HIDDEN">Benedikt-Grundmann@xxxxxx</A>&gt;</li>
+<li><em>Date</em>: 03 Oct 2002 19:24:35 +0200</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Am Mit, 2002-10-02 um 19.31 schrieb Jonathan Bachrach:
+&gt; Benedikt Grundmann &lt;Benedikt-Grundmann@web.de&gt; writes:
+&gt; 
+&gt; &gt; Am Sam, 2002-09-28 um 04.43 schrieb Andrew Sutherland:
+&gt; &gt; &gt; 
+&gt; &gt; &gt; Currently, to use modules that use .c files, you must build a new goo
+&gt; &gt; &gt; image with those modules included.
+&gt; &gt; &gt; 
+&gt; &gt; &gt; For example, to build network sockets in to the goo image, you would:
+&gt; &gt; &gt; 
+&gt; &gt; &gt; - Edit src/eval/main.goo, and add the following line:
+&gt; &gt; &gt; 
+&gt; &gt; &gt; (use goo/io/net)
+&gt; &gt; &gt; 
+&gt; &gt; I tried that. Actually I added these two lines:
+&gt; &gt; (use samurui/samurui)
+&gt; &gt; (use goo/io/net)
+&gt; &gt; 
+&gt; &gt; &gt; - Then, in the REPL of a running goo:
+&gt; &gt; &gt; 
+&gt; &gt; &gt; (use eval/g2c)
+&gt; &gt; &gt; (g2c-test &quot;magic&quot;) ;; sets the output dir to &quot;g2c-magic&quot; off of goo/c
+&gt; &gt; &gt; (g2c-top) ;; builds a new image in &quot;g2c-magic&quot;
+&gt; &gt; During execution of that call a Stack overflow happened :-(
+&gt; 
+&gt; we just checked in a working samurui and a compiler that compiles it.
+&gt; i tried it myself.  try again with the latest cvs files.
+&gt; 
+&gt; jonathan
+Did &quot;cvs update -d&quot;.
+Compilation of a new g2c-magic worked.  (use samurui/test) created a
+window but when I pressed a button inside that window an error happened:
+
+goo/user 0&lt;= (use samurui/test)
+[Loading module samurui/test...
+About to add-all
+Constructing a paintbox...
+Returning paintbox...
+Returning canvas...
+About to rebind
+About to update
+About to show
+Going to show #{&lt;gui-window&gt; handle: &amp;0x8d33b80 attrs: #f children:
+#[#{&lt;gui-vbox&gt; handle: &amp;0x8d34ca8 attrs: #f children: #[#{&lt;gui-label&gt;
+handle: * attrs: *} #{&lt;happy-draw&gt; handle: * attrs: * gc: * paintbox: *
+canvas: *}]}]}
+Returning canvas...
+ERROR: Function #{Gen mouse-press ((widget &lt;any&gt;) (x &lt;int&gt;) (y &lt;int&gt;)
+(button &lt;int&gt;) (time &lt;int&gt;))} called with wrong number arguments
+(#{&lt;happy-draw&gt; handle: &amp;0x8d398e0 attrs: (fill) gc: #f paintbox:
+#{&lt;gui-paintbox&gt; handle: &amp;0x8d398e0 attrs: #f gc: #{&lt;gdk-gc&gt; handle:
+&amp;0x8e229d8 colormap: #{&lt;gdk-colormap&gt; handle: *}}} canvas:
+#{&lt;gui-canvas&gt; handle: &amp;0x8d39f38 attrs: #f gc: #{&lt;gdk-gc&gt; handle:
+&amp;0x8e228d0 colormap: #{&lt;gdk-colormap&gt; handle: *}}}} 157 102 1).
+Type &quot;,restart N&quot; to restart execution:
+1. Return to interpreter level 1.
+2. Return to interpreter level 0.
+3. Exit the top-level interpreter.
+goo/user 1&lt;= ,restart 3
+
+
+(use samurui/test2) resulted in an error before I saw any window:
+
+goo/user 0&lt;= (use samurui/test2)
+[Loading module samurui/test2...
+About to add-all
+About to rebind
+About to update
+
+(magic:740): Gtk-CRITICAL **: file gtktreeview.c: line 6532
+(gtk_tree_view_unref_tree_helper): assertion `node != NULL' failed
+About to show
+Going to show #{&lt;gui-window&gt; handle: &amp;0x8b7ab18 attrs: #f children:
+#[#{&lt;gui-vbox&gt; handle: &amp;0x8b7bc40 attrs: #f children: #[#{&lt;gui-label&gt;
+handle: * attrs: *} #{&lt;gui-scrolled-window&gt; handle: * attrs: * children:
+*}]}]}
+ERROR: No applicable methods on #{Gen master-update-slaves (&lt;any&gt;
+&lt;any&gt;)} when called with (#f #{&lt;str-hold&gt; da-str: &quot;Apples&quot;}).
+Type &quot;,restart N&quot; to restart execution:
+1. Return to interpreter level 1.
+2. Return to interpreter level 0.
+3. Exit the top-level interpreter.
+
+
+(use samurui/test3) seemed to work but after closing the main scribble
+window another (small) window was created, which did not showed any
+controls and wasn't closable.  The goo prompt worked though and after
+quitting goo the window disappeared.
+
+
+I haven't got the time to do any more serious testing now.  Maybe
+tomorow evening / night.
+
+
+Cheers,
+
+Bene
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00201" href="msg00201.html">Re: Problems with libraries using C - code</a></strong>
+<ul><li><em>From:</em> Andrew Sutherland</li></ul></li>
+<li><strong><a name="00200" href="msg00200.html">Re: Problems with libraries using C - code</a></strong>
+<ul><li><em>From:</em> Andrew Sutherland</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00187" href="msg00187.html">goo is missing...</a></strong>
+<ul><li><em>From:</em> Jonathan Hseu</li></ul></li>
+<li><strong><a name="00188" href="msg00188.html">Re: goo is missing...</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+<li><strong><a name="00191" href="msg00191.html">Re: goo is missing...</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+<li><strong><a name="00194" href="msg00194.html">Problems with libraries using C - code</a></strong>
+<ul><li><em>From:</em> Benedikt Grundmann</li></ul></li>
+<li><strong><a name="00195" href="msg00195.html">Re: Problems with libraries using C - code</a></strong>
+<ul><li><em>From:</em> Andrew Sutherland</li></ul></li>
+<li><strong><a name="00197" href="msg00197.html">Re: Problems with libraries using C - code</a></strong>
+<ul><li><em>From:</em> Benedikt Grundmann</li></ul></li>
+<li><strong><a name="00198" href="msg00198.html">Re: Problems with libraries using C - code</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00198.html">Re: Problems with libraries using C - code</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00200.html">Re: Problems with libraries using C - code</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00198.html">Re: Problems with libraries using C - code</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00200.html">Re: Problems with libraries using C - code</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00199"><strong>Date</strong></a></li>
+<li><a href="threads.html#00199"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Problems with libraries using C &#45; code -->
+<!--X-From-R13: Prarqvxg Uehaqznaa <Prarqvxg&#45;UehaqznaaNjro.qr> -->
+<!--X-Date: Fri, 27 Sep 2002 16:58:53 &#45;0400 (EDT) -->
+<!--X-Message-Id: 1033160242.672.8.camel@CoolLaptop -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20020923043614.GA4544@vomjom -->
+<!--X-Reference: 4984.24.91.160.204.1032764055.squirrel@languor.static.net -->
+<!--X-Reference: uo8lm5s1hmy.fsf@djundjun.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Problems with libraries using C - code</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00193.html">Date Prev</a>][<a href="msg00195.html">Date Next</a>][<a href="msg00192.html">Thread Prev</a>][<a href="msg00195.html">Thread Next</a>][<a href="index.html#00194">Date Index</a>][<a href="threads.html#00194">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Problems with libraries using C - code</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Goo mailing liste &lt;<A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Problems with libraries using C - code</li>
+<li><em>From</em>: Benedikt Grundmann &lt;<A HREF="mailto:Benedikt-Grundmann@DOMAIN.HIDDEN">Benedikt-Grundmann@xxxxxx</A>&gt;</li>
+<li><em>Date</em>: 27 Sep 2002 22:57:19 +0200</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+When trying to use a library which uses dynamically compiled c-code on
+my debian linux laptop I get the following error:
+
+goo/user 1&lt;= dreamer@CoolLaptop:~$ goo
+;;; GOO
+;;; JONATHAN BACHRACH
+;;; MIT AI Lab
+;;; SEP 18, 2002
+;;; 
+;;; VERSION = 0.151
+;;; ROOT    = /home/dreamer/goo/lib/goo/
+
+goo/user 0&lt;= (use demos/nettest)
+[Loading module demos/nettest...
+  [Loading module goo/io/net...
+FAILED TO LOAD /tmp/exp-686-0.so BECAUSE /tmp/exp-686-0.so: undefined
+symbol: YgooSioSnetYPwrite_socket_string
+  ]
+ERROR: Unbound variable connect-socket.
+Type &quot;,restart N&quot; to restart execution:
+1. Return to interpreter level 1.
+2. Return to interpreter level 0.
+3. Exit the top-level interpreter.
+goo/user 1&lt;= 
+
+
+When trying to use the samurui library a segmentation fault (SIGSEV)
+happens:
+
+goo/user 1&lt;= (use samurui/test)
+  [Loading module samurui/test...
+    [Loading module samurui/samurui...
+      [Loading module samurui/gtk...
+Speicherzugriffsfehler
+dreamer@CoolLaptop:~$
+
+I'm using yesterdays CVS.  Is that a known error?  Is there a
+workaround?
+
+
+Cheers
+
+Bene
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00195" href="msg00195.html">Re: Problems with libraries using C - code</a></strong>
+<ul><li><em>From:</em> Andrew Sutherland</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00187" href="msg00187.html">goo is missing...</a></strong>
+<ul><li><em>From:</em> Jonathan Hseu</li></ul></li>
+<li><strong><a name="00188" href="msg00188.html">Re: goo is missing...</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+<li><strong><a name="00191" href="msg00191.html">Re: goo is missing...</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00193.html">Re: one-of and other questions on goo's type system</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00195.html">Re: Problems with libraries using C - code</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00192.html">regular expression library</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00195.html">Re: Problems with libraries using C - code</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00194"><strong>Date</strong></a></li>
+<li><a href="threads.html#00194"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

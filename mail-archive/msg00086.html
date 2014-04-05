@@ -1,0 +1,102 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Win32 and Dynamic Compilation working -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Thu, 25 Jul 2002 00:31:02 &#45;0400 (EDT) -->
+<!--X-Message-Id: uo8y9c0pgp5.fsf@djundjun.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: uvg74bll8.fsf@double.co.nz -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Win32 and Dynamic Compilation working</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00085.html">Date Prev</a>][<a href="msg00087.html">Date Next</a>][<a href="msg00085.html">Thread Prev</a>][<a href="msg00087.html">Thread Next</a>][<a href="index.html#00086">Date Index</a>][<a href="threads.html#00086">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Win32 and Dynamic Compilation working</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Chris Double &lt;<A HREF="mailto:chris@DOMAIN.HIDDEN">chris@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Win32 and Dynamic Compilation working</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 25 Jul 2002 00:36:06 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Chris Double &lt;chris@double.co.nz&gt; writes:
+
+&gt; I have dynamic compilation (g2c-eval) working under Win32 using the
+&gt; Visual C++ compiler. I had to make a number of changes to get it
+&gt; going and I'm not sure it works for all cases. I'll outline the
+&gt; changes here to get feedback on what the best approach might be to
+&gt; support this (assuming you want to support it in the mainline Goo
+&gt; release).
+
+i'm impressed.
+
+&gt; ...  Is there a way of unloading the shared libraries that are
+&gt; loaded? Will I run out of file handles and/or address space
+&gt; eventually?
+
+on linux, you'll actually run out of roots for the boehm collector
+before you run out of address space or dll handles.  you can increase
+this limit but clearly it's not a longterm solution to dynamic
+compilation.
+
+jonathan
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00084" href="msg00084.html">Win32 and Dynamic Compilation working</a></strong>
+<ul><li><em>From:</em> Chris Double</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00085.html">Re: Win32 and Dynamic Compilation working</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00087.html">Writing Goo libraries</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00085.html">Re: Win32 and Dynamic Compilation working</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00087.html">Writing Goo libraries</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00086"><strong>Date</strong></a></li>
+<li><a href="threads.html#00086"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

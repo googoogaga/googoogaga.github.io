@@ -1,0 +1,173 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Sample code for I/O ideas -->
+<!--X-From-R13: Ezryyl Bbbu <cybc+tbbNerqoevpx.qph.vr> -->
+<!--X-Date: Tue, 19 Nov 2002 08:02:36 &#45;0500 (EST) -->
+<!--X-Message-Id: 20021119130232.A6190@prodigy.Redbrick.DCU.IE -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Sample code for I/O ideas</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00231.html">Date Prev</a>][<a href="msg00233.html">Date Next</a>][<a href="msg00227.html">Thread Prev</a>][<a href="msg00233.html">Thread Next</a>][<a href="index.html#00232">Date Index</a>][<a href="threads.html#00232">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Sample code for I/O ideas</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Sample code for I/O ideas</li>
+<li><em>From</em>: Smelly Pooh &lt;<A HREF="mailto:plop%2Bgoo@DOMAIN.HIDDEN">plop+goo@xxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Tue, 19 Nov 2002 13:02:32 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+I've put together examples of how a unix cat function would look like in
+the current scheme and each of the proposed schemes.
+
+I've an eof? method that takes a port as an argument rather than the
+return value of get/peek as it suits this example better
+
+cat-cur:
+For simple I/O I find the current scheme is the best, it has the
+shortest most understandable code
+
+cat-ex:
+The condition signalling scheme is my next favourite for simple code,
+but it seems the best for complex code (such as where there are
+multiple I/O calls in a block or where restarts are desirable, cat was a
+good candidate for using restarts for each file change)
+
+cat-nl:
+I don't like the ending with a new line scheme as the return value of
+gets has to be assigned to a variable and its length checked before
+using it, with the previous two methods the return value of gets can be
+used directly
+
+cat-tup:
+Similar to the new line scheme, the return values from gets needs to be
+assigned and checked before they can be used
+
+My preference is leaning toward using exceptions, it'll be great if both
+that and the current scheme can work together, I don't know how that'll
+work as you add more I/O methods such as block reads and writes or even
+asynchronous I/O, will methods be written for both schemes or will one
+take precedence?
+
+(use goo)
+
+(dc &lt;end-of-file&gt; (&lt;condition&gt;))
+
+(dv *eof* -1)
+(dv *not-eof* 0)
+
+(dm eof? (port|&lt;port&gt; =&gt; &lt;log&gt;)
+  (= (as &lt;int&gt; (peek port)) 255) )
+  ; (eof-object? (peek port))
+
+(dm gets-ex (port|&lt;port&gt; =&gt; &lt;str&gt;)
+  (if (eof? port)
+    (sig (new &lt;end-of-file&gt;))
+    (gets port) ) )
+
+(dm gets-nl (port|&lt;port&gt; =&gt; &lt;str&gt;)
+  (if (eof? port)
+    &quot;&quot;
+    (cat (gets port) &quot;\n&quot;) ) )
+
+(dm gets-tup (port|&lt;port&gt; =&gt; &lt;str&gt;)
+  (if (eof? port)
+    (tup *eof* &quot;&quot;)
+    (tup *not-eof* (gets port)) ) )
+
+(dm cat-cur (files|...)
+  (for ((file files))
+    (def port (open &lt;file-in-port&gt; file))
+    (rep loop ()
+      (unless (eof? port)
+        (post &quot;%s\n&quot; (gets port)) (loop) ) )
+    (close port) ) )
+
+(dm cat-ex (files|...)
+  (for ((file files))
+    (def port (open &lt;file-in-port&gt; file))
+    (esc break
+      (try &lt;end-of-file&gt; (fun (c r) (close port) (break #f))
+        (rep loop()
+          (post &quot;%s\n&quot; (gets-ex port)) (loop) ) ) ) ) )
+
+(dm cat-nl (files|...)
+  (for ((file files))
+    (def port (open &lt;file-in-port&gt; file))
+    (rep loop()
+      (def line (gets-nl port))
+      (unless (= (len line) 0)
+        (post line) (loop) ) )
+    (close port) ) )
+
+(dm cat-tup (files|...)
+  (for ((file files))
+    (def port (open &lt;file-in-port&gt; file))
+    (rep loop()
+      (def (tup status line) (gets-tup port))
+      (unless (= status *eof*)
+        (post &quot;%s\n&quot; line) (loop) ) )
+    (close port) ) )
+
+(export eof? cat-cur cat-ex cat-nl cat-tup)
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00233" href="msg00233.html">Re: Sample code for I/O ideas</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00231.html">Re: gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00233.html">Re: Sample code for I/O ideas</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00227.html">enum protocol suggestion</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00233.html">Re: Sample code for I/O ideas</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00232"><strong>Date</strong></a></li>
+<li><a href="threads.html#00232"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

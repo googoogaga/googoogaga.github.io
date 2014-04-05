@@ -1,0 +1,155 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: minor patches, random questions. -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Wed, 3 Dec 2003 12:53:22 &#45;0500 (EST) -->
+<!--X-Message-Id: 9174E2FF&#45;25B9&#45;11D8&#45;A0D2&#45;000A95A0424C@ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20031127195011.GA64527@nilpotent.org -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: minor patches, random questions.</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00349.html">Date Prev</a>][<a href="msg00351.html">Date Next</a>][<a href="msg00349.html">Thread Prev</a>][<a href="msg00351.html">Thread Next</a>][<a href="index.html#00350">Date Index</a>][<a href="threads.html#00350">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: minor patches, random questions.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Faried Nawaz &lt;<A HREF="mailto:silence-goo@DOMAIN.HIDDEN">silence-goo@xxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: minor patches, random questions.</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Wed, 3 Dec 2003 12:53:14 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Nov 27, 2003, at 2:50 PM, Faried Nawaz wrote:
+
+&gt;
+&gt; The diff file is at <A  HREF="http://web.nilpotent.org/tmp/goo-2003-11-26.txt">http://web.nilpotent.org/tmp/goo-2003-11-26.txt</A>
+&gt;
+&gt; c/grt.c: (app-args) was returning the args in reverse order.
+&gt;
+&gt; emacs/goo.el: I noticed that my code using (with-port ...) indented
+&gt; differently from the code in goo's sources.
+
+this should probably be generalized to indent any with-* form as you 
+suggest.
+
+&gt; src/goo/top.goo, src/goo/main.goo: This code lets you run goo scripts.
+&gt; You can create a file with
+&gt;
+&gt; == cut here ==
+&gt; #!/path/to/goo --
+&gt;
+&gt; (+ 2 3)
+&gt; == cut here ==
+&gt;
+&gt; make it executable, and run it.
+
+looks good.
+
+&gt; There are two problems with this.  The first one is that the first two
+&gt; elements of (app-args) are now &quot;--&quot; and the name of the script you're
+&gt; running.  Since scripts generally expect argv[1] and upwards to point
+&gt; to real arguments, argc/argv need to be mangled to skip these two args.
+&gt; Will a simple { Pargc += 2; Pargv += 2; } in read-script work?
+
+well i don't think this should be done at this low a level as this 
+returns exactly what c main returns.  instead there could be an 
+argument processing filter that returns a table of key value pairs...
+
+&gt; Other problem: the changes to main.goo.  They're not nice, but that's
+&gt; because i tried to keep the &quot;;;; GOO\n;;; JONATHAN BACHRACH\n ...&quot;
+&gt; header when goo was started interactively.
+
+this seems reasonable.
+
+&gt; I thought about writing a file-access method --
+&gt;
+&gt; (file-access 'read &quot;/etc/passwd&quot;) =&gt; #t
+&gt; (file-access 'write &quot;/etc/shadow&quot;) =&gt; #f
+&gt; (file-access 'execute &quot;/bin/ls&quot;) =&gt; #t
+&gt;
+&gt; but I realized that instead of hacking src/goo/%system.c, I could
+&gt; simply write inline C code using the access(2) system call.  Which
+&gt; cases call for inline C and which cases call for %fns?
+
+i'm thinking that when the amount of c code is small, is to be used 
+exactly once and involves a certain amount of nudging into goo land, 
+then it would be much more succinct as embedded c code.  i'm actually 
+thinking about eventually getting rid of most of the c primitives and 
+replacing them with embedded c.
+
+&gt; Also -- I couldn't figure out how to build and return a tuple from C.
+
+all the more reason to use embedded c.
+
+but if you gotta, then you can do this with:
+
+   t = YPPtfab((P)n, YPfalse);
+   YPtelt_setter(x, t, i);
+   ...
+
+&gt; Thanks,
+&gt;
+&gt; Faried.
+&gt;
+&gt;
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00349" href="msg00349.html">minor patches, random questions.</a></strong>
+<ul><li><em>From:</em> Faried Nawaz</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00349.html">minor patches, random questions.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00351.html">followup to the script patch.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00349.html">minor patches, random questions.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00351.html">followup to the script patch.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00350"><strong>Date</strong></a></li>
+<li><a href="threads.html#00350"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

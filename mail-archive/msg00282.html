@@ -1,0 +1,150 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: rough first impressions -->
+<!--X-From-R13: [vyrf Stna <zvyrfNpnqqe.pbz> -->
+<!--X-Date: Sun, 13 Apr 2003 12:37:10 &#45;0400 (EDT) -->
+<!--X-Message-Id: 1050251823.1331.24.camel@snagret -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>rough first impressions</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00281.html">Date Prev</a>][<a href="msg00283.html">Date Next</a>][<a href="msg00276.html">Thread Prev</a>][<a href="msg00284.html">Thread Next</a>][<a href="index.html#00282">Date Index</a>][<a href="threads.html#00282">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>rough first impressions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: rough first impressions</li>
+<li><em>From</em>: Miles Egan &lt;<A HREF="mailto:miles@DOMAIN.HIDDEN">miles@xxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 13 Apr 2003 09:37:03 -0700</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+(Coming from the perspective of someone that's been a daytime
+perl/python/ruby person and nightime lisp/ocaml person for the last
+several years.)
+
+LIKES:
+* terseness vs common lisp
+Code compactness contributes to readability, at least to a point.  I
+think goo strikes a good balance here although the d? keywords are a
+little bit hard to distinguish.
+
+* pervasive object orientation
+One of Ruby's big strengths.  I think this is the right way to do this.
+
+* prefix syntax
+Macros or bust.
+
+* multimethods
+I was very disappointed to hear that they're leaving these out of Arc.
+
+* property / member function equivalence
+Aka the Uniform Access Principle.  Another of Ruby's inspired moves. 
+Switching from direct member access to a member accessor function,
+especially in a dynamically typed language is a huge PITA.  The only
+safe thing to do in Python is to defensively write a lot of boilerplate
+getter/setter code for every member.  In Ruby I can do the lazy thing
+first and fix it painlessly later.
+
+* collection stuff
+Probably my favorite thing about Ruby is the elegance of it's iteration
+mechanisms and corresponding syntax.  This feature alone makes me twice
+as productive in Ruby as in Python.  Building this in is a smart move. 
+Goo's iteration seems to have an even more imperative flavor than
+Ruby's, which is a bit ironic given Goo's roots.
+
+* direct module/filename mapping and hierarchical modules
+I like (use goo/mail/smtp).
+
+* optional type declarations
+I definitely miss this in the big 3 scripting languages and I'm assuming
+this will open the door for compiler optimizations that are difficult or
+impossible without them.  I'm not sure if I agree with the convention of
+adding type annotations to every function.  Seems tedious.
+
+DISLIKES:
+* &lt;type&gt; notation
+Is it really necessary to so strongly distinguish types syntactically? 
+Is this done primarily to help the compiler?  You've already got the |
+for type annotations, couldn't you just as easily write:
+(dm mygenfunc (a|int b|str =&gt; str))
+?
+
+* {} for (seq ...)
+This is too hard to distinguish from () in deeply nested expressions and
+doesn't seem like enough of a win over (seq ...) to justify new syntax. 
+I guess if you support reader macros this could just be a simple reader
+macro, right?
+
+* simple function vs generic function distinction
+It bugs me a bit that there are two completely different kinds of
+methods and that I have to make up my mind which one to use pretty early
+in my design.  I don't know anything about multi-method implementation
+so maybe this is nuts, but it would be cool if all functions were
+generic.
+
+Anyway, I think it's a pretty intruiging package.  How serious are you
+all about developing this thing?  Is it primarily a research vehicle or
+do you really intend to take on Python?
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00286" href="msg00286.html">Re: rough first impressions</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+<li><strong><a name="00284" href="msg00284.html">Re: rough first impressions</a></strong>
+<ul><li><em>From:</em> James McCartney</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00281.html">Re: goo on Mac OS X</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00283.html">use &amp; imports</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00276.html">goo on Mac OS X</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00284.html">Re: rough first impressions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00282"><strong>Date</strong></a></li>
+<li><a href="threads.html#00282"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

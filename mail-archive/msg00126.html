@@ -1,0 +1,138 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: CVS update: goo/src/goo/cols -->
+<!--X-From-R13: Oaqerj Ehgureynaq <fbzoerebNnv.zvg.rqh> -->
+<!--X-Date: Sat, 3 Aug 2002 13:55:33 &#45;0400 (EDT) -->
+<!--X-Message-Id: uqzbs8jzv1q.fsf@bongo.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 30A49D37&#45;A6BE&#45;11D6&#45;8F54&#45;003065D63222@fuhm.net -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: CVS update: goo/src/goo/cols</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00125.html">Date Prev</a>][<a href="msg00127.html">Date Next</a>][<a href="msg00122.html">Thread Prev</a>][<a href="msg00133.html">Thread Next</a>][<a href="index.html#00126">Date Index</a>][<a href="threads.html#00126">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: CVS update: goo/src/goo/cols</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: CVS update: goo/src/goo/cols</li>
+<li><em>From</em>: Andrew Sutherland &lt;<A HREF="mailto:sombrero@DOMAIN.HIDDEN">sombrero@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 03 Aug 2002 13:55:29 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+Perhaps the best thing here would be to maintain a consistent
+distinction between == and =, with == remaining address equality and =
+indicating semantic equivalency.  We could then construct a new
+hash-table sub-class &lt;val-tab&gt; (or some other equally catchy name)
+that uses = for equivalency testing.
+
+Then the question is what to do about hashing vis a vis the two
+tables.  In Java (as you know), Object implements int hashCode(),
+which defaults to hashing on the address, which of course jives with
+equals() which defaults to an address-equivalency test.  Class
+designers may then override these with the constraint that a.equals(b)
+=&gt; (a.hashCode() == b.hashCode()).  Goo needs an equivalent to
+hashCode() for user purposes, and it seems like using id-hash which is
+currently used by the &lt;tab&gt; implementation would be a bad thing.
+
+&gt;From an implementation perspective, I can see why having a hash table
+that works solely on addresses is beneficial; it allows you to
+basically tack meta-data onto specific instances of objects (with the
+caveat that tagged types such as integers can only have one-instance
+in the table).  If id-hash doubled as hashCode(), the result in &lt;tab&gt;
+would be inefficient collisions in hashSpace.
+
+So here's my proposal:
+
+- Cull the methods in the id-hash generic to those directly required
+  to hash on unique object instances.  (aka, revert my patch)
+
+- Create a generic hash(o|&lt;any&gt;) or hashcode that is designed for
+  users to implement for their classes as well.  Provide defaults for
+  goo base-classes that maintains consistency for containers, strings,
+  etc.
+
+- Create a class &lt;val-tab&gt; that uses hash as its hash function and =
+  as its equivalency function. (There's no reason for users to have to
+  create their own table subclasses.)
+
+- Put it on the to-do list to revert the == behavior for &lt;col&gt; and
+  &lt;seq&gt; to be address equivalency again.  (Perhaps go so far as to
+  make == a function (df) so that people can't do bad/stupid things.)
+  I say to-do, because I'm sure there's a hack reason that == behaves
+  like = on those classes that will break goo if changed.
+
+- Move &lt;str-tab&gt; like you suggested, as its need will be obviated by
+  &lt;val-tab&gt; and the fact that 'hash' will be implemented on strings.
+
+Andrew
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00159" href="msg00159.html">&lt;val-tab&gt;</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+<li><strong><a name="00145" href="msg00145.html">Re: CVS update: goo/src/goo/cols</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+<li><strong><a name="00133" href="msg00133.html">Re: CVS update: goo/src/goo/cols</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00122" href="msg00122.html">Re: CVS update: goo/src/goo/cols</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00125.html">Re: Goo Nitpicks</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00127.html">Some more nitpicks</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00122.html">Re: CVS update: goo/src/goo/cols</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00133.html">Re: CVS update: goo/src/goo/cols</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00126"><strong>Date</strong></a></li>
+<li><a href="threads.html#00126"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

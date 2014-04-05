@@ -1,0 +1,135 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: use &#38; imports -->
+<!--X-From-R13: [vyrf Stna <zvyrfNpnqqe.pbz> -->
+<!--X-Date: Thu, 17 Apr 2003 17:48:51 &#45;0400 (EDT) -->
+<!--X-Message-Id: 1050616119.5830.2.camel@pompous.pixar.com -->
+<!--X-Content-Type: multipart/signed -->
+<!--X-Reference: 1050252572.1501.1.camel@snagret -->
+<!--X-Reference: uqzel40lsnx.fsf@bongo.ai.mit.edu -->
+<!--X-Derived: pgp03644.pgp -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: use &amp; imports</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00320.html">Date Prev</a>][<a href="msg00322.html">Date Next</a>][<a href="msg00320.html">Thread Prev</a>][<a href="msg00317.html">Thread Next</a>][<a href="index.html#00321">Date Index</a>][<a href="threads.html#00321">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: use &amp; imports</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Andrew Sutherland &lt;<A HREF="mailto:sombrero@DOMAIN.HIDDEN">sombrero@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: use &amp; imports</li>
+<li><em>From</em>: Miles Egan &lt;<A HREF="mailto:miles@DOMAIN.HIDDEN">miles@xxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 17 Apr 2003 14:48:39 -0700</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Cool.  I'll take a look at this.
+
+On Thu, 2003-04-17 at 14:29, Andrew Sutherland wrote:
+&gt; Miles Egan &lt;miles@caddr.com&gt; writes:
+&gt; 
+&gt; &gt; Is there any way to use a module without dumping all of its exports into
+&gt; &gt; the local namespace?  Generally I prefer to use explicit namespace
+&gt; &gt; prefixes.
+&gt; &gt; 
+&gt; &gt; miles
+&gt; 
+&gt; A while back I added use/mangle.  Assuming it hasn't gone away, my
+&gt; original post still holds.  I think that provides what you want. It
+&gt; goes a little something like this:
+&gt; 
+&gt; -----
+&gt; 
+&gt; Anonymous CVS (see info at Wiki) now has use/mangle support checked
+&gt; in. This is relevant for those of you who want to do things like:
+&gt; 
+&gt;  (use/mangle tests/manglea a:)
+&gt;  (use/mangle tests/mangleb b:)
+&gt; 
+&gt;  (a:func-a)
+&gt;  (a:func-b)
+&gt;  (b:func-a)
+&gt;  (b:func-b)
+&gt; 
+&gt; All it does is import everything exported by the module in question,
+&gt; but with the given prefix mangled on to the binding name.
+&gt; 
+&gt; For those who were desiring module:binding, this is equivalent to what
+&gt; you wanted, although it's usable for other things too. For example,
+&gt; you could also bind on &quot;mail-&quot; instead, or something like that.
+&gt; 
+&gt; This should help deal with the instinct of prefixing method names
+&gt; yourself, out of a fear of name collisions. (Eg, earlier I found
+&gt; myself prefixing &quot;mail-&quot; onto functions just because I was concerned
+&gt; about binding collisions with something more important.) Note that I
+&gt; am one of those people would ideally like a unified generic system
+&gt; without the constraints on the number of parameters, but this is a
+&gt; useful thing regardless, and very helpful in the short term.
+&gt; 
+&gt; -----
+&gt; 
+&gt; Andrew
+-- 
+Miles Egan &lt;miles@caddr.com&gt;
+</pre>
+<p><strong>Attachment:
+<a href="pgp03644.pgp" ><tt>signature.asc</tt></a></strong><br>
+<em>Description:</em> This is a digitally signed message part</p>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00283" href="msg00283.html">use &amp; imports</a></strong>
+<ul><li><em>From:</em> Miles Egan</li></ul></li>
+<li><strong><a name="00320" href="msg00320.html">Re: use &amp; imports</a></strong>
+<ul><li><em>From:</em> Andrew Sutherland</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00320.html">Re: use &amp; imports</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00322.html">Re: Whither Dylan?</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00320.html">Re: use &amp; imports</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00317.html">Whither Dylan?</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00321"><strong>Date</strong></a></li>
+<li><a href="threads.html#00321"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

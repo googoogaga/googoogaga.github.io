@@ -1,0 +1,213 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: continuations and linear types -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Fri, 19 Apr 2002 04:06:17 &#45;0400 (EDT) -->
+<!--X-Message-Id: 512F720D&#45;536C&#45;11D6&#45;9A51&#45;003065D63222@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 1019069927.1679.768.camel@ghostwheel -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: continuations and linear types</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00023.html">Date Prev</a>][<a href="msg00025.html">Date Next</a>][<a href="msg00019.html">Thread Prev</a>][<a href="msg00025.html">Thread Next</a>][<a href="index.html#00024">Date Index</a>][<a href="threads.html#00024">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: continuations and linear types</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: continuations and linear types</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 19 Apr 2002 04:06:13 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Wednesday, April 17, 2002, at 02:58  PM, Allen Short wrote:
+&gt; i'm very excited about the possibilities goo presents; it's almost
+&gt; everything i've wanted from a language.
+&gt;
+&gt; my primary interest is in distributed and concurrent apps; hence, i've
+&gt; been quite interested in the disucssions of continuations and threads so
+&gt; far. I propose adding linear types to goo;
+&gt; [.....]
+
+After an initial reading of that paper, I'm quite unconvinced that 
+linear types as described there are a useful concept. As far as I can 
+tell, the main argument for them is to make it impossible for one to be 
+accessed by multiple threads. However, this is a _*great*_ cost in 
+complexity for single-threaded programs. I can tell you right now I'd 
+hate to use a language that makes me go through the hoops described in 
+that paper. Even they admit its basically impossible to use without a 
+GUI programming UI. What are the chances of that ever getting done in 
+the near future? They poo-poo text-programming, but I haven't seen any 
+indication that its going to go away any time soon. The rest of the 
+arguments seem to me like they're basically premature optimizations 
+exposed to the programmer.
+
+However, I do believe that a similar concept, not applied to number of 
+references, but rather, to number of *different threads that have 
+references* is a great idea. In fact, I'm currently a proponent of the 
+concept that objects should *always* be linear-with-respect-to-threads. 
+That is, two threads cannot ever hold a reference to the same object 
+[[at least, as far as they can tell]]. Make RPC the only method of 
+communication, but make it very optimized. In my experience, when 
+writing a threaded program, you pretty much need to work that way 
+anyways if you're going to stay sane, but its just a lot easier to screw 
+up and allow a reference to escape to another thread when you didn't 
+intend to.
+
+&gt; Additionally, linear continuations have unique advantages; they allow
+&gt; continuations to be stack allocated (since they cannot be captured), and
+&gt; avoid the bad interactions shareable continuations have with
+&gt; unwind-protect and tail recursion (for a detailed discussion of this
+&gt; issue, see <A  HREF="http://lists.tunes.org/archives/tunes/1999-August/002235.html">http://lists.tunes.org/archives/tunes/1999-August/002235.html</A>
+&gt; ) while providing most of the control advantages of shareable
+&gt; continuations such as coroutines and microthreading.
+&gt;
+&gt; Of course, some applications require non-linear continuations;
+&gt; Queinnec-style use of continuations for web apps most notably, as well
+&gt; as prolog-style backtracking. My own feelings are that only allowing
+&gt; linear continuations is a sufficient tradeoff between expressitivity and
+&gt; clean semantics/efficient implementation.
+
+Single-shot continuations have a lot going for them, but unless I'm 
+missing something, being able to be stack-allocated is not one of them. 
+However, every time I think about multi-callable continuations they seem 
+like a worse idea. That message reminds me of my biggest objection: that 
+functions can get put in normally-impossible states of execution. Even 
+for web-applications it seems like a poor idea, as the state of the data 
+is not copied, only the state of execution. The That's all well-and-good 
+as long as you make sure not to ever modify program state or ever use 
+non-functional operations in your app. If anything does, it could end up 
+in serious trouble. That seems to me to be quite poor, and it makes me 
+think that what you really want to have for web-applications is fork().
+
+Then there's the issues with callbacks from a C library. With one-shot 
+continuations, it seems at least *possible* to make the C 
+interoperability issues work out, but with multi-shot continuations, 
+that gets more complicated. Its not really possible to return to a C 
+function more than once.
+
+Banging out a microthread implementation in psudeo-GOO to demonstrate to 
+myself impossibility of stack-allocating frames [gonna need it sometime, 
+why not write it in an email program with no indenting or parenmatching? 
+;P]:
+
+
+(dv *threads* (tup))
+
+(df yield ()
+   (call-cc
+     (fun (cont)
+       (if (&gt; 0 (len *threads*))
+         (seq
+           (def next (1st *threads*)
+           (set *threads* (add (tail *threads*) cont) ; substitute the 
+appropriate generic equivalent of &quot;tail&quot; in GOO
+           (next))
+         (cont)
+       ))))
+
+(df die ()
+   (msg out &quot;Thread died&quot;)
+   (def next (1st *threads*)
+   (set *threads* (tail *threads*))
+   (next))
+
+(df add-thread (func)
+   (msg out &quot;Thread started&quot;)
+   (set *threads*
+     (add *threads*
+       (fun ()
+         (func)
+         (die))))
+
+(df foo ()
+   (msg out &quot;Foo frame allocated&quot;)
+   (add-thread bar)
+   (yield)
+   (msg out &quot;Foo frame deallocated&quot;)
+)
+
+(df bar ()
+   (msg out &quot;Bar frame allocated&quot;)
+   (yield)
+   (msg out &quot;Bar frame deallocated&quot;)
+)
+
+=&gt; (foo)
+Foo frame allocated
+Thread started
+Bar frame allocated
+Foo frame deallocated
+
+now foo has returned to top-level, but bar's activation frame must still 
+exist, so if yield is called again,
+=&gt; (yield)
+Bar frame deallocated
+Thread died
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00026" href="msg00026.html">Re: continuations and linear types</a></strong>
+<ul><li><em>From:</em> Allen Short</li></ul></li>
+<li><strong><a name="00025" href="msg00025.html">Re: continuations and linear types</a></strong>
+<ul><li><em>From:</em> Avi Bryant</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00019" href="msg00019.html">continuations and linear types</a></strong>
+<ul><li><em>From:</em> Allen Short</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00023.html">Predicate dispatch</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00025.html">Re: continuations and linear types</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00019.html">continuations and linear types</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00025.html">Re: continuations and linear types</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00024"><strong>Date</strong></a></li>
+<li><a href="threads.html#00024"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

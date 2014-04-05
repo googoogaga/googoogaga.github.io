@@ -1,0 +1,197 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: goo&#45;mode for xemacs -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Fri, 20 Sep 2002 10:25:33 &#45;0400 (EDT) -->
+<!--X-Message-Id: uo8d6r8rb4z.fsf@djundjun.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>goo-mode for xemacs</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00184.html">Date Prev</a>][<a href="msg00186.html">Date Next</a>][<a href="msg00184.html">Thread Prev</a>][<a href="msg00186.html">Thread Next</a>][<a href="index.html#00185">Date Index</a>][<a href="threads.html#00185">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>goo-mode for xemacs</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: goo-mode for xemacs</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 20 Sep 2002 10:25:32 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+here's a message from a non-member:
+
+Date: Fri, 20 Sep 2002 16:02:10 +0200
+From: Alexander S A Kjeldaas &lt;astor@midten.trd.fast.no&gt;
+To: googoogaga@ai.mit.edu
+Subject: goo-mode for xemacs
+Message-ID: &lt;20020920160210.B71840@midten.fast.no&gt;
+Content-Type: multipart/mixed; boundary=nFreZHaLTZJo0R7j
+
+
+--nFreZHaLTZJo0R7j
+Content-Type: text/plain; charset=us-ascii
+
+I saw someone requested having goo-mode running under xemacs on irc.
+I use the following patch (relative to 0.143) to get goo-mode with
+font-locking working under xemacs.
+
+astor
+
+--nFreZHaLTZJo0R7j
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=out
+
+--- /home/astor.new/ledig/goo-0_143-any-dev/emacs/goo.el	2002-06-19 06:17:15.000000000 +0200
++++ goo.el	2002-09-02 17:54:59.000000000 +0200
+@@ -18,8 +18,23 @@
+       ;; let's just use Lisp's syntax for now...
+       (setq goo-mode-syntax-table table)
+       (modify-syntax-entry ?| &quot;_   &quot; table)
+-      ;; (modify-syntax-entry ?- &quot;w   &quot; goo-mode-syntax-table)
+-      ))
++      (modify-syntax-entry ?- &quot;w   &quot; table)
++      (modify-syntax-entry ?&lt; &quot;w   &quot; table)
++      (modify-syntax-entry ?&gt; &quot;w   &quot; table)
++      (modify-syntax-entry ?+ &quot;w   &quot; table)
++      (modify-syntax-entry ?* &quot;w   &quot; table)
++      (modify-syntax-entry ?/ &quot;w   &quot; table)
++      (modify-syntax-entry ?. &quot;w   &quot; table)
++      (modify-syntax-entry ?= &quot;w   &quot; table)
++      (modify-syntax-entry ?! &quot;w   &quot; table)
++      (modify-syntax-entry ?? &quot;w   &quot; table)
++      (modify-syntax-entry ?$ &quot;w   &quot; table)
++      (modify-syntax-entry ?% &quot;w   &quot; table)
++      (modify-syntax-entry ?_ &quot;w   &quot; table)
++      (modify-syntax-entry ?&amp; &quot;w   &quot; table)
++      (modify-syntax-entry ?~ &quot;w   &quot; table)
++      (modify-syntax-entry ?^ &quot;w   &quot; table)
++      (modify-syntax-entry ?: &quot;w   &quot; table)))
+ 
+ (defvar goo-mode-abbrev-table nil &quot;&quot;)
+ (define-abbrev-table 'goo-mode-abbrev-table ())
+@@ -30,11 +45,11 @@
+     (&quot;Variables&quot;
+      &quot;^\\s-*(dv\\s-+\\(\\sw+\\)&quot; 1)
+     (&quot;Functions&quot;
+-     &quot;^\\s-*(df\\s-+\\(\\sw+\\)&quot; 1)
++     &quot;^\\s-*(df\\s-+\\(\\sw+\\(\\s-+(.*)\\)?\\)&quot; 1)
+     (&quot;Methods&quot;
+-     &quot;^\\s-*(dm\\s-+\\(\\sw+\\)&quot; 1)
++     &quot;^\\s-*(dm\\s-+\\(\\sw+\\(\\s-+(.*)\\)?\\)&quot; 1)
+     (&quot;Generics&quot;
+-     &quot;^\\s-*(dg\\s-+\\(\\sw+\\)&quot; 1)
++     &quot;^\\s-*(dg\\s-+\\(\\sw+\\(\\s-+(.*)\\)?\\)&quot; 1)
+     (&quot;Syntax&quot;
+      &quot;^\\s-*(ds\\s-+\\(\\sw+\\)&quot; 1))
+   &quot;Imenu generic expression for Goo mode.  See `imenu-generic-expression'.&quot;)
+@@ -60,7 +75,7 @@
+ 	   goo-font-lock-keywords-2)
+           nil				; keywords-only: nil-&gt; fontify strings * comments too
+ 	  t				; case-fold : t -&gt; ignore case of keywords
+-	  ((&quot;+-*/.&lt;&gt;=!?$%_&amp;~^:&quot; . &quot;w&quot;))	; syntax-alist : ???
++	  nil
+ 	  beginning-of-defun
+           (font-lock-mark-block-function . mark-defun))))
+ 
+@@ -136,10 +151,16 @@
+ (defconst goo-font-lock-keywords-1
+   (eval-when-compile
+     (list
+-     '(&quot;(\\(dv\\|df\\|def\\sw*\\|dm\\|dg\\|dp\\|dc\\|dl\\)\\s-+\\(\\sw+\\)&quot;
++     '(&quot;(\\(df\\|def\\sw*\\|dm\\|dg\\|dp\\|dc\\|dl\\)\\s-+\\(\\sw+\\)&quot;
+        (1 font-lock-keyword-face)
+        (2 font-lock-function-name-face nil t))
+-     '(&quot;^\\s-*(\\(dss?\\)&quot; . 1)))
++     '(&quot;^\\s-*(\\(dss?\\)&quot; . 1)
++     '(&quot;(\\(dv\\) \\(\\sw+\\)&quot;
++       (1 font-lock-keyword-face)
++       (2 font-lock-variable-name-face))
++     '(&quot;(\\(use\\) \\(\\sw+\\)&quot;
++       (1 font-lock-keyword-face)
++       (2 font-lock-reference-face))))
+   &quot;Subdued expressions to highlight in Goo modes.&quot;)
+ 
+ (defconst goo-font-lock-keywords-2
+@@ -148,15 +169,21 @@
+      (list
+       (cons
+        (concat
+-	&quot;(&quot; (regexp-opt
++	&quot;(\\(&quot; (regexp-opt
+ 	     '(&quot;if&quot; &quot;seq&quot; &quot;set&quot; &quot;fun&quot; &quot;loc&quot; &quot;lab&quot;
+ 	       &quot;fin&quot; &quot;try&quot; &quot;sig&quot; &quot;isa&quot; &quot;slot&quot; &quot;ct&quot; &quot;expand&quot;
+ 	       &quot;quote&quot; &quot;rep&quot; &quot;mif&quot; &quot;and&quot; &quot;or&quot; &quot;unless&quot; &quot;when&quot;
+ 	       &quot;incf&quot; &quot;decf&quot; &quot;inc&quot; &quot;dec&quot; &quot;case&quot; &quot;select&quot; &quot;for&quot; &quot;let&quot;
+ 	       &quot;packing&quot; &quot;pack&quot; &quot;use&quot; &quot;export&quot; &quot;need-implementation&quot;
+-	       &quot;ct-also&quot; &quot;pushf&quot; &quot;popf&quot; &quot;dlet&quot;) t)
+-	&quot;\\&gt;&quot;) 1)
++	       &quot;ct-also&quot; &quot;pushf&quot; &quot;popf&quot; &quot;dlet&quot;))
++	&quot;\\|\\(with\\|for\\)-\\sw+\\)\\&gt;&quot;) 1)
+       '(&quot;\\(#t\\|#f\\|=&gt;\\)&quot; . font-lock-keyword-face)
++      '(&quot;\\&lt;\\(\\sw+\\)|\\(&lt;\\sw+&gt;\\&gt;\\)&quot; 
++	(1 font-lock-variable-name-face)
++	(2 font-lock-type-face))
++      '(&quot;\\&lt;\\(\\sw+\\)|\\((t[&lt;&gt;=].*?)\\)&quot;
++	(1 font-lock-variable-name-face)
++	(2 font-lock-type-face))
+       ;; David Fox &lt;fox@graphics.cs.nyu.edu&gt; for SOS/STklos class specifiers.
+       '(&quot;\\&lt;&lt;\\sw+&gt;\\&gt;&quot; . font-lock-type-face))))
+   &quot;Gaudy expressions to highlight in Goo modes.&quot;)
+
+--nFreZHaLTZJo0R7j--
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00184.html">one-of and other questions on goo's type system</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00186.html">Command prompt</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00184.html">one-of and other questions on goo's type system</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00186.html">Command prompt</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00185"><strong>Date</strong></a></li>
+<li><a href="threads.html#00185"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

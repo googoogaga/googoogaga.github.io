@@ -1,0 +1,108 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: CVS update: goo/src/goo/cols -->
+<!--X-From-R13: Quevfgbcure Oezfgebat <pnezfgebNgjvfgrqzngevk.pbz> -->
+<!--X-Date: Sun, 4 Aug 2002 23:43:14 &#45;0400 (EDT) -->
+<!--X-Message-Id: 1028519037.19023.6.camel@radii -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 52AFDC02&#45;A812&#45;11D6&#45;8F54&#45;003065D63222@fuhm.net -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: CVS update: goo/src/goo/cols</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00133.html">Date Prev</a>][<a href="msg00135.html">Date Next</a>][<a href="msg00133.html">Thread Prev</a>][<a href="msg00135.html">Thread Next</a>][<a href="index.html#00134">Date Index</a>][<a href="threads.html#00134">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: CVS update: goo/src/goo/cols</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: CVS update: goo/src/goo/cols</li>
+<li><em>From</em>: Christopher Armstrong &lt;<A HREF="mailto:carmstro@DOMAIN.HIDDEN">carmstro@xxxxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 04 Aug 2002 23:43:55 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Sun, 2002-08-04 at 21:26, James Knight wrote:
+&gt; So, again, the question is whether == should be required to be a *fast* 
+&gt; operation or not. My opinion is that it is more valuable to have == be 
+&gt; defined as &quot;computationally equivalent&quot; than &quot;fast equals&quot;. And, under 
+&gt; the (currently specified!) definition, &lt;tup&gt; should override ==.
+
+IMO, if &lt;tup&gt; overrides it, &lt;str&gt; should too. (afaict, strings are
+immutable...). It would finally make &lt;tab&gt;s useful in most cases if
+those two immutable types did it (and probably most others). Plus, it
+would be even cheaper than doing it for tuples, since strings can only
+contain chars (and not other &lt;tup&gt;s or whatever).
+
+I didn't quite understand this next part, so if my suggestion is moot, I
+apologize :)
+
+&gt; &gt; - Move &lt;str-tab&gt; like you suggested, as its need will be obviated by
+&gt; &gt;   &lt;val-tab&gt; and the fact that 'hash' will be implemented on strings.
+&gt; 
+&gt; Its need won't be obviated, as the general equality function for strings 
+&gt; does not (and should not) do case-insensitive comparisons, which the 
+&gt; symbol table must do.
+
+-- 
+                                Chris Armstrong
+                         &lt;&lt; radix@twistedmatrix.com &gt;&gt;
+                <A  HREF="http://twistedmatrix.com/users/carmstro.twistd/">http://twistedmatrix.com/users/carmstro.twistd/</A>
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00133" href="msg00133.html">Re: CVS update: goo/src/goo/cols</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00133.html">Re: CVS update: goo/src/goo/cols</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00135.html">Object identity and immutable types</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00133.html">Re: CVS update: goo/src/goo/cols</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00135.html">Object identity and immutable types</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00134"><strong>Date</strong></a></li>
+<li><a href="threads.html#00134"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

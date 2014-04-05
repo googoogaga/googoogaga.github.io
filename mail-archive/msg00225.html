@@ -1,0 +1,117 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Proposed numeric type hierarchy -->
+<!--X-From-R13: Pevna Qnzcoryy <ynzoqnNznp.pbz> -->
+<!--X-Date: Mon, 28 Oct 2002 11:55:41 &#45;0500 (EST) -->
+<!--X-Message-Id: 0E7DFA84&#45;EA96&#45;11D6&#45;9824&#45;0030655353F2@mac.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 15798.49279.652529.636670@h00045a4799d6.ne.client2.attbi.com -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Proposed numeric type hierarchy</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00224.html">Date Prev</a>][<a href="msg00226.html">Date Next</a>][<a href="msg00224.html">Thread Prev</a>][<a href="msg00222.html">Thread Next</a>][<a href="index.html#00225">Date Index</a>][<a href="threads.html#00225">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Proposed numeric type hierarchy</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Neel Krishnaswami &lt;<A HREF="mailto:neelk@DOMAIN.HIDDEN">neelk@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Proposed numeric type hierarchy</li>
+<li><em>From</em>: Brian Campbell &lt;<A HREF="mailto:lambda@DOMAIN.HIDDEN">lambda@xxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Mon, 28 Oct 2002 11:55:26 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Wednesday, October 23, 2002, at 11:30  AM, Neel Krishnaswami wrote:
+
+&gt; James Knight writes:
+&gt;&gt;
+&gt;&gt; On Monday, October 21, 2002, at 08:28  AM, Neel Krishnaswami wrote:
+&gt;&gt;&gt;&gt; ;; I hope this is the right use of the term 'scalar'
+&gt;&gt;&gt;&gt; (dc &lt;scalar&gt; (&lt;any&gt;))
+&gt;&gt;&gt;
+&gt;&gt;&gt; Unfortunately, it's not. Scalars are real values, which means that
+&gt;&gt;&gt; complex isn't an appropriate subclass for them.
+&gt;&gt;
+&gt;&gt; I was hoping the important piece of meaning was &quot;not vector&quot;. What's
+&gt;&gt; a better term?
+&gt;
+&gt; I don't think there is one. &quot;Scalar&quot; is a really crummy word, because
+&gt; it's usually defined as a real value, but everyone uses it to also
+&gt; mean &quot;not a vector&quot;. So you have definitions like: a scalar field is a
+&gt; function R^n -&gt; R, which leaves you out of luck with complex numbers.
+
+In terms of linear algebra, a scalar is an element of the field that 
+the vector space is defined over. Thus, any element of any field can be 
+considered a scalar. This maps most closely to the meaning we want for 
+a programming language, since the type is specifying the set of 
+allowable operations. A field defines the addition and multiplication 
+operations, which work the way we expect them to work (associative, 
+distributive, etc.). I think it would be fair to allow &lt;scalar&gt; to have 
+any field as a subclass, if we look at it from this perspective.
+
+All sources I can find online and in books I have seem to be split as 
+to whether you should count complex numbers as scalars. Some 
+concentrate on the aspect that it must be a &quot;directionless magnitude&quot;, 
+and some that it is a real number, while others claim that it is just 
+an element of a field.
+
+Is there any reason why we don't just call the class &lt;number&gt; or &lt;num&gt;? 
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00224" href="msg00224.html">Re: Proposed numeric type hierarchy</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00224.html">Re: Proposed numeric type hierarchy</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00226.html">gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00224.html">Re: Proposed numeric type hierarchy</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00222.html">Re: Proposed numeric type hierarchy</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00225"><strong>Date</strong></a></li>
+<li><a href="threads.html#00225"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

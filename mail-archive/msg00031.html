@@ -1,0 +1,129 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: linear continuations -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Sat, 20 Apr 2002 16:58:04 &#45;0400 (EDT) -->
+<!--X-Message-Id: 4E1C5394&#45;54A1&#45;11D6&#45;B615&#45;003065D63222@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 1019244010.8481.30.camel@ghostwheel -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: linear continuations</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00030.html">Date Prev</a>][<a href="msg00032.html">Date Next</a>][<a href="msg00026.html">Thread Prev</a>][<a href="msg00033.html">Thread Next</a>][<a href="index.html#00031">Date Index</a>][<a href="threads.html#00031">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: linear continuations</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: linear continuations</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sat, 20 Apr 2002 16:58:03 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Friday, April 19, 2002, at 03:20  PM, Allen Short wrote:
+&gt;&gt; Single-shot continuations have a lot going for them, but unless I'm
+&gt;&gt; missing something, being able to be stack-allocated is not one of them.
+&gt;
+&gt; Linear continuations are different from single-shot continuations:
+&gt; single-shot continuations are still capturable and can be referenced
+&gt; multiple times; I have been told that multi-shot continuations can be
+&gt; built from single-shot ones (but still cannot track down the paper in
+&gt; which this is demonstrated). However, linear continuations have no
+&gt; implicit continuation -- that is, the function called by call/lc cannot
+&gt; return, it must call the continuation passed to it at some point.
+&gt; Thus, you dont have the time-travel effects that prevent
+&gt; stack-allocation of continuations.
+
+This still confuses me. As far as I can tell, in my example, the 
+continuations are linear. In 'yield', the continuation is either used 
+immediately, or stuck in a list to be used later. In no case does more 
+than one thing have a reference to it at once. When it is later pulled 
+off the list, it is immediately consumed, and noone else can have a 
+reference to it. Control flow can never (at least I don't think it can) 
+fall off the end of the function provided to call/cc. What's the 
+essential bit of knowledge I'm missing?
+
+&gt;&gt; it makes me think that what you really want to have for 
+&gt;&gt; web-applications
+&gt;&gt; is fork().
+&gt;
+&gt; Exactly. in a linear-continuations system, you'd have to explicitly copy
+&gt; the current continuation to get a new thread.
+
+I hadn't (until Avi's message) realized that anyone implemented 
+multi-shot continuations with copied bindings, instead of the Scheme way 
+of using the same stack frames multiple times with all the weirdness 
+that implies. The Smalltalk semantics make a lot more sense, and I'd be 
+much happier with an implementation that worked like that (if just for 
+the reason that imperative and recursive loops are equivalent). However, 
+having it copy a piece of the program when a continuation is used 
+multiple times makes me wonder even more whether &quot;the right thing&quot; would 
+be to copy the whole program. [leaving aside the efficiency issue for 
+the moment, that is].
+
+James
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00033" href="msg00033.html">Re: linear continuations</a></strong>
+<ul><li><em>From:</em> Avi Bryant</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00026" href="msg00026.html">Re: continuations and linear types</a></strong>
+<ul><li><em>From:</em> Allen Short</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00030.html">Re: List Index?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00032.html">Re: linear types</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00026.html">Re: continuations and linear types</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00033.html">Re: linear continuations</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00031"><strong>Date</strong></a></li>
+<li><a href="threads.html#00031"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

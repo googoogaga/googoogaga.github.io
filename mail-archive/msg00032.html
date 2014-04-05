@@ -1,0 +1,149 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: linear types -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Sat, 20 Apr 2002 17:13:09 &#45;0400 (EDT) -->
+<!--X-Message-Id: 693313A6&#45;54A3&#45;11D6&#45;B615&#45;003065D63222@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 1019244010.8481.30.camel@ghostwheel -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: linear types</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00031.html">Date Prev</a>][<a href="msg00033.html">Date Next</a>][<a href="msg00033.html">Thread Prev</a>][<a href="msg00005.html">Thread Next</a>][<a href="index.html#00032">Date Index</a>][<a href="threads.html#00032">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: linear types</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: linear types</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sat, 20 Apr 2002 17:13:07 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Friday, April 19, 2002, at 03:20  PM, Allen Short wrote:
+&gt; On Fri, 2002-04-19 at 03:06, James Knight wrote:
+&gt;
+&gt;&gt; After an initial reading of that paper, I'm quite unconvinced that
+&gt;&gt; linear types as described there are a useful concept. As far as I can
+&gt;&gt; tell, the main argument for them is to make it impossible for one to be
+&gt;&gt; accessed by multiple threads. However, this is a _*great*_ cost in
+&gt;&gt; complexity for single-threaded programs. I can tell you right now I'd
+&gt;&gt; hate to use a language that makes me go through the hoops described in
+&gt;&gt; that paper.
+&gt;
+&gt; well, yes -- *non*-linear types are extremely useful as well, i'm
+&gt; certainly not advocating a linear-types-only language, as Mr Baker does
+&gt; in the &quot;lively linear lisp&quot; paper.
+
+But having both would involve making a duplicate version of almost every 
+library function. Having to do mutating and copying versions of all the 
+collections modifying functions is already bad enough. Now we need two 
+versions of all the I/O functions, pretty much all the other collections 
+functions, etcetc. Otherwise how do you take care of having to give the 
+object back to the caller to let him keep a reference to it?
+
+&gt;&gt; The rest of the
+&gt;&gt; arguments seem to me like they're basically premature optimizations
+&gt;&gt; exposed to the programmer.
+&gt;
+&gt; Hmm. how so? to my mind, linearity is a property that would be hard to
+&gt; recover via inference. I dont see any disadvantages to allowing its
+&gt; explicit declaration.
+
+Disadvantages above. In terms of optimizability, I was thinking of the 
+examples in the paper where its used while constructing an object. It 
+should be (mostly) straightforward to make an optimizer that can figure 
+out that an object does not escape while its being constructed, and thus 
+allow free (non-copying) coercion from a mutable form used for 
+construction to an immutable form exported to the world. You are 
+certainly correct that it would be very hard to recover in general, but 
+then again, in general, objects aren't used linearly.
+
+
+&gt;&gt; However, I do believe that a similar concept, not applied to number of
+&gt;&gt; references, but rather, to number of *different threads that have
+&gt;&gt; references* is a great idea.
+&gt;
+&gt; Hmm. How would this &quot;linearity-with-respect-to-threads&quot; be accomplished?
+&gt; what do you mean by &quot;as far as they can tell&quot;?
+
+In concept it is quite simple - when you create a new thread of 
+execution, you copy all the memory of the current thread. This is 
+generally called a &quot;process&quot; in the UNIX world and is efficiently 
+implemented by the &quot;fork&quot; system call. :) Now, they cannot mess up each 
+other's objects. The only issue is communicating efficiently. The usual 
+unix way to do that is to package everything up into a stream of bytes, 
+and send it over a socket. That, of course, is quite inefficient (and in 
+most languages, quite irritating, as you need to do all the 
+packing/unpacking yourself), but it gets the job done. IMO this has much 
+cleaner semantics than any shared memory model. The only issue is then 
+to make RPC calls as nearly free as possible between threads running in 
+the same execution environment, even when sending complex data 
+structures.
+
+My comment about &quot;as far as they can tell&quot; was an attempt to note that 
+lazy copying of objects is probably possible, thus allowing two threads 
+to point to the same piece of memory representing an object, as long as 
+it isn't modified.
+
+James
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00026" href="msg00026.html">Re: continuations and linear types</a></strong>
+<ul><li><em>From:</em> Allen Short</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00031.html">Re: linear continuations</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00033.html">Re: linear continuations</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00033.html">Re: linear continuations</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00005.html">Re: kickoff</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00032"><strong>Date</strong></a></li>
+<li><a href="threads.html#00032"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

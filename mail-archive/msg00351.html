@@ -1,0 +1,89 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: followup to the script patch. -->
+<!--X-From-R13: Tnevrq @njnm <fvyrapr&#45;tbbNavycbgrag.bet> -->
+<!--X-Date: Fri, 12 Dec 2003 21:29:37 &#45;0500 (EST) -->
+<!--X-Message-Id: 20031213022919.GA46754@nilpotent.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>followup to the script patch.</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00350.html">Date Prev</a>][<a href="msg00352.html">Date Next</a>][<a href="msg00349.html">Thread Prev</a>][<a href="msg00352.html">Thread Next</a>][<a href="index.html#00351">Date Index</a>][<a href="threads.html#00351">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>followup to the script patch.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: followup to the script patch.</li>
+<li><em>From</em>: Faried Nawaz &lt;<A HREF="mailto:silence-goo@DOMAIN.HIDDEN">silence-goo@xxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 12 Dec 2003 18:29:19 -0800</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+The patch does one thing that isn't right in src/eval/main.goo:
+
+        (post &quot;%=&quot; (read-script (elt args 1) 'goo/user)))
+
+It probably shouldn't post the output of evaluating the script.  That
+makes goo useless for, say, cgis.
+
+The code in c/grt.c:YPinit_world() ends with an exit(0); what if you
+want to do exit(1)?  Should there be a global integer defined that you
+can (set ...) inside goo?  Will that work?
+
+
+Faried.
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00350.html">Re: minor patches, random questions.</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00352.html">goo and FreeBSD</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00349.html">minor patches, random questions.</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00352.html">goo and FreeBSD</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00351"><strong>Date</strong></a></li>
+<li><a href="threads.html#00351"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

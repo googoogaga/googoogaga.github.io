@@ -1,0 +1,107 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Build problems on Win32 -->
+<!--X-From-R13: "Quevf Rbhoyr" <RbhoyrQNnpp.pb.am> -->
+<!--X-Date: Tue, 16 Apr 2002 19:32:43 &#45;0400 (EDT) -->
+<!--X-Message-Id: scbd5d97.074@mh_acc099 -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Build problems on Win32</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00007.html">Date Prev</a>][<a href="msg00009.html">Date Next</a>][<a href="msg00004.html">Thread Prev</a>][<a href="msg00010.html">Thread Next</a>][<a href="index.html#00008">Date Index</a>][<a href="threads.html#00008">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Build problems on Win32</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &lt;<A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Build problems on Win32</li>
+<li><em>From</em>: &quot;Chris Double&quot; &lt;<A HREF="mailto:DoubleC@DOMAIN.HIDDEN">DoubleC@xxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Wed, 17 Apr 2002 11:33:30 +1200</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+I can build Goo successfully from the initial windows distribution by doing a 'make simple-install' from Cygwin. But if I regenerate the sources I have problems. Following the instructions in the doc file, I do:
+
+  (use eval/g2c)
+  (g2c-goo)
+
+When I then do a 'make' on the C source I get an error:
+
+  $ make
+  (cd g2c; make)
+  make[1]: Entering directory `/cygdrive/e/temp/goo2/goo-0_131-win32-dev/c/g2c'
+  make[1]: *** No rule to make target `..%', needed by `g2c'.  Stop.
+  make[1]: Leaving directory `/cygdrive/e/temp/goo2/goo-0_131-win32-dev/c/g2c'
+  make: *** [all] Error 2
+
+Comparing the makefile in GOO_BUILD_ROOT/c/g2c to the one in the original distribution I see that the pattern substitution line has had the '/' changed to '\'. Ditto with the slash in the paths of all the .o files in the makefile. 
+
+Changing the '\' to '/' in the pattern substitution and the file paths allowed Goo to build fine. Path separators are a pain for cross platform stuff, aren't they!
+
+Chris.
+
+--------------------------------------------------------------------------------------
+Disclaimer:
+&quot;The information contained in this document is confidential to the addressee(s) and
+ may be legally privileged.   Any view or opinions expressed are those of the author
+ and may not be those of the organisation to which the author belongs.  If you have
+ received this e-mail message in error please delete it and notify me. Thank you.&quot;
+--------------------------------------------------------------------------------------
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00010" href="msg00010.html">Re: Build problems on Win32</a></strong>
+<ul><li><em>From:</em> Ken Anderson</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00007.html">Re: kickoff</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00009.html">Sockets</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00004.html">kickoff</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00010.html">Re: Build problems on Win32</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00008"><strong>Date</strong></a></li>
+<li><a href="threads.html#00008"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

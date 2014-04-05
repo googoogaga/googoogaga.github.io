@@ -1,0 +1,184 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: goo interoperability with c -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Fri, 15 Aug 2003 22:33:25 &#45;0400 (EDT) -->
+<!--X-Message-Id: FECD8A93&#45;CF91&#45;11D7&#45;9524&#45;000A95A0424C@ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>goo interoperability with c</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00328.html">Date Prev</a>][<a href="msg00330.html">Date Next</a>][<a href="msg00325.html">Thread Prev</a>][<a href="msg00330.html">Thread Next</a>][<a href="index.html#00329">Date Index</a>][<a href="threads.html#00329">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>goo interoperability with c</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: goo interoperability with c</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 15 Aug 2003 22:33:18 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+i wanted to let people know about some recent goo developments.  first 
+of all, andrew sutherland has completed his master's thesis on a viral 
+computing dialect of goo.  i've made his thesis available through 
+www.googoogaga.org
+
+secondly, after doing a bunch of multimedia apps in C i'm now starting 
+to integrate them back into goo in order to realize the dream of making 
+goo a multimedia-capable language.  one big challenge (and age old 
+problem) is how best to interface to c code.  i will describe some new 
+goo c interfacing mechanisms that i'm readying for release, but first 
+let's consider very briefly four c extension facilities available in 
+python: swig, ctypes, c-inline, and pyrex.
+
+swig is a language-neutral semi-automatic header parsing mechanism that 
+produces separate c files that get compiled and linked into your 
+application.  users are allowed tailor the type mapping according to 
+their application.  ctypes is a python facility that allows one to 
+import dlls, to enumerate their exported symbols, and to manually 
+specify their type interfaces with a special python-based c type 
+system.  c-inline permits the definition of c code fragments as python 
+objects to be executed later.  c snippets are specified as python 
+strings.  finally, pyrex allows the intermixing of c and python code 
+implicitly requesting c code by defining python variables with c types. 
+  in this way, loops can be completely performed in low overhead c if 
+all loop related variables are defined with c types.  the following 
+presents a pros/cons evaluation of these four facilities:
+
+   name     pros                    cons
+   ------------------------------------------------------------------
+   swig     semi-automatic          heavyweight
+   ctypes   loads dlls              another c type system
+   c-inline lighter weight          cumbersome and no python escapes
+   pyrex    even lighter weight     whole other python dialect
+
+in summary, either the solutions are too heavyweight or too 
+complicated, where the weight is measured in terms of space and speed 
+as well as amount of extra glue code and the complication is measured 
+in terms of amount extra mechanism and nuisance to use.  pyrex is the 
+most similar in spirit in terms of mixing c and python code, but it 
+introduces a whole other c type system and makes compilation dependent 
+on their the types of variables.
+
+what i think you really want to do is quite simply be able to inline c 
+code directly into goo, escaping back into goo when necessary, relying 
+on c for its type system instead of having to mirror it in goo.  this 
+approach is simpler than pyrex in that the execution proceeds either 
+entirely in c or goo and the distinction is syntactically obvious.  
+inlining c turns out to be quite straightforward and appropriate for 
+goo because goo relies heavily on a C backend (including during dynamic 
+evaluation).
+
+we consider the construction of a simple goo layer on top of a 2d 
+subset of opengl.  as the first example consider the definition of a 
+goo method for a simplified version of initializing the graphics system:
+
+   (dm gl-setup () #{ glutInitWindowSize( 640, 480 ); })
+
+where the #{ ... } form escapes to C executing a series of C statements 
+and evaluates to false.
+
+from here let's consider graphics functions themselves.  for example,
+
+   (dm gl-vertex (x|&lt;flo&gt; y|&lt;flo&gt;) #{ glVertex3f($x, $y); })
+
+shows how the $ operator escapes back into goo evaluating the 
+subsequent sexpression (ala unquote in a quasiquote expression).  
+unfortunately, in this case, the x and y variables contain goo style 
+floats and must first be exported (unboxed) to c style as follows:
+
+   (dm gl-vertex (x|&lt;flo&gt; y|&lt;flo&gt;)
+     #{ glVertex3f($(c-export x), $(c-export y)); })
+
+where c-export unboxes the float. c-export methods are defined for all 
+the basic goo value types (e.g., &lt;log&gt;, &lt;chr&gt;, &lt;int&gt;, &lt;flo&gt; and &lt;str&gt;). 
+   furthermore, users can define their own c-export methods.
+
+unfortunately, embedding direct calls to c-export is verbose and thus 
+we introduce a shorthand '@s' which is equivalent to $(c-export s).  
+now gl-vertex becomes:
+
+   (dm gl-vertex (x|&lt;flo&gt; y|&lt;flo&gt;) #{ glVertex3f(@x, @y); })
+
+in more advanced situations, the $ operator can also be used to assign 
+and create pointers to goo variables.
+
+often times users will need to get values back from c in a functional 
+style.  for this we introduce the c expression form #x( ... ) which is 
+the same as the c statement form except that its value is the value of 
+the enclosed c expression and where the x modifier in the #x( ... ) 
+specifies the way to interpret the expression as a goo value.  valid 
+modifiers are i for &lt;int&gt;, f for &lt;flo&gt;, s for &lt;str&gt;, c for &lt;chr&gt;, b for 
+&lt;log&gt;, and l for &lt;loc&gt;.  for example, one can grab an integer C macro 
+constant as follows:
+
+   (dv $gl-line-loop #i( GL_LINE_LOOP ))
+
+from here, top level c definitions can be defined at top level with #{ 
+}.  for example, a callback can be defined as follows:
+
+   #{ int gl_idle(int x) { $(gl-idle); } }
+
+this can also be used to introduce structure definitions, typedefs,  
+includes, etc.
+
+i'm getting ready to release a new version of goo with this facility 
+but would appreciate any feedback on it before then.
+
+jonathan
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00328.html">Re: Whither Dylan?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00330.html">Re: goo interoperability with c</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00325.html">CVS working?</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00330.html">Re: goo interoperability with c</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00329"><strong>Date</strong></a></li>
+<li><a href="threads.html#00329"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

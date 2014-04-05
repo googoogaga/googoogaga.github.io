@@ -1,0 +1,149 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Goo Nitpicks -->
+<!--X-From-R13: Xbanguna Vfrh <ibzwbzNibzwbz.bet> -->
+<!--X-Date: Thu, 1 Aug 2002 19:58:46 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20020801235849.GA31655@vomjom -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20020801162100.GA29233@vomjom -->
+<!--X-Reference: uo8ofcm2rta.fsf@djundjun.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Goo Nitpicks</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00112.html">Date Prev</a>][<a href="msg00114.html">Date Next</a>][<a href="msg00110.html">Thread Prev</a>][<a href="msg00115.html">Thread Next</a>][<a href="index.html#00113">Date Index</a>][<a href="threads.html#00113">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Goo Nitpicks</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;, <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: Goo Nitpicks</li>
+<li><em>From</em>: Jonathan Hseu &lt;<A HREF="mailto:vomjom@DOMAIN.HIDDEN">vomjom@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Thu, 1 Aug 2002 18:58:49 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Thu, Aug 01, 2002 at 05:27:13PM -0400, Jonathan Bachrach wrote:
+&gt; 
+&gt; &gt; This would replace the current mod:name system (because of possible
+&gt; &gt; name clashing).
+&gt; 
+&gt; how would this replace it and what name clashes are you referring to?
+
+Nevermind.  I was just thinking:
+(use foo/bar/baz/math goo/math)
+
+might make it so you couldn't use goo/math... but if the programmer
+wanted to, they could also add:
+(use goo/math asdf)
+
+So I guess it isn't a problem.
+
+&gt; &gt; 6. Why is DS like: (ds (macro ,blah ,@asdf)) and not like:
+&gt; &gt; (ds macro (,blah ,@asdf))?
+&gt; &gt; 
+&gt; &gt; It seems inconsistent with DF and DM.
+&gt; 
+&gt; i see your point.  i was trying to make it somewhat wysiwyg but then i
+&gt; could have done the same with DF's looking more like calls (as is done
+&gt; in scheme with define).
+
+Well, I'm happy with having all functions changed to Scheme style
+definitions too.
+
+&gt; 
+&gt; &gt; 8. Some destructive functions don't have a !, such as set.
+&gt; 
+&gt; having set not have a ! was intentional.  wanted it to be short.
+&gt; 
+&gt; what other functions do you have in mind?
+
+(dv), (def)
+It's not a huge issue.
+
+&gt; &gt; 11. According to wiki, default values will look like:
+&gt; &gt; (dm function (a:0|&lt;int&gt; b:1|&lt;int&gt;))
+&gt; &gt; 
+&gt; &gt; It may be just me, but I think default values should be consistent with
+&gt; &gt; rep's and let's variable assignments.
+&gt; &gt; 
+&gt; &gt; So, maybe make default values look like:
+&gt; &gt; (dm function ((a 0)|&lt;int&gt; (b 0)|&lt;int&gt;))
+&gt; &gt; 
+&gt; &gt; Or change let/rep to look like:
+&gt; &gt; (let (x:0 y:3))
+&gt; 
+&gt; nice.
+
+I'm wondering, would the let example interfere with modules at all?
+(let (x:math:$pi)) looks somewhat difficult to read for those new to the
+language.
+
+-- 
+Jonathan Hseu &lt;vomjom@vomjom.org, vomjom@debian.org, jh4@cec.wustl.edu&gt;
+GPG ID:          5228D713
+GPG fingerprint: 220B A4EF 70FE B884 CB38  F93F EA8A 1024 5228 D713
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00115" href="msg00115.html">Re: Goo Nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00108" href="msg00108.html">Goo Nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Hseu</li></ul></li>
+<li><strong><a name="00110" href="msg00110.html">Re: Goo Nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00112.html">Re: Goo Nitpicks (condition hierarchy)</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00114.html">Re: please resend your googoogaga msg -- Re: Trouble building goo-0_0140</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00110.html">Re: Goo Nitpicks</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00115.html">Re: Goo Nitpicks</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00113"><strong>Date</strong></a></li>
+<li><a href="threads.html#00113"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

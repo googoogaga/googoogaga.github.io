@@ -1,0 +1,147 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: CVS update: goo/src/goo/cols -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Sat, 3 Aug 2002 04:51:36 &#45;0400 (EDT) -->
+<!--X-Message-Id: 30A49D37&#45;A6BE&#45;11D6&#45;8F54&#45;003065D63222@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: E17arG8&#45;0006w1&#45;00@bongo.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: CVS update: goo/src/goo/cols</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00121.html">Date Prev</a>][<a href="msg00123.html">Date Next</a>][<a href="msg00118.html">Thread Prev</a>][<a href="msg00126.html">Thread Next</a>][<a href="index.html#00122">Date Index</a>][<a href="threads.html#00122">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: CVS update: goo/src/goo/cols</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Andrew Sutherland &lt;<A HREF="mailto:sombrero@DOMAIN.HIDDEN">sombrero@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: CVS update: goo/src/goo/cols</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sat, 3 Aug 2002 04:51:24 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+&gt; Date:	Saturday August 3, 2002 @ 1:15
+&gt; Author:	sombrero
+&gt;
+&gt; Update of /projects/dynlangs/cvsroot/goo/src/goo/cols
+&gt; In directory bongo:/home/ai2/sombrero/cvs/goo/src/goo/cols
+&gt;
+&gt; Modified Files:
+&gt; 	tab.goo
+&gt; Log Message:
+&gt; Add a id-hash variant for tup's that recursively calls id-hash on all
+&gt; elements in the tup, multiply by 31 each time and adding. (A standard
+&gt; behavior used by the java collections API when computing hashcodes
+&gt; over the contained elements.)  This has been implemented after short
+&gt; debate with Chris Armstrong, and we both agree that no one loses by
+&gt; adding this base behavior; tups are immutable, and under the current
+&gt; scheme, if you lose the reference to your tup (and this is for keys
+&gt; of course), you can't get the damn thing back out again, which is 
+&gt; stupid.
+
+This brings up an interesting question. GOO currently has two kinds of 
+equals: ==, which means &quot;computationally equivalent&quot;, and =, which is 
+the more loose &quot;value is equal&quot; kind of equality. The first one 
+currently is defined as memory-address equality. = defaults to that, but 
+is overridden in two cases -- &lt;col&gt; and &lt;seq&gt; -- to check equality based 
+on the contents of the object.
+
+So, should &lt;tup&gt; (or more generally, immutable objects), override == to 
+do equality based on the == equality of their contents and class? This 
+would be logically consistent, as they are immutable, and thus must be 
+computationally equivalent (excepting the use of &quot;address-of&quot;, which I 
+assume must be excepted). However, that does have a speed overhead, and 
+is not done in Java, where == *always* means compare the addresses of 
+the objects. Since GOO isn't too concerned about speed, I'd say it is a 
+reasonable decision.
+
+As for this particular change:
+In GOO, hashtables by default use &quot;==&quot; equality, not &quot;=&quot; equality (this 
+is unlike Java, where hashtables use .equals() which is like &quot;=&quot; in 
+GOO.). Thus, currently, I don't believe this patch will have any effect. 
+If this is decided to be a good thing (tm), then == should also be 
+overridden on &lt;tup&gt; as (note: untested):
+
+(dm == (c1|&lt;tup&gt; c2|&lt;tup&gt; =&gt; &lt;log&gt;)
+   (or (sup c1 c2) ;; check primitive equality first for efficiency.
+     (and (== (object-class c1) (object-class c2))
+       (rep eq ((e1 (enum c1)) (e2 (enum c2)))
+         (if (fin? e1)
+             (fin? e2)
+             (and (== (now e1)  (now e2))
+                  (eq (nxt e1) (nxt e2))))))))
+
+&gt; It's also a bit debatable why str-tab needs to be a separate class,
+&gt; although str's are mutable, so I suppose that's okay.  But it certainly
+&gt; makes sense that all immutable container objects should attempt to hash
+&gt; for equivalency.
+
+I don't believe &lt;str-tab&gt; was ever intended to be a public class. It is 
+(i believe) an implementation private class only for doing 
+string-&gt;symbol uniquing. It should most likely be moved out of 
+goo/cols/tab to goo/runtime and not be exported.
+
+&gt; Or something.  Feel free to revert, but I think this is a good 
+&gt; thing(tm).
+
+James
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00126" href="msg00126.html">Re: CVS update: goo/src/goo/cols</a></strong>
+<ul><li><em>From:</em> Andrew Sutherland</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00121.html">Re: Goo Nitpicks</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00123.html">Re: Goo Nitpicks (condition hierarchy)</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00118.html">[carmstro@twistedmatrix.com: Re: Goo Nitpicks]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00126.html">Re: CVS update: goo/src/goo/cols</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00122"><strong>Date</strong></a></li>
+<li><a href="threads.html#00122"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

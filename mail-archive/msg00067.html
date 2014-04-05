@@ -1,0 +1,149 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Threads -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Wed, 22 May 2002 18:28:19 &#45;0400 (EDT) -->
+<!--X-Message-Id: uo83cwjvmqb.fsf@djundjun.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 15591.64572.592437.422762@h00045a4799d6.ne.client2.attbi.com -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Threads</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00066.html">Date Prev</a>][<a href="msg00068.html">Date Next</a>][<a href="msg00064.html">Thread Prev</a>][<a href="msg00070.html">Thread Next</a>][<a href="index.html#00067">Date Index</a>][<a href="threads.html#00067">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Threads</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Neel Krishnaswami &lt;<A HREF="mailto:neelk@DOMAIN.HIDDEN">neelk@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Threads</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 22 May 2002 18:31:08 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Neel Krishnaswami &lt;neelk@alum.mit.edu&gt; writes:
+
+&gt; First off, GOO is very sweet. I like it. 
+&gt; 
+&gt; jrb wrote:
+&gt; &gt;
+&gt; &gt; we have discussed the possibility.  i think the general thought is to
+&gt; &gt; not support native threads but to instead support threads built out of
+&gt; &gt; upward continuations (i.e., cooperative threads).  full parallelism
+&gt; &gt; would be built instead out of more insular processes.  the problem of
+&gt; &gt; making user programs thread safe and the overhead of system thread
+&gt; &gt; safety are thought to be too high a price to pay for parallelism.
+&gt; 
+&gt; What exactly is the price? 
+
+it's not so much the price to the implementor but to the users trying
+to get correct/safe concurrent code running.  perhaps another regime
+is in order (such as in erlang where threads can't directly read/write
+data from each other)?  the thinking goes that it's too easy to shoot
+yourself in the foot in something like java because it gives you a
+false sense of security (and atomicity).  what are your thoughts on
+this?
+
+&gt; To me, it looks like the main difficulties are:
+&gt; 
+&gt;   o Can updating the subtype table be made thread-safe?
+&gt;   o Can adding methods to a gf be made thread-safe?
+
+and collection code (e.g., vec and tab) and the compiler itself (as
+discussed in a previous mail message).
+
+&gt; Even with full parallelism, you can make each of these thread-safe at
+&gt; the cost of an extra indirection at each gf dispatch and each subtype
+&gt; test. You can store a pointer to a pointer to the relevant data
+&gt; structures, and then when it's necessary to update them you can make a
+&gt; modified copy, and then make the update with an atomic compare-and-
+&gt; swap. The CAS would need a tiny bit of per-architecture assembly, but
+&gt; fortunately the CILK project (<A  HREF="http://supertech.lcs.mit.edu/cilk/">http://supertech.lcs.mit.edu/cilk/</A>) has
+&gt; stealable code to do that for x86, IA64, SPARC, Alpha, PowerPC and
+&gt; MIPS. I dunno how much of a hit the extra indirection would inflict,
+&gt; though I'd guess it's fairly modest.
+
+yeah, we did all of this in fun-o-dylan.  it's not that bad, but it
+does cost every user even in the single threaded case.  there are
+certain knock on effects that aren't obvious.  i'm definitely up for
+the work, but i'm wondering whether there's a better way, a way that's
+more pay as you go and provides a more realistic model.  certainly,
+there is research concerning global analysis to know when and/or where
+a program is single threaded in such a way as to inform optimizations
+to remove these overheads, but this might be difficult in an
+interactive environment.  in fun-o-dylan, we tried to at least to hide
+the costs in the less frequent paths such as table writes instead of
+reads etc.
+
+&gt; On a related note, the C-- people have written a paper that identifies
+&gt; a continuation discipline that enables you to write exceptions and
+&gt; coroutines/threads, but is compatible with a stack implementations. If
+&gt; you allow continuations with a dynamic-extent (like Dylan/GOO
+&gt; continuations), but permit them to be called multiple times (unlike
+&gt; GOO), then you can write coroutines but can still use a stack. See:
+&gt; 
+&gt;   Featherweight Concurrency in a Portable Assembly Language. Ramsey and
+&gt;   Peyton-Jones. <A  HREF="http://citeseer.nj.nec.com/ramsey01featherweight.html">http://citeseer.nj.nec.com/ramsey01featherweight.html</A>
+&gt; 
+&gt; I guess you could implement this by compiling into CPS and then
+&gt; allocating continuations using alloca() and occasionally cleaning up.
+
+jonathan
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00064" href="msg00064.html">Re: Threads</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00066.html">&quot;P&quot; notation not described in section 1.1?</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00068.html">Yet another xemacs fix</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00064.html">Re: Threads</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00070.html">Re: Threads</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00067"><strong>Date</strong></a></li>
+<li><a href="threads.html#00067"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

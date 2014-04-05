@@ -1,0 +1,96 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Bigint support -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Mon, 14 Oct 2002 22:27:21 &#45;0400 (EDT) -->
+<!--X-Message-Id: A09BFF66&#45;DFE5&#45;11D6&#45;909F&#45;003065F305CC@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Bigint support</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00217.html">Date Prev</a>][<a href="msg00219.html">Date Next</a>][<a href="msg00217.html">Thread Prev</a>][<a href="msg00220.html">Thread Next</a>][<a href="index.html#00218">Date Index</a>][<a href="threads.html#00218">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Bigint support</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Bigint support</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Mon, 14 Oct 2002 22:27:18 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Preliminary bigint support using the GNU MP library is now in. It's not 
+compiled into the image by default at the moment, to try it out, grab a 
+copy of GOO off CVS, add &quot;(use goo/bignum/gmp)&quot; to src/goo.goo, and 
+rebuild GOO. There is transparent switchover between &lt;fixnum&gt; and 
+&lt;bignum&gt; depending on the size of the integer in the primitive numeric 
+functions, so you generally shouldn't have to care about which kind of 
+&lt;int&gt; you're dealing with.
+
+It appears to work as far as I can tell but there are no testcases to 
+ensure that, and bigint constants won't work in compiled code (as the 
+compiler isn't smart enough to know not to emit &quot;500000000000000000&quot; in 
+the C code). Constants do work in the evaluator, though, so you can do 
+e.g.
+goo/user 0&lt;=  (* (pow 30 30) 5555555555555555555)
+goo/user 0=&gt; 
+1143839622748049999885616037725195000000000000000000000000000000
+
+Maybe next can be rational numbers and arbitrary precision floats.
+
+james
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00217.html">Null ports</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00219.html">Re: Re: [Fwd: Questions on goo / samurui]</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00217.html">Null ports</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00220.html">Proposed numeric type hierarchy</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00218"><strong>Date</strong></a></li>
+<li><a href="threads.html#00218"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

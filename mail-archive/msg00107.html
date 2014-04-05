@@ -1,0 +1,156 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Goo Nitpicks -->
+<!--X-From-R13: Xbanguna Vfrh <ibzwbzNibzwbz.bet> -->
+<!--X-Date: Thu, 1 Aug 2002 00:51:23 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20020801045127.GA26345@vomjom -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Goo Nitpicks</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00106.html">Date Prev</a>][<a href="msg00108.html">Date Next</a>][<a href="msg00099.html">Thread Prev</a>][<a href="msg00108.html">Thread Next</a>][<a href="index.html#00107">Date Index</a>][<a href="threads.html#00107">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Goo Nitpicks</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Goo Nitpicks</li>
+<li><em>From</em>: Jonathan Hseu &lt;<A HREF="mailto:vomjom@DOMAIN.HIDDEN">vomjom@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Wed, 31 Jul 2002 23:51:27 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+This is my Goo nitpick list.  Some of my nitpicks you may have good
+reasons for... so I'd like to know what they are :)
+
+1. My most important nitpick is the current module system:
+It's a big namespace clog to (use) everything, so a lot of us would
+probably prefer to use (mod:name)
+
+The problem with (mod:name) is that directories can pile up:
+foo/bar/baz/math:$pi
+
+Even simply typing goo/math:$pi is somewhat of a pain.
+
+My proposal is this:
+When the programmer types: (use blah)  , it acts as it does now.
+When the programmer types: (use goo/math math)  , the second argument
+  will be the shortened version.  Then the programmer can type:
+  math:$pi to use bindings from that module. (Issue: exported or
+  unexported bindings?)
+
+This method would replace the current mod:name
+
+2. swapf vs. rotatef
+I personally think you should replace swapf with Common Lisp's rotatef,
+which is just more useful.
+
+3. Chris Armstrong's nitpick: string formatting should not be tied to
+ports.  Perhaps we should use a separate function for string formatting,
+eliminating the need for (msg)
+
+4. Why is DS like: (ds (macro ,blah ,@body)) and not like:
+(ds macro (,blah ,@body))?
+
+It seems inconsistent with DF and DM
+
+5. This one isn't a nitpick... but I'd like to know why DF exists when
+we could just have DM?
+
+6. *-setter seems too long.  A good replacement might be *-set or *! or
+*-set! (see #11)
+
+7. Will we be able to (use)/import from the current directory where goo
+is run?
+
+8. This is probably just a bug: (dv) always returns #f and not the value
+you assign to the variable.
+
+9. DS example on the web is wrong.  It should be 'unless' and not 'when'
+
+(empty)'s signature on the web is also wrong.
+
+10. Is there a way to get a subset of a sequence?  It seems as if there
+should be a builtin function for it.
+
+11. Rename (set) to (set!) because it is destructive?
+
+12. From what I read on wiki, you intend to have default values look
+like: (dm asdf (a:1|&lt;int&gt; b:2|&lt;int&gt;))
+
+Maybe it's just me, but default variables in functions should be
+consistent with variable assignment in rep and let, for example:
+(dm asdf ((a 1)|&lt;int&gt; (b 2)|&lt;int&gt;))
+
+13. Functions like (trunc/) return a tuple.  If users wanted a
+remainder, they would probably use (mod).  I think (trunc/) should
+return 2 values, but it should work like common lisp's
+(multiple-value-bind), if you want those two values, you ask for it,
+otherwise it just gives one value.
+
+Unless I'm mistaken, you have to do: (1st (trunc/ 5 3)) to get the
+result of the division... it's too much typing.
+
+14. Oh yeah, push and pop are broken for lists.  This is just a bug.
+
+There are a few more, but I will wait for comments on these :)
+
+Thanks.
+
+-- 
+Jonathan Hseu &lt;vomjom@vomjom.org, vomjom@debian.org, jh4@cec.wustl.edu&gt;
+GPG ID:          5228D713
+GPG fingerprint: 220B A4EF 70FE B884 CB38  F93F EA8A 1024 5228 D713
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00106.html">Re: Trouble building goo-0_0140</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00108.html">Goo Nitpicks</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00099.html">Goo on a cellphone..almost</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00108.html">Goo Nitpicks</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00107"><strong>Date</strong></a></li>
+<li><a href="threads.html#00107"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

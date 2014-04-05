@@ -1,0 +1,168 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: goo is missing... -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Mon, 23 Sep 2002 18:11:03 &#45;0400 (EDT) -->
+<!--X-Message-Id: uo8lm5s1hmy.fsf@djundjun.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20020923043614.GA4544@vomjom -->
+<!--X-Reference: 4984.24.91.160.204.1032764055.squirrel@languor.static.net -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: goo is missing...</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00190.html">Date Prev</a>][<a href="msg00192.html">Date Next</a>][<a href="msg00188.html">Thread Prev</a>][<a href="msg00192.html">Thread Next</a>][<a href="index.html#00191">Date Index</a>][<a href="threads.html#00191">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: goo is missing...</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;James Knight&quot; &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: goo is missing...</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 23 Sep 2002 18:11:01 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+&quot;James Knight&quot; &lt;jknight@fuhm.net&gt; writes:
+
+&gt; &gt; So... my professor let me program my research this semester in goo.
+&gt; &gt; I've found that I've been needing the following:
+&gt; &gt; 1. egal == for strings and tuples (mostly because of the lack of #4 and
+&gt; &gt;                                   the advantages it would give for
+&gt; &gt; 				   &lt;tab&gt;)
+&gt; &gt;   I think == for immutables has far more advantages than disadvantages.
+&gt; &gt;   The only disadvantage I can think of is == will no longer be a fast
+&gt; &gt;   == operator.  Two options come to mind:
+&gt; &gt;   a. Make an object-== which basically does
+&gt; &gt;   (== (address-of x) (address-of y))
+&gt; &gt;   b. If someone wants a fast ==, just have them type that out.
+&gt; 
+&gt; I totally agree. Even though == is the most often called function in
+&gt; all of GOO, it still needs to do the right thing. Having it be fast
+&gt; is not useful if it isn't producing the appropriate results. How
+&gt; often do you actually *want* to compare two tuples for pointer
+&gt; equality? There are various ways a structural test could be made
+&gt; fast such as storing a precomputed hashcode and testing that before
+&gt; iterating over all elements.
+
+i'm getting there...
+
+&gt; &gt; 2. Something that produced bugs for me:
+&gt; &gt; (add!) and (add) do different things.  The first appends, while the
+&gt; &gt; second prepends.  (add!) for lists prepends.
+&gt; &gt;
+&gt; &gt; I think the behavior of add should be more consistent.  When I call
+&gt; &gt; add, I expect things to be added to the end.  Otherwise, when I make a
+&gt; &gt; function that takes a &lt;seq&gt; and uses add, if you pass it different
+&gt; &gt; types of &lt;seq&gt;'s, it will have a different result.
+&gt; &gt;
+&gt; &gt; This will make (add!) slower for lists, but who uses lists anyway?
+&gt; 
+&gt; Definitely. I suspect that's just left over from the transition away from
+&gt; lists and was overlooked.
+
+right.
+
+&gt; &gt; 3. Reverse (pos) and reverse (finds)
+&gt; There must be some way of doing that which doesn't require duplicating
+&gt; every function that iterates over a sequence and returns the index.
+
+why not just search the reversed sequence or return all successful
+keys and take the last one?  unless advance optimization are in place,
+these options seem heavyweight.  i agree, though, that there's got to
+be a better way.
+
+&gt; &gt; 4. Being able to define what equality function to use for mem?, split,
+&gt; &gt; pos, finds, and pretty much every other &lt;seq&gt; function that uses it.
+&gt; 
+&gt; I have a few thoughts about that:
+&gt; a) if #1 was implemented is it still really necessary?
+
+yes if you used mutable sequences you might still want to do
+searching.  i guess you could say to convert them to immutable
+sequences first but i'm not sure that's a satisfactory answer.
+
+&gt; b) actually adding that to the API would cause excessive bloat
+&gt; without optional keyword arguments, and perhaps even with.
+&gt; c) for some of those, it is not really even necessary. For instance,
+&gt; instead of mem?, use any? if you want to use an alternate test
+&gt; function.
+
+right.
+
+&gt; &gt; 5. case-sensitive string hashing
+&gt; You can do that, but it's not really well supported, or documented. As
+&gt; I've said before, &lt;str-tab&gt; really ought not be in the public API at all.
+&gt; All you need to do is make a subclass of &lt;tab&gt; and override the key-test
+&gt; and tab-hash functions, only one of which is exported from the
+&gt; goo/cols/tab module. :)
+
+key-test is exported from goo/cols/col and goo
+
+&gt; &gt; There was a #6, but I have forgotten it by now :)
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00194" href="msg00194.html">Problems with libraries using C - code</a></strong>
+<ul><li><em>From:</em> Benedikt Grundmann</li></ul></li>
+<li><strong><a name="00192" href="msg00192.html">regular expression library</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00187" href="msg00187.html">goo is missing...</a></strong>
+<ul><li><em>From:</em> Jonathan Hseu</li></ul></li>
+<li><strong><a name="00188" href="msg00188.html">Re: goo is missing...</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00190.html">Re: one-of and other questions on goo's type system</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00192.html">regular expression library</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00188.html">Re: goo is missing...</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00192.html">regular expression library</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00191"><strong>Date</strong></a></li>
+<li><a href="threads.html#00191"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

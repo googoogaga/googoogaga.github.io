@@ -1,0 +1,146 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: enum protocol suggestion -->
+<!--X-From-R13: Ezryyl Bbbu <cybc+tbbNerqoevpx.qph.vr> -->
+<!--X-Date: Wed, 20 Nov 2002 02:18:56 &#45;0500 (EST) -->
+<!--X-Message-Id: 20021120071851.A23701@prodigy.Redbrick.DCU.IE -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20021117023504.A535@prodigy.Redbrick.DCU.IE -->
+<!--X-Reference: uo8isysdgx7.fsf@djundjun.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: enum protocol suggestion</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00235.html">Date Prev</a>][<a href="msg00237.html">Date Next</a>][<a href="msg00235.html">Thread Prev</a>][<a href="msg00237.html">Thread Next</a>][<a href="index.html#00236">Date Index</a>][<a href="threads.html#00236">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: enum protocol suggestion</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: enum protocol suggestion</li>
+<li><em>From</em>: Smelly Pooh &lt;<A HREF="mailto:plop%2Bgoo@DOMAIN.HIDDEN">plop+goo@xxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Wed, 20 Nov 2002 07:18:52 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+In reply to Jonathan Bachrach's flatulent wordings, 
+
+&gt; &gt; Methods like now-key and now-setter do not belong in an enumerator.
+&gt; &gt; They assume that you are dealing with a collection, which is not
+&gt; &gt; necessarily the case (for example when using &lt;range&gt; as an enum)
+&gt; 
+&gt; perhaps this just argues for different classes of enums.  i was trying
+&gt; to not have too many classes.  i figured that they could go
+&gt; unimplemented for collections not supporting this bit of protocol. 
+
+This brings me to something else I was thinking about.  With the
+generic functions style of OO it's very hard to enforce a protocol at
+the language level (since new generic functions can be added at any
+time).  As goo's protocol family increases, how will one know what
+methods need to be implemented and what methods don't to conform to a
+protocol?  It makes me uneasy to half implement a protocol because I
+don't know where it'll work and where it won't work
+
+&gt; &gt; With a few minor changes enum could be used as a generic lazy iterator,
+&gt; &gt; much like the stream type from ML or generators from python
+&gt; &gt; (<A  HREF="http://www.python.org/doc/2.2.2/whatsnew/node5.html">http://www.python.org/doc/2.2.2/whatsnew/node5.html</A>)
+&gt; &gt; 
+&gt; &gt; I believe that an enumerator should simply be a thunk.  Each time the
+&gt; &gt; thunk is called it returns the next item in the enumerator (keeping
+&gt; &gt; state in a closure if necessary) until it reaches the end of the
+&gt; &gt; enumeration, in which case an &lt;enum-end&gt; condition is signalled
+&gt; 
+&gt; i'm definitely sympathetic to this, but i too am reluctant to use
+&gt; conditions to signify end of enumeration.
+&gt; 
+&gt; perhaps a better solution is to introduce convenient syntax for
+&gt; defining these enums.  i haven't yet worked this out, but this has
+&gt; been the plan all along.
+
+Perhaps a syntax for inner/anonymous classes?
+
+(anon (&lt;enum&gt;)
+  (dm fin? (_) ; code)
+  (dm nxt (_) ; code)
+)
+
+which defines the methods fin? and nxt on anonymous class _
+and returns an object of type _
+
+I think nxt and now should be the one method unless there's a reason to
+split them
+
+(rep loop (enum)
+  (unless (fin? enum)
+    (nxt enum)
+    (post &quot;%s\n&quot; (now enum)) ) )
+
+is less elegant than
+
+(rep loop (enum)
+  (unless (fin? enum)
+    (post &quot;%s\n&quot; (nxt enum)) ) )
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00237" href="msg00237.html">Re: enum protocol suggestion</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00227" href="msg00227.html">enum protocol suggestion</a></strong>
+<ul><li><em>From:</em> Smelly Pooh</li></ul></li>
+<li><strong><a name="00235" href="msg00235.html">Re: enum protocol suggestion</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00235.html">Re: enum protocol suggestion</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00237.html">Re: enum protocol suggestion</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00235.html">Re: enum protocol suggestion</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00237.html">Re: enum protocol suggestion</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00236"><strong>Date</strong></a></li>
+<li><a href="threads.html#00236"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: [carmstro@twistedmatrix.com: Re: Goo Nitpicks] -->
+<!--X-From-R13: Quevfgbcure Oezfgebat <pnezfgebNgjvfgrqzngevk.pbz> -->
+<!--X-Date: Fri, 2 Aug 2002 16:00:48 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20020802200046.GB28637@twistedmatrix.com -->
+<!--X-Content-Type: multipart/mixed -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>[carmstro@twistedmatrix.com: Re: Goo Nitpicks]</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00117.html">Date Prev</a>][<a href="msg00119.html">Date Next</a>][<a href="msg00109.html">Thread Prev</a>][<a href="msg00122.html">Thread Next</a>][<a href="index.html#00118">Date Index</a>][<a href="threads.html#00118">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>[carmstro@twistedmatrix.com: Re: Goo Nitpicks]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: [carmstro@twistedmatrix.com: Re: Goo Nitpicks]</li>
+<li><em>From</em>: Christopher Armstrong &lt;<A HREF="mailto:carmstro@DOMAIN.HIDDEN">carmstro@xxxxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 2 Aug 2002 15:00:46 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Gah. I forgot to Cc: the list again. Sorry guys :-)
+</pre>
+<blockquote><small>---&nbsp;<i>Begin&nbsp;Message</i>&nbsp;---</small>
+<ul>
+<li><em>To</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Goo Nitpicks</li>
+<li><em>From</em>: Christopher Armstrong &lt;<A HREF="mailto:carmstro@DOMAIN.HIDDEN">carmstro@xxxxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 2 Aug 2002 13:08:33 -0500</li>
+</ul>
+<pre>
+On Fri, Aug 02, 2002 at 12:41:11PM -0400, Jonathan Bachrach wrote:
+&gt; Christopher Armstrong &lt;carmstro@twistedmatrix.com&gt; writes:
+&gt; &gt; On Thu, 2002-08-01 at 17:27, Jonathan Bachrach wrote:
+[snip]
+&gt; &gt; happen when I'm importing modules. Anyway, I think Python's `import'
+&gt; &gt; statement is really perfect. 'from module import name', 'from package
+&gt; &gt; import module', 'from package.package import module', etc. Python's
+&gt; &gt; 'from foo import *' is basically equivalent to (use foo). Of course I'm
+&gt; &gt; not suggesting that the syntax be stolen, but the semantics.
+&gt; 
+&gt; actually, what i had in mind which is very much like dylan and eulisp
+&gt; is the ability to do selective imports:  
+&gt; 
+&gt;   (use (each goo/math $pi))
+&gt; 
+&gt; with prefixing
+&gt; 
+&gt;   (use (prefix goo/math math/))
+
+So, I'm confused: would this make it so I could say `math:$pi' in my module
+code? If so, that's cool.
+
+&gt; and combined
+&gt; 
+&gt;   (use (prefix (each goo/math $pi) math/))
+&gt; 
+&gt; and in general provide filters constructed using a composition of set
+&gt; operations and renaming.  this way you could control your namespace
+&gt; more precisely.  i'll put a proposal up on the goo wiki.
+&gt; 
+&gt; i should say that i don't like python's from statement because it
+&gt; snapshots the current binding values.  what if the binding values in
+&gt; the imported from module change through reloading or redefinition.
+&gt; you're out of luck?  the only way to ensure up to date values is to
+&gt; use a module object and dereference it for every binding access.  this
+&gt; seems cumbersome to me.
+
+Well, when I used `from', I only ever import module objects, not the names
+defined inside the module (or &quot;*&quot;, for &quot;everything&quot;). Modules rarely ever
+get redefined themselves; when a module is reloaded, it's mutated, so
+`modObj.foo' will return the new value for `foo'.
+
+Anyway, I can understand your dislike of explicit dereferencing, but 
+please, I beg of you, *let* me dereference names through their module 
+names explicitly. I'm fine with goo's module system being more static 
+and non-first-class, but I think this is orthogonal, and I really love 
+being able to read a single snippet of code and not having to guess at 
+where each name comes from.
+
+&gt; furthermore, the only way to know what you use of a module is to look
+&gt; for all these module dereferences and even then you won't know because
+&gt; the module is a first class object and could be passed around and
+&gt; accessed dynamically.  this is the one place where goo is trying to be
+&gt; a bit static, forcing you to list your exports and imports.
+
+Yah, disallowing passing around modules is cool.
+
+&gt; &gt; One of my _big_ annoyances, that's tangentially related, is that I have
+&gt; &gt; to currently (use) a module to add a method to a generic function
+&gt; &gt; defined in it. Two solutions: 1) keep a global registry of all generic
+&gt; &gt; functions everywhere and have `dm' look up and add methods to a gf in
+&gt; &gt; the registry, or 2) be able to explicitly tell `dm' which gf to add the
+&gt; &gt; method to. I've not thought a lot about #1, and it seems like it will
+&gt; &gt; probably have problems. But I'm fine with either solution.
+&gt; 
+&gt; the problem is that then you have another namespace (i.e., the generic
+&gt; function registry) that you need to control.  
+&gt; 
+&gt; in java, don't you need to use an interface to implement it?  generics
+&gt; provide an api like an interface.  from what i know about python, a
+&gt; class implements an interface when it implements all required methods.
+&gt; this is definitely more dynamic as are python's class-based
+&gt; namespaces.
+
+Ok, so what about my second suggestion? I'd like to be able to say:
+
+(dm mymeth mod:mymeth (o|&lt;bar&gt;) nil) ; of course syntax is arguable
+
+This would attach my new `mymeth' method to the gf defined in `mod'.
+
+Obviously this is tied into my wish for explicit dereferencing of names in
+other modules, because as I said I don't like importing names from other
+modules into my namespace.
+
+&gt; &gt; Oh, and speaking of `mod:name' -- It seems that this syntax doesn't work
+&gt; &gt; in regular modules. wutsupwitdat? I hope that's just an oversight: I
+&gt; &gt; won't be able to continue coding long without it (as I said, I can't
+&gt; &gt; stand using `use' everywhere.)
+&gt; 
+&gt; the original idea was that mod:name would only be used for module
+&gt; protection violations (i.e., getting binding values from unexported
+&gt; bindings in other modules) in the listener.  i should at least allow
+&gt; one to use that syntax to access bindings that are exported.  i didn't
+&gt; want to have people write code that accesses bindings willy nilly from
+&gt; other modules.
+
+Yes, that's fine with me. But it's not even available for the use you
+mention, outside of the REPL (i.e., in a module).
+
+goo/user 0&lt;= (use test)
+[Loading module test...
+ERROR: Unbound binding: test2:foo
+
+where ~/.goo/mods/test.goo has only `test2:foo', and ~/.goo/mods/test2.goo
+has a method `foo' defined.
+
+Anyway, I promise to not go accessing bindings from other modules
+willy-nilly. :-D
+
+&gt; &gt; (b) there should be continuation prompts.
+&gt; 
+&gt; what do you mean here?
+
+Python's:
+
+&gt;&gt;&gt; def foo():
+...     print &quot;hi&quot;
+
+when expecting more code, goo doesn't print anything, I'd prefer if it
+printed out a distinct prompt for &quot;I am expecting you to close a paren&quot;.
+
+--
+                                Chris Armstrong
+                         &lt;&lt; radix@twistedmatrix.com &gt;&gt;
+                <A  HREF="http://twistedmatrix.com/users/carmstro.twistd/">http://twistedmatrix.com/users/carmstro.twistd/</A>
+</pre>
+<small>---&nbsp;<i>End Message</i>&nbsp;---</small></blockquote>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00117.html">Re: Goo Nitpicks</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00119.html">Re: Goo Nitpicks</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00109.html">please resend your googoogaga msg -- Re: Trouble building goo-0_0140</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00122.html">Re: CVS update: goo/src/goo/cols</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00118"><strong>Date</strong></a></li>
+<li><a href="threads.html#00118"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

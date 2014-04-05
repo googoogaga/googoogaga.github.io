@@ -1,0 +1,116 @@
+diff -c -r goo-0_155-any-dev/c/g2c/goo/%system.c goo-current/c/g2c/goo/%system.c
+*** goo-0_155-any-dev/c/g2c/goo/%system.c	Wed Nov 19 14:49:58 2003
+--- goo-current/c/g2c/goo/%system.c	Wed Jan 21 11:14:36 2004
+***************
+*** 174,180 ****
+    char  ibuf[4096];
+    int   i, j;
+    int   pid;
+!   char *bv[] = {"cc", "-shared",  "-g", "-O", "-fPIC",  rbuf, "-o", sofile, cfile, NULL};
+    char *v[100], *lptr;
+  
+    sprintf(rbuf, "-I%s/lib", YPsu(YgooSsystemYTgoo_rootT));
+--- 174,180 ----
+    char  ibuf[4096];
+    int   i, j;
+    int   pid;
+!   char *bv[] = {"cc", "-shared",  "-I/usr/local/include", "-g", "-O", "-fPIC",  rbuf, "-o", sofile, cfile, NULL};
+    char *v[100], *lptr;
+  
+    sprintf(rbuf, "-I%s/lib", YPsu(YgooSsystemYTgoo_rootT));
+diff -c -r goo-0_155-any-dev/c/g2c/goo/bignum.c goo-current/c/g2c/goo/bignum.c
+*** goo-0_155-any-dev/c/g2c/goo/bignum.c	Wed Nov 19 14:44:43 2003
+--- goo-current/c/g2c/goo/bignum.c	Wed Jan 21 09:44:49 2004
+***************
+*** 778,784 ****
+  
+  
+  #include <gmp.h>
+! #include <values.h>
+  
+  static mp_limb_t dummy_limb;
+  
+--- 778,784 ----
+  
+  
+  #include <gmp.h>
+! #include <limits.h>
+  
+  static mp_limb_t dummy_limb;
+  
+diff -c -r goo-0_155-any-dev/src/goo/%system.c goo-current/src/goo/%system.c
+*** goo-0_155-any-dev/src/goo/%system.c	Wed Nov 19 14:50:49 2003
+--- goo-current/src/goo/%system.c	Wed Jan 21 11:13:20 2004
+***************
+*** 174,180 ****
+    char  ibuf[4096];
+    int   i, j;
+    int   pid;
+!   char *bv[] = {"cc", "-shared",  "-g", "-O", "-fPIC",  rbuf, "-o", sofile, cfile, NULL};
+    char *v[100], *lptr;
+  
+    sprintf(rbuf, "-I%s/lib", YPsu(YgooSsystemYTgoo_rootT));
+--- 174,180 ----
+    char  ibuf[4096];
+    int   i, j;
+    int   pid;
+!   char *bv[] = {"cc", "-shared",  "-I/usr/local/include", "-g", "-O", "-fPIC",  rbuf, "-o", sofile, cfile, NULL};
+    char *v[100], *lptr;
+  
+    sprintf(rbuf, "-I%s/lib", YPsu(YgooSsystemYTgoo_rootT));
+diff -c -r goo-0_155-any-dev/src/goo/bignum/%gmp.c goo-current/src/goo/bignum/%gmp.c
+*** goo-0_155-any-dev/src/goo/bignum/%gmp.c	Mon Oct 14 02:13:53 2002
+--- goo-current/src/goo/bignum/%gmp.c	Wed Jan 21 09:45:00 2004
+***************
+*** 1,5 ****
+  #include <gmp.h>
+! #include <values.h>
+  #include "grt.h"
+  
+  #define MODN(name) YgooSbignumSgmpYP##name
+--- 1,5 ----
+  #include <gmp.h>
+! #include <limits.h>
+  #include "grt.h"
+  
+  #define MODN(name) YgooSbignumSgmpYP##name
+diff -c -r goo-0_155-any-dev/src/goo/bignum/gmp.goo goo-current/src/goo/bignum/gmp.goo
+*** goo-0_155-any-dev/src/goo/bignum/gmp.goo	Wed Nov 19 14:50:49 2003
+--- goo-current/src/goo/bignum/gmp.goo	Wed Jan 21 09:45:06 2004
+***************
+*** 6,12 ****
+  
+  #{
+  #include <gmp.h>
+! #include <values.h>
+  #include "grt.h"
+  
+  #define iu(tint) (((PINT)(tint)) >> TAG_BITS)
+--- 6,12 ----
+  
+  #{
+  #include <gmp.h>
+! #include <limits.h>
+  #include "grt.h"
+  
+  #define iu(tint) (((PINT)(tint)) >> TAG_BITS)
+diff -c -r goo-0_155-any-dev/src/goo/bignum.goo goo-current/src/goo/bignum.goo
+*** goo-0_155-any-dev/src/goo/bignum.goo	Wed Nov 19 14:50:49 2003
+--- goo-current/src/goo/bignum.goo	Wed Jan 21 09:44:54 2004
+***************
+*** 4,10 ****
+  
+  #{
+  #include <gmp.h>
+! #include <values.h>
+  
+  static mp_limb_t dummy_limb;
+  
+--- 4,10 ----
+  
+  #{
+  #include <gmp.h>
+! #include <limits.h>
+  
+  static mp_limb_t dummy_limb;
+  

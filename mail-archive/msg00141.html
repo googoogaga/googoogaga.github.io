@@ -1,0 +1,119 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Two bugs.... -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Mon, 5 Aug 2002 22:18:56 &#45;0400 (EDT) -->
+<!--X-Message-Id: D4BC0779&#45;A8E2&#45;11D6&#45;8F54&#45;003065D63222@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 15695.61.145268.980674@h00045a4799d6.ne.client2.attbi.com -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Two bugs....</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00140.html">Date Prev</a>][<a href="msg00142.html">Date Next</a>][<a href="msg00138.html">Thread Prev</a>][<a href="msg00142.html">Thread Next</a>][<a href="index.html#00141">Date Index</a>][<a href="threads.html#00141">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Two bugs....</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: Two bugs....</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Mon, 5 Aug 2002 22:18:43 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+On Monday, August 5, 2002, at 06:46  PM, Neel Krishnaswami wrote:
+&gt; Hi,
+&gt;
+&gt; I have two bug reports.
+&gt;
+&gt; One, a reproducable segfault under goo 0.140. First, define:
+&gt;
+&gt;   (dc &lt;treap&gt; (&lt;map&gt; &lt;col.&gt;))
+&gt;   (dp seed (&lt;treap&gt; =&gt; &lt;int&gt;))
+&gt;   (dp tree (&lt;treap&gt; =&gt; &lt;log&gt;))
+&gt;   (dv empty-treap (new &lt;treap&gt; seed 48637761 tree #f))
+&gt;
+&gt; Then if I type 'empty-treap' at the REPL line I get a segfault.
+
+This bug is likely closely related to:
+goo/user 0&lt;= x (new &lt;map&gt;))
+goo/user 0=&gt; #f
+goo/user 0&lt;= x
+Program received signal SIGSEGV, Segmentation fault.
+
+&gt;   goo/user 0&lt;= (dv x 48637761)
+&gt;   goo/user 0=&gt; #f
+&gt;   goo/user 0&lt;= x
+&gt;   goo/user 0=&gt; 48637760 ;; wtf?!
+
+Now *that*'s a cool bug. It seems to be a parsing error, as (dv x (+ 
+48637760 1)) gives you the right result.
+
+James
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00143" href="msg00143.html">Two more bugs</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+<li><strong><a name="00142" href="msg00142.html">new contributed library: &lt;treap&gt;</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00138" href="msg00138.html">Two bugs....</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00140.html">Re: Two bugs....</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00142.html">new contributed library: &lt;treap&gt;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00138.html">Two bugs....</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00142.html">new contributed library: &lt;treap&gt;</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00141"><strong>Date</strong></a></li>
+<li><a href="threads.html#00141"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

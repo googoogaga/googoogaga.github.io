@@ -1,0 +1,131 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: more stuff. -->
+<!--X-From-R13: Tnevrq @njnm <fvyrapr&#45;tbbNavycbgrag.bet> -->
+<!--X-Date: Mon, 29 Sep 2003 16:24:38 &#45;0400 (EDT) -->
+<!--X-Message-Id: m3oex39wex.fsf@xpf.nilpotent.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>more stuff.</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00331.html">Date Prev</a>][<a href="msg00333.html">Date Next</a>][<a href="msg00331.html">Thread Prev</a>][<a href="msg00333.html">Thread Next</a>][<a href="index.html#00332">Date Index</a>][<a href="threads.html#00332">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>more stuff.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: more stuff.</li>
+<li><em>From</em>: Faried Nawaz &lt;<A HREF="mailto:silence-goo@DOMAIN.HIDDEN">silence-goo@xxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Tue, 30 Sep 2003 01:23:02 +0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+Actually, with GOO_ROOT set to /data/src/goo, I end up with
+/data/src/goo/lib/goo/lib/grt.h.  That's probably wrong.  So, what
+does install -D do?  I don't have a linux box handy.
+
+Also, I needed to ln -s /usr/local/include/gc /data/src/goo/lib
+
+I saw mention of docstrings in the wiki wishlist.  Can this be done
+cheaply with properties?  I noticed that
+
+(dp doc (&lt;any&gt; =&gt; &lt;str&gt;))
+
+causes a core dump, with either ,g2c-eval or ,ast-eval:
+
+Program received signal SIGSEGV, Segmentation fault.
+0x80726b3 in YPdispatchI (regs=0x837afc0) at goo/fun.c:3399
+3399          if (T8) {
+(gdb) list
+3394          T9 = (P)YPtelt(assocs_,iF1783);
+3395          xF1784 = T9;
+3396          yF1785 = key_;
+3397          T8 = (P)YPeqQ(xF1784,yF1785);
+3398          T7 = (P)YPbb(T8);
+3399          if (T8) {
+3400            T12 = (P)YPiA(iF1783,(P)1);
+3401            T11 = (P)YPtelt(assocs_,T12);
+3402            T10 = (P)YgooSfunYgen_lookup_1(gen_,T11,args_);
+3403            T6 = T10;
+(gdb) where
+#0  0x80726b3 in YPdispatchI (regs=0x837afc0) at goo/fun.c:3399
+#1  0x816a13d in Yargument_type_errorI (regs=0x837afc0) at ../grt.h:518
+#2  0x80dfdcf in YPPcheck_call_types (regs_=0x837afc0) at ../grt.h:562
+#3  0x8168cfd in YgooSconditionsYsignal_handler_listI (regs=0x837afc0) at ../grt.h:530
+#4  0x8168ea3 in fun_sig_38I (regs=0x837afc0) at ../grt.h:531
+#5  0x80729e3 in YPdispatchI (regs=0x837afc0) at ../grt.h:586
+#6  0x816a13d in Yargument_type_errorI (regs=0x837afc0) at ../grt.h:518
+#7  0x80dfdcf in YPPcheck_call_types (regs_=0x837afc0) at ../grt.h:562
+#8  0x8168cfd in YgooSconditionsYsignal_handler_listI (regs=0x837afc0) at ../grt.h:530
+#9  0x8168ea3 in fun_sig_38I (regs=0x837afc0) at ../grt.h:531
+#10 0x80729e3 in YPdispatchI (regs=0x837afc0) at ../grt.h:586
+#11 0x816a13d in Yargument_type_errorI (regs=0x837afc0) at ../grt.h:518
+#12 0x80dfdcf in YPPcheck_call_types (regs_=0x837afc0) at ../grt.h:562
+#13 0x8168cfd in YgooSconditionsYsignal_handler_listI (regs=0x837afc0) at ../grt.h:530
+#14 0x8168ea3 in fun_sig_38I (regs=0x837afc0) at ../grt.h:531
+#15 0x80729e3 in YPdispatchI (regs=0x837afc0) at ../grt.h:586
+#16 0x816a13d in Yargument_type_errorI (regs=0x837afc0) at ../grt.h:518
+#17 0x80dfdcf in YPPcheck_call_types (regs_=0x837afc0) at ../grt.h:562
+#18 0x8168cfd in YgooSconditionsYsignal_handler_listI (regs=0x837afc0) at ../grt.h:530
+etc.
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00335" href="msg00335.html">Re: more stuff.</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+<li><strong><a name="00333" href="msg00333.html">Re: more stuff.</a></strong>
+<ul><li><em>From:</em> Chris Double</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00331.html">0.153, a few things</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00333.html">Re: more stuff.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00331.html">0.153, a few things</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00333.html">Re: more stuff.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00332"><strong>Date</strong></a></li>
+<li><a href="threads.html#00332"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

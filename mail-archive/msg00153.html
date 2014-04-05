@@ -1,0 +1,122 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: use/mangle checked in. -->
+<!--X-From-R13: Oaqerj Ehgureynaq <fbzoerebNnv.zvg.rqh> -->
+<!--X-Date: Sun, 11 Aug 2002 21:24:28 &#45;0400 (EDT) -->
+<!--X-Message-Id: uqzr8h4x41g.fsf@bongo.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>use/mangle checked in.</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00152.html">Date Prev</a>][<a href="msg00154.html">Date Next</a>][<a href="msg00138.html">Thread Prev</a>][<a href="msg00154.html">Thread Next</a>][<a href="index.html#00153">Date Index</a>][<a href="threads.html#00153">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>use/mangle checked in.</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: use/mangle checked in.</li>
+<li><em>From</em>: Andrew Sutherland &lt;<A HREF="mailto:sombrero@DOMAIN.HIDDEN">sombrero@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 11 Aug 2002 21:24:27 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Anonymous CVS (see info at Wiki) now has use/mangle support checked
+in.  This is relevant for those of you who want to do things like:
+
+(use/mangle tests/manglea a:)
+(use/mangle tests/mangleb b:)
+
+(a:func-a)
+(a:func-b)
+(b:func-a)
+(b:func-b)
+
+All it does is import everything exported by the module in question,
+but with the given prefix mangled on to the binding name.
+
+For those who were desiring module:binding, this is equivalent to what
+you wanted, although it's usable for other things too.  For example,
+you could also bind on &quot;mail-&quot; instead, or something like that.
+
+This should help deal with the instinct of prefixing method names
+yourself, out of a fear of name collisions.  (Eg, earlier I found
+myself prefixing &quot;mail-&quot; onto functions just because I was concerned
+about binding collisions with something more important.)  Note that I
+am one of those people would ideally like a unified generic system
+without the constraints on the number of parameters, but this is a
+useful thing regardless, and very helpful in the short term.
+
+IMPORTANT!
+
+I've checked in new .c files and a new binary as well because the
+boot-strapping issues require you to either just build your image from
+the C files/use the binary, OR you must go through the boot-strapping
+process yourself to get yourself a happy image.  Specifically, the
+use/mangle export in src/goo/boot.goo requires that the running image
+must have the use/mangle export already loaded.  So to build it
+yourself, you must remove the export, build an image, then build a new
+image using the new image, with the xport re-exported.  (It's possible
+there's a way around this, but I'm not one of the people who knows how
+to do it, if so.)
+
+Andrew
+
+PS-- You'll want to (use goo/boot) to get at this I think.
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00154" href="msg00154.html">What if...</a></strong>
+<ul><li><em>From:</em> Jonathan Hseu</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00152.html">Re: new contributed library: &lt;treap&gt;</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00154.html">What if...</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00138.html">Two bugs....</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00154.html">What if...</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00153"><strong>Date</strong></a></li>
+<li><a href="threads.html#00153"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

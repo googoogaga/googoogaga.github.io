@@ -1,0 +1,96 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: tcc -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Tue, 17 Sep 2002 12:31:03 &#45;0400 (EDT) -->
+<!--X-Message-Id: Pine.LNX.4.21.0209171219520.8229&#45;100000@languor.static.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>tcc</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00174.html">Date Prev</a>][<a href="msg00176.html">Date Next</a>][<a href="msg00172.html">Thread Prev</a>][<a href="msg00179.html">Thread Next</a>][<a href="index.html#00175">Date Index</a>][<a href="threads.html#00175">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>tcc</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: tcc</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Tue, 17 Sep 2002 12:30:59 -0400 (EDT)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+So I've been playing with tcc (Tiny C Compiler
+<A  HREF="http://fabrice.bellard.free.fr/tcc/">http://fabrice.bellard.free.fr/tcc/</A>) a bit with the expectation of
+replacing the fork/exec of gcc with a library call to the compiler which
+compiles into the running image. However it does not appear to be ready
+for embedded use yet. The released version compiles once only (which is
+all that's needed for the standard executable), and with some coaxing I
+got it to work two or three times, but then it dies from some cause I
+haven't determined. Most of the state is still stored in global variables
+instead of TCCState, and tcc_delete isn't actually freeing any of the
+memory, and tcc_new isn't actually initializing all the globals it needs
+to. The C parser seems to be good enough for GOO, however, as it did
+manage to compile all of GOO staticly (but GOO then runs very very
+slowly) as the optimizer isn't anything close to gcc -O2.
+
+james
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00179" href="msg00179.html">Re: tcc</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00174.html">Re: Cool....</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00176.html">Hard Limit &quot;pressure makes pearls&quot;</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00172.html">Cool....</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00179.html">Re: tcc</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00175"><strong>Date</strong></a></li>
+<li><a href="threads.html#00175"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

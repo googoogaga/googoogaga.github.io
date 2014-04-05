@@ -1,0 +1,173 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Win32 Sockets -->
+<!--X-From-R13: Quevf Rbhoyr <puevfNqbhoyr.pb.am> -->
+<!--X-Date: Fri, 4 Oct 2002 23:26:14 &#45;0400 (EDT) -->
+<!--X-Message-Id: u1y75wooo.fsf@double.co.nz -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Win32 Sockets</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00202.html">Date Prev</a>][<a href="msg00204.html">Date Next</a>][<a href="msg00202.html">Thread Prev</a>][<a href="msg00204.html">Thread Next</a>][<a href="index.html#00203">Date Index</a>][<a href="threads.html#00203">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Win32 Sockets</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Win32 Sockets</li>
+<li><em>From</em>: Chris Double &lt;<A HREF="mailto:chris@DOMAIN.HIDDEN">chris@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 05 Oct 2002 15:27:03 +1200</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+The following minor changes to %net.c will allow sockets to work on
+the MSVC version of Goo v146:
+
+Change the include section to be:
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#if !defined(_MSC_VER)
+#include &lt;unistd.h&gt;
+#include &lt;netdb.h&gt;
+#else
+#include &lt;winsock.h&gt;
+#endif
+#include &lt;fcntl.h&gt;
+#include &lt;errno.h&gt;
+#if !defined(_MSC_VER)
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#endif
+
+
+Add:
+
+#if defined(_MSC_VER)
+int win32_start_sockets()
+{
+  static int sockets_started = 0;
+
+  if(!sockets_started)
+  {
+    WSADATA data;
+	if(WSAStartup(MAKEWORD(1, 1), &amp;data) != 0)
+	{
+      return 0;
+    }
+
+    
+    sockets_started = 1;
+   
+  }
+  return 1;
+}
+
+#endif
+
+Change:
+
+GOOFUNC(new_socket) ()
+{
+  int sock;
+ 
+#if defined(_MSC_VER)
+  if(!win32_start_sockets())
+  {
+    return YPfalse;
+  }
+#endif
+
+  sock = socket(AF_INET, SOCK_STREAM, 0); // default protocol.
+
+  if (sock &lt; 0)
+    return YPfalse;
+
+  return sockWrap(sock);
+}
+
+Change:
+
+GOOFUNC(make_non_blocking) (P sockfd)
+{
+  int opts;
+  int sock = sockUnwrap(sockfd);
+#if defined(_MSC_VER)
+  return YPfalse;
+#else
+  opts = fcntl(sock, F_GETFL);
+  if(opts &lt; 0)
+    {
+      return YPfalse;
+    }
+
+  opts |= O_NONBLOCK;
+
+  if(fcntl(sock, F_SETFL, opts) &lt; 0)
+    {
+      return YPfalse;
+    }
+
+  return YPtrue;
+#endif
+}
+
+Chris.
+-- 
+<A  HREF="http://radio.weblogs.com/0102385">http://radio.weblogs.com/0102385</A>
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00202.html">Binary distribution of MSVC Win32 Goo v146 available</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00204.html">Win32 socket addition</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00202.html">Binary distribution of MSVC Win32 Goo v146 available</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00204.html">Win32 socket addition</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00203"><strong>Date</strong></a></li>
+<li><a href="threads.html#00203"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Writing Goo libraries -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Thu, 25 Jul 2002 20:46:58 &#45;0400 (EDT) -->
+<!--X-Message-Id: 2D84B2DC&#45;A031&#45;11D6&#45;B16F&#45;003065D63222@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: u8z40nu0o.fsf@double.co.nz -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Writing Goo libraries</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00088.html">Date Prev</a>][<a href="msg00090.html">Date Next</a>][<a href="msg00087.html">Thread Prev</a>][<a href="msg00094.html">Thread Next</a>][<a href="index.html#00089">Date Index</a>][<a href="threads.html#00089">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Writing Goo libraries</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: Writing Goo libraries</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Thu, 25 Jul 2002 20:46:53 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Thursday, July 25, 2002, at 03:31  AM, Chris Double wrote:
+&gt; For those writing libraries in Goo what sort of steps do you follow in
+&gt; terms of organising where the code lives, how to update, etc?
+&gt;
+&gt; What sort of advice can you give on developing in Goo based on your
+&gt; experience?
+&gt;
+&gt; Some things for discussion:
+&gt;
+&gt; Where do you have the code 'live'? In the 'src' subdirectory somewhere
+&gt; or some local repository? How do you get Goo to know about the local
+&gt; repository?
+
+If you look at system.goo, you can see where goo looks for files.
+For modules, it searches in a few places:
+$(HOME)/.goo/mods/
+$(GOO_ROOT)/local/mods/
+$(GOO_ROOT)/mods/
+Thus, the answer would be to install it in $(GOO_ROOT)/local/mods/ for 
+system-wide installation, and ~/.goo/mods for user installation. You can 
+add paths to the variable *module-search-path* to make it search in more 
+places if you wish.
+
+&gt; When you have some code written, do you 'use' that module and then
+&gt; add/modify definitions as appropriate via the r-e-p? Or do you prefer
+&gt; just re-loading the module to catch up on all changes? What works
+&gt; best?
+
+Unfortunately there is not really any way to unload a module once its 
+been loaded. Thus, I end up just evaluating the expressions.
+
+&gt; What about those projects mixing 'C' code and Goo code (The GUI for
+&gt; example). How do you minimize having to rebuild the Goo system
+&gt; whenever you add new 'C' functionality?
+
+Well right now the GUI core stuff is pretty much all C I think. SWIG 
+generates C code which gets loaded in via the so-load call. The GOO core 
+never gets recompiled. There is an issue with this, though, in that the 
+C code is introducing bindings which the static g2c compiler does not 
+know about. Thus it is currently impossible to have code in goo-proper 
+which depends on the SWIG'd code.
+
+&gt; Does dynamic compilation help, hinder or anything else?
+
+It doesn't do much but make the program run faster. :) One thing to 
+watch for - If you're pasting something into the REP, it helps to put it 
+all in a (seq) so that the compiler can get it all at once instead of 
+separately compiling and loading each statement.
+
+&gt; When (if) you define a generic function via the r-e-p and realise that
+&gt; the arguments to the function aren't correct what do you do? Redefine
+&gt; the generic with a different name? Quit out and restart?
+
+Well you can do ,restart 2 to &quot;Replace #{Gen foo (&lt;any&gt;)} with an empty 
+generic congruent with #{Met foo ((a &lt;any&gt;) (b &lt;any&gt;))}.&quot; But I just put 
+a bunch of &quot;dg&quot;s at the top of the file, which define the generics I'm 
+going to use and thus replace anything previously defined so I don't run 
+into the problem
+
+
+&gt; Anyone game on writing up what their Goo development environment is
+&gt; like in actual Goo usage? (Emacs, Eclipse, etc?)
+
+Everyone I know writes in emacs.
+
+
+james
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00087" href="msg00087.html">Writing Goo libraries</a></strong>
+<ul><li><em>From:</em> Chris Double</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00088.html">image saving</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00090.html">Re: image saving</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00087.html">Writing Goo libraries</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00094.html">Re: Writing Goo libraries</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00089"><strong>Date</strong></a></li>
+<li><a href="threads.html#00089"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

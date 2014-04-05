@@ -1,0 +1,211 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Re: [Fwd: Questions on goo / samurui] -->
+<!--X-From-R13: Prarqvxg Uehaqznaa <Prarqvxg&#45;UehaqznaaNjro.qr> -->
+<!--X-Date: Thu, 17 Oct 2002 10:34:06 &#45;0400 (EDT) -->
+<!--X-Message-Id: 200210171433.g9HEXqX02589@mailgate5.cinetic.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Re: [Fwd: Questions on goo / samurui]</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00218.html">Date Prev</a>][<a href="msg00220.html">Date Next</a>][<a href="msg00216.html">Thread Prev</a>][<a href="msg00217.html">Thread Next</a>][<a href="index.html#00219">Date Index</a>][<a href="threads.html#00219">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Re: [Fwd: Questions on goo / samurui]</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;BenediktGrundmann&quot; &lt;<A HREF="mailto:Benedikt-Grundmann@DOMAIN.HIDDEN">Benedikt-Grundmann@xxxxxx</A>&gt;,  &quot;AndrewSutherland&quot; &lt;<A HREF="mailto:sombrero@DOMAIN.HIDDEN">sombrero@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Re: [Fwd: Questions on goo / samurui]</li>
+<li><em>From</em>: Benedikt Grundmann &lt;<A HREF="mailto:Benedikt-Grundmann@DOMAIN.HIDDEN">Benedikt-Grundmann@xxxxxx</A>&gt;</li>
+<li><em>Date</em>: Thu, 17 Oct 2002 16:33:52 +0200</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Andrew Sutherland &lt;sombrero@ai.mit.edu&gt; schrieb am 12.10.02 00:43:42:
+&gt; (Note: This is being copied to the list for all to &quot;enjoy&quot;)
+&gt; 
+&gt; No need to worry about bothering me!  I'm quite happy that anyone is
+&gt; trying to use SamurUI at all.  I apologize for not responding; I
+&gt; actually read it and then started to talk to Jonathan about what you
+&gt; said, then I promptly got distracted by something and ran off.  If I
+&gt; fail to respond in the future, feel free to remind me as many times as
+&gt; needed :)
+&gt; 
+&gt; Your request to be able to invoke Goo with some command-line arguments
+&gt; is reasonable; I'll see what I can do to get Jonathan to add that.
+&gt; However, in the meantime, you can pipe some stuff into Goo to
+&gt; accomplish what you desire.  Specifically, you would do the following:
+&gt; 
+&gt; echo &quot;(use mystyff/test/foo)&quot; | ./g2c
+&gt; 
+&gt; We are hoping to clean up the development process for UI's so that
+&gt; quitting isn't required (or at least recommended) so much.
+&gt; 
+&gt; I don't think (present &quot;Hello World&quot;) is going to work anytime soon.
+&gt; To be honest, I'm not sure why it doesn't work; I think the problem is
+&gt; that it is assuming that your presented object will have an
+&gt; interface-view (iview) associated with it, but my quick perusal of the
+&gt; code prompted by your e-mail suggested it should not have an issue
+&gt; with that.  In general, however, the SamurUI strategy is to bind
+&gt; things through getters and setters, which would preclude passing in
+&gt; constants in most cases.  I agree it would make a cute hello-world,
+&gt; but I'm generally wary of languages/UI's claiming everything important
+&gt; can be done in one line of code (or less!).
+&gt; 
+&gt; All of your 4 &quot;How can I's&quot; are quite reasonable, but I'm going to
+&gt; turn all of them around again and ask you what you're trying to do,
+&gt; rather than just assume that you should be able to directly call all
+&gt; of those things.
+&gt; 
+&gt; SamurUI has a number of layers going on:
+&gt; 
+&gt; 1) Traditional GUI Layer.  Constructs windows, buttons, etc.  Binds
+&gt;    callbacks to buttons etc.
+&gt; 
+&gt; 2) SamurUI the magic factory with default bindings.
+&gt; 
+&gt; Most of the questions you ask seem to operate in the #1 space, which
+&gt; I'm only really building because I need it to do my artsy, dubiously
+&gt; useful #2 stuff.  Basically, I guess I'm trying to reinvent CLIM
+&gt; without knowing all the stuff CLIM did, and certainly without trying
+&gt; to put in the same level of effort.  Addressing your specific points:
+&gt; 
+&gt; 1) The only reason I could see to modify a label is if you were using
+&gt;    it as a feedback mechanism.  For example, a label in a status-bar,
+&gt;    etc.  Running with my current design style, it seems that I should
+&gt;    internalize status/feedback mechanisms.  The mechanism could work
+&gt;    in a similar fashion to the way master/slave communication works.
+&gt;    Specifically, you would create a feedback object (ex: progress bar,
+&gt;    label, etc.) by providing the default feedback 0 or &quot;&quot; I suppose,
+&gt;    and then giving the communications channel it should use a name.
+&gt;    When you create an object that presumably will have or emit
+&gt;    feedback, you wrap it with a communications channel to use.  A
+&gt;    rudimentary example:
+&gt; 
+&gt; (imethod &lt;app&gt; copy-something me ...
+&gt;         ...
+&gt;         (emit-status (/ i 100.0))
+&gt;     )
+&gt; 
+&gt; (iview &lt;app&gt; 
+&gt;    (columns &quot;Copy Progress: &quot; (slave-status 0.0 copy-progress))
+&gt;    (master-status copy-something)
+&gt;    )
+&gt; 
+&gt; 2) So I actually should create these at least for the thing GTK
+&gt;    wrapping first, but let's get to how these fit into the SamurUI
+&gt;    world.  For files, colors, and fonts, it seems that what should be
+&gt;    happening is that I should be defining default bindings that
+&gt;    trigger these, as well as base classes as needed.  So I would
+&gt;    create a &lt;document-file&gt; class, that would bind to a text-box with
+&gt;    a &quot;browse&quot; button that brings up the file dialog.  The actual
+&gt;    opening and saving would be done by you... you'd just have the
+&gt;    filename.  I'll cave and say that we should have a way to trigger
+&gt;    the dialog though, which would probably be just the think GTK
+&gt;    wrapping way.  Colors and fonts would be same deal... there would
+&gt;    be a default binding for displayed color and font objects, but
+&gt;    again, there will be direct methods you can call if you just want a
+&gt;    font or color returned.
+&gt; 
+&gt; 3) There's obviously a need for this, but I would appreciate knowing
+&gt;    what it is you want to do with these.  You can probably (present
+&gt;    ...) multiple times right now and get multiple top level windows.
+&gt;    In fact, you can probably present while it's running and create new
+&gt;    ones on the fly.  A new modal-present could probably be introduced
+&gt;    which would work similarly to present, except of course the window
+&gt;    that appears would be modal.  (And could be called in a method, or
+&gt;    what have you.)
+&gt; 
+
+&gt; 4) Again, there needs to be a way to do this with the thin GTK
+&gt;    wrapping which will be done in a pseudo-getter-setter technique,
+&gt;    but the SamurUI proper solution would ideally not involve this kind
+&gt;    of procedural GUI control.  I suppose the way I see this going is
+&gt;    to use the constraints interface (which is currently supposed to
+&gt;    let you bound spin-boxes for numbers) to let you specify that a
+&gt;    given control should only be active under certain situations.  That
+&gt;    would presumably cover the case you have in mind.  Of course, I
+&gt;    want to avoid making the &quot;elegant&quot; approach much harder and
+&gt;    laborious a process to use than just programatically calling (set
+&gt;    (gui-enabled bob) #f).  Of course, a little extra work might be in
+&gt;    order, given that properly stating the constraints that express
+&gt;    whether or not a control should be enabled can save you big, and
+&gt;    works a lot better than having you code enabling disabling code all
+&gt;    over the place.  (And it's good abstraction too I suppose; keeping
+&gt;    the interface code in the (rapidly growing) interface-view.)
+&gt; 
+&gt; Er, so I think that covers it all.  I should note that I'm probably
+&gt; not going to be able to get to most of these things for 1.5 - 2 weeks,
+&gt; and that you should feel free to implement anything you want and send
+&gt; it to me.  I probably will be somewhat fussy about things I put in the
+&gt; 'fancy' SamurUI proper, but anything that adds functionality will
+&gt; definitely go in the thin GTK wrapping.  (Which sounds like what you
+&gt; are looking for primarily anyways.)
+&gt; 
+Not necessarily.  These are just the things I'm looking for in a gui library :-)
+It's just that it is more easy to think in convential gui terms instead of thinking 
+of the conceptually easier but also more unusual samurui ways :-)
+
+By the way at the moment I haven't got Internet at home though it will maybe take me some more time to answer / react to your emails.
+
+Cheers
+
+Bene
+
+________________________________________________________________
+Keine verlorenen Lotto-Quittungen, keine vergessenen Gewinne mehr! 
+Beim WEB.DE Lottoservice: <A  HREF="http://tippen2.web.de/?x=13">http://tippen2.web.de/?x=13</A>
+
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00218.html">Bigint support</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00220.html">Proposed numeric type hierarchy</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00216.html">Re: [Fwd: Questions on goo / samurui]</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00217.html">Null ports</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00219"><strong>Date</strong></a></li>
+<li><a href="threads.html#00219"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

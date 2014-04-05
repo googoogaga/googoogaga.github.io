@@ -1,0 +1,119 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: continuations and linear types -->
+<!--X-From-R13: Oiv Pelnag <nivNorgn4.pbz> -->
+<!--X-Date: Fri, 19 Apr 2002 04:28:44 &#45;0400 (EDT) -->
+<!--X-Message-Id: Pine.LNX.4.30.0204190112540.27200&#45;100000@cable.beta4.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 512F720D&#45;536C&#45;11D6&#45;9A51&#45;003065D63222@fuhm.net -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: continuations and linear types</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00024.html">Date Prev</a>][<a href="msg00026.html">Date Next</a>][<a href="msg00024.html">Thread Prev</a>][<a href="msg00026.html">Thread Next</a>][<a href="index.html#00025">Date Index</a>][<a href="threads.html#00025">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: continuations and linear types</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: continuations and linear types</li>
+<li><em>From</em>: Avi Bryant &lt;<A HREF="mailto:avi@DOMAIN.HIDDEN">avi@xxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Fri, 19 Apr 2002 01:32:16 -0700 (PDT)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Fri, 19 Apr 2002, James Knight wrote:
+
+&gt; However, every time I think about multi-callable continuations they seem
+&gt; like a worse idea. That message reminds me of my biggest objection: that
+&gt; functions can get put in normally-impossible states of execution. Even
+&gt; for web-applications it seems like a poor idea, as the state of the data
+&gt; is not copied, only the state of execution. The That's all well-and-good
+&gt; as long as you make sure not to ever modify program state or ever use
+&gt; non-functional operations in your app. If anything does, it could end up
+&gt; in serious trouble. That seems to me to be quite poor, and it makes me
+&gt; think that what you really want to have for web-applications is fork().
+
+I use full continuations for commercial web development literally every
+day and never run into &quot;normally-impossible state&quot; situations.  This is
+likely for two reasons:
+
+- the implementation of continuations I use (for Smalltalk, in Smalltalk)
+has slightly strange semantics, in that it copies all of the bindings on
+each invocation, so that assignments to locals in one invocation don't
+affect any others.  This makes it much better suited to backtracking.
+
+- the program state (that is, the state of the interaction with the user,
+as opposed to the state of databases, etc) is kept in well defined places
+such that copying and restoring it can be easily automated and controlled.
+
+The first is a real language consideration (well, unless, as in Smalltalk,
+you have a reified stack), and I would certainly recommend that a language
+intended to be used for web development add this variant of call/cc to its
+repertoire.  But then, I don't know if that's a goal of GOO.
+
+The second is a fairly natural result of designing a structured framework
+for web applications, and I would expect to be able to build something
+similar in any language I was using.
+
+Cheers,
+Avi
+
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00024" href="msg00024.html">Re: continuations and linear types</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00024.html">Re: continuations and linear types</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00026.html">Re: continuations and linear types</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00024.html">Re: continuations and linear types</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00026.html">Re: continuations and linear types</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00025"><strong>Date</strong></a></li>
+<li><a href="threads.html#00025"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

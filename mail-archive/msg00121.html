@@ -1,0 +1,114 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Goo Nitpicks -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Sat, 3 Aug 2002 00:23:00 &#45;0400 (EDT) -->
+<!--X-Message-Id: B1EC8817&#45;A698&#45;11D6&#45;8F54&#45;003065D63222@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: uo8fzxx2oyg.fsf@djundjun.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Goo Nitpicks</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00120.html">Date Prev</a>][<a href="msg00122.html">Date Next</a>][<a href="msg00125.html">Thread Prev</a>][<a href="msg00124.html">Thread Next</a>][<a href="index.html#00121">Date Index</a>][<a href="threads.html#00121">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Goo Nitpicks</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: Goo Nitpicks</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sat, 3 Aug 2002 00:23:00 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+On Friday, August 2, 2002, at 12:41  PM, Jonathan Bachrach wrote:
+&gt; i would propose
+&gt;
+&gt;   (take x n) == (sub x 0 n) == x[0:n]
+&gt;
+&gt; and
+&gt;
+&gt;   (drop x n) == (sub x n (len x)) == x[n:]
+&gt;
+&gt; as is done in NESL (by guy e. blelloch).  what this doesn't cover are
+&gt; the cases where negative numbers are used as the second index.  i
+&gt; could have another sub, say sub* handles this case and keeps sub pure.
+
+I'd have to say this is getting close to the point of overloading my 
+brain's namespace. What python accomplishes with one simple 
+easy-to-remember construct (x[a:b]), we are now proposing to use *four* 
+names for? That seems rather overboard. 'take' and 'drop' really don't 
+jump out at me as having the meaning you're trying to push them into 
+either.
+
+I'd have to say I see no reason for 'take' at all. It is not hard to 
+type (sub x 0 n). The form which 'drop' replaces - (sub x n (len x)) - 
+is somewhat cumbersome, but could perhaps be more easily accomplished by 
+allowing (sub x n 'end).
+&quot;(dm sub (x|&lt;seq&gt; from|&lt;int&gt; below|(t= 'end)) (sub x from (len x)))&quot;.
+
+James
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00124" href="msg00124.html">Re: Goo Nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00117" href="msg00117.html">Re: Goo Nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00120.html">Re: please resend your googoogaga msg -- Re: Trouble building goo-0_0140</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00122.html">Re: CVS update: goo/src/goo/cols</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00125.html">Re: Goo Nitpicks</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00124.html">Re: Goo Nitpicks</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00121"><strong>Date</strong></a></li>
+<li><a href="threads.html#00121"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

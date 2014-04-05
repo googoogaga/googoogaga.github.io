@@ -1,0 +1,180 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: new contributed library: <treap> -->
+<!--X-From-R13: @rry Yevfuanfjnzv <arryxNnyhz.zvg.rqh> -->
+<!--X-Date: Tue, 6 Aug 2002 20:01:36 &#45;0400 (EDT) -->
+<!--X-Message-Id: 15696.25700.728737.800586@h00045a4799d6.ne.client2.attbi.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 15695.61.145268.980674@h00045a4799d6.ne.client2.attbi.com -->
+<!--X-Reference: D4BC0779&#45;A8E2&#45;11D6&#45;8F54&#45;003065D63222@fuhm.net -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>new contributed library: &lt;treap&gt;</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00141.html">Date Prev</a>][<a href="msg00143.html">Date Next</a>][<a href="msg00141.html">Thread Prev</a>][<a href="msg00150.html">Thread Next</a>][<a href="index.html#00142">Date Index</a>][<a href="threads.html#00142">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>new contributed library: &lt;treap&gt;</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: new contributed library: &lt;treap&gt;</li>
+<li><em>From</em>: Neel Krishnaswami &lt;<A HREF="mailto:neelk@DOMAIN.HIDDEN">neelk@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Tue, 6 Aug 2002 20:05:56 -0400 (EDT)</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+Hi all,
+
+I wrote a new collection class in goo, and stuck it on the wiki (under
+GooLibs). I'll blurb it a little, so you know what I'm talking about,
+and then write about what I found easy/hard about the experience.
+
+o &lt;treap&gt; is a new mapping class that implements purely functional
+  balanced binary trees. It has O(log n) expected-time insertion,
+  search and removal. Like all binary trees it uses comparison to
+  order its elements, and &lt;treap&gt; currently uses the system '&lt;'
+  comparison. If you want to use value equality rather than '==', this
+  will do it for you.  Finally, the fact that it's functional means
+  that adding or deleting elements gives gets you a new tree, which
+  makes it handy if you need to save old versions or need a
+  thread-safe mapping class.
+
+Comments on writing it:
+
+I picked a functional map to slightly push the goo collection protocol
+a little, since it's a kind of collection that the protocol hadn't
+been designed in mind with. Overall, the experience was fairly
+straightforward, once jrb diagnosed that you have to implement the
+enumeration protocol before anything else.
+
+o That's probably symptomatic of my main difficulty: it's not clear
+  which methods I must override in order to have a collection that
+  works reliably with all the collection methods. It would be really
+  great if there were a 'Collection-writing 101' document that
+  described exactly which methods need to get overridden. Restarting
+  goo again and again as methods called each other without a
+  terminating base case and crashed goo was not so much fun.
+
+  I'm still not sure I have a complete set of collection methods,
+  actually. I'm sure that the set is *small*; I'm just not sure
+  I got it all. (col was a last-minute addition, for example.)
+
+o I had a similar problem with the exception system: I wasn't
+  sure which exceptions to throw where, so I just used an (error
+  &quot;foo&quot;) everywhere. This is rather suboptimal, because it really
+  degrades the value of the exception system for library users.
+
+  Python is a good model here. It has a fine-grained, well-documented
+  exception hierarchy, and the std library makes use of it
+  everywhere. So it's easy to figure out which exception you should
+  throw, and people actually do it. That annoyed me about Dylan: it
+  had this mondo powerful system with restartable exceptions and
+  everything, but no one seemed to make any substantial use of it.
+
+o There are a couple of missing functions from the protocol:
+
+  add-key: (c|&lt;map&gt; key|&lt;any&gt; val|&lt;any&gt; =&gt; &lt;map&gt;)
+
+   This is just the dual of del. 
+
+  fold-map: (f|&lt;fun&gt; init|&lt;any&gt; c|&lt;col&gt; =&gt; &lt;any&gt;)
+    
+    This is (f (f (f (f init k0 v0) k1 v1) ...))
+    where ki/vi are key-value pairs.
+
+  do-map: (f|&lt;fun&gt; c|&lt;col&gt;)
+  
+   This calls (f k v) on each key/value pair for side-effect. 
+
+  These seem like obvious adds. If I understood how packers work
+  there are probably analogs there, too. 
+
+o It's also clear that the goo collection protcol is *very* heavily
+  aimed at sequences and mappings. I started out writing &lt;treap&gt; as a
+  set type, and then changed it into a mapping to make it actually
+  exercise the collection libraries. Right now, I don't think sets
+  fit at all comfortably into the goo collection worldview. This is
+  annoying because sets are basically the only other common kind of
+  collection, and it sure would be nice if goo could handle them
+  easily.
+
+o I really like how goo generates a display for a map:
+
+  goo/user 0&lt;= (col &lt;treap&gt; 1 'a 2 'b 3 'c)
+  goo/user 0=&gt; #&lt;&lt;treap&gt; 1: a 3: c 2: b&gt;
+
+  It would be way cool if the reader could use that as literal syntax
+  for any kind of map. So #&lt;&lt;foo&gt; 1: &quot;a&quot; 3: &quot;c&quot; 2:&quot;b&quot;&gt; would morph
+  into (col &lt;foo&gt; 1 &quot;a&quot; 3 &quot;c&quot; 2 &quot;b&quot;), or something like that.
+
+o I'd like an option to display backtraces automatically, and for
+  there to be line number information in errors. 
+
+-- 
+Neel Krishnaswami
+neelk@alum.mit.edu
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00150" href="msg00150.html">Re: new contributed library: &lt;treap&gt;</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00138" href="msg00138.html">Two bugs....</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+<li><strong><a name="00141" href="msg00141.html">Re: Two bugs....</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00141.html">Re: Two bugs....</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00143.html">Two more bugs</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00141.html">Re: Two bugs....</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00150.html">Re: new contributed library: &lt;treap&gt;</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00142"><strong>Date</strong></a></li>
+<li><a href="threads.html#00142"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: rough first impressions -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Mon, 14 Apr 2003 12:12:27 &#45;0400 (EDT) -->
+<!--X-Message-Id: E1176B94&#45;6E93&#45;11D7&#45;BFF8&#45;000A95A0424C@ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 1050251823.1331.24.camel@snagret -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: rough first impressions</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00285.html">Date Prev</a>][<a href="msg00287.html">Date Next</a>][<a href="msg00285.html">Thread Prev</a>][<a href="msg00287.html">Thread Next</a>][<a href="index.html#00286">Date Index</a>][<a href="threads.html#00286">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: rough first impressions</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Miles Egan &lt;<A HREF="mailto:miles@DOMAIN.HIDDEN">miles@xxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: rough first impressions</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Mon, 14 Apr 2003 12:12:24 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+miles,
+
+On Sunday, April 13, 2003, at 12:37 PM, Miles Egan wrote:
+
+&gt; (Coming from the perspective of someone that's been a daytime
+&gt; perl/python/ruby person and nightime lisp/ocaml person for the last
+&gt; several years.)
+&gt;
+&gt; LIKES:
+&gt; * terseness vs common lisp
+&gt; Code compactness contributes to readability, at least to a point.  I
+&gt; think goo strikes a good balance here although the d? keywords are a
+&gt; little bit hard to distinguish.
+
+yeah i've thought about at least adding synonyms such as defclass.  a 
+lot of people grumble at the beginning but then seem to like the 
+terseness and the saved columns.
+
+&gt; * collection stuff
+&gt; Probably my favorite thing about Ruby is the elegance of it's iteration
+&gt; mechanisms and corresponding syntax.  This feature alone makes me twice
+&gt; as productive in Ruby as in Python.  Building this in is a smart move.
+&gt; Goo's iteration seems to have an even more imperative flavor than
+&gt; Ruby's, which is a bit ironic given Goo's roots.
+
+yeah i've thought about more declarative ways of specifying an 
+iteration protocol, perhaps with a macro that expands into the various 
+methods.  i definitely wasn't ready though to add coroutine support.
+
+&gt; DISLIKES:
+&gt; * &lt;type&gt; notation
+&gt; Is it really necessary to so strongly distinguish types syntactically?
+
+it's just a naming convention.  you can name your types whatever you 
+want.  you can even alias the builtin ones if you like.
+
+&gt; Is this done primarily to help the compiler?  You've already got the |
+&gt; for type annotations, couldn't you just as easily write:
+&gt; (dm mygenfunc (a|int b|str =&gt; str))
+&gt; ?
+
+actually what i was thinking was changing goo over to using case 
+sensitivity and having all caps be the convention for types.  this 
+saves characters and is pretty standard and lets you name the 
+constructors by lowercasing the type name.  lots of lispers object to 
+case sensitivity and using the shift key (except to type parentheses).
+
+&gt; * {} for (seq ...)
+&gt; This is too hard to distinguish from () in deeply nested expressions 
+&gt; and
+&gt; doesn't seem like enough of a win over (seq ...) to justify new syntax.
+&gt; I guess if you support reader macros this could just be a simple reader
+&gt; macro, right?
+
+it is.  i agree that the curly notation is very experimental.  i really 
+wanted to use curlies for a terse closure notation (as is done with 
+smalltalk blocks).  the seq abbreviation just fell out of that.  i do 
+like arc's use of do for seq.  it seems worth saving one more character 
+for something so used.  the other option is to just favor using 
+closures for control structures (ala smalltalk) and then not really 
+needing seq that often.  this is where the terse closure notation wins 
+big.  that's a big makeover though.  not sure.  i'm on the fence.
+
+&gt; * simple function vs generic function distinction
+&gt; It bugs me a bit that there are two completely different kinds of
+&gt; methods and that I have to make up my mind which one to use pretty 
+&gt; early
+&gt; in my design.  I don't know anything about multi-method implementation
+&gt; so maybe this is nuts, but it would be cool if all functions were
+&gt; generic.
+
+you can pretty much do this.  the only exception is local functions.  
+these could be done as generic functions as well and allow users to 
+have multiple methods on a given local generic.  in general, i think it 
+is a mistake for users to use raw methods as this precludes future 
+extension (of course this might be what the user wants but this is 
+meant to be a very dynamic language).
+
+of course, internally i need to have non generic functions to bootstrap 
+the system.  it's open for debate.
+
+&gt; Anyway, I think it's a pretty intruiging package.  How serious are you
+&gt; all about developing this thing?  Is it primarily a research vehicle or
+&gt; do you really intend to take on Python?
+
+i'm not planning on taking on python.  i'm interested in a number of 
+research directions and application areas.  i've got a pretty good base 
+and now plan to push it.  i will continue to make it available and 
+respond to suggestions but i don't have world domination in mind.
+
+jonathan
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00305" href="msg00305.html">Re: rough first impressions</a></strong>
+<ul><li><em>From:</em> Neel Krishnaswami</li></ul></li>
+<li><strong><a name="00298" href="msg00298.html">Re: rough first impressions</a></strong>
+<ul><li><em>From:</em> James Knight</li></ul></li>
+<li><strong><a name="00288" href="msg00288.html">Re: rough first impressions</a></strong>
+<ul><li><em>From:</em> Michael Vanier</li></ul></li>
+<li><strong><a name="00287" href="msg00287.html">Re: rough first impressions</a></strong>
+<ul><li><em>From:</em> Miles Egan</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00282" href="msg00282.html">rough first impressions</a></strong>
+<ul><li><em>From:</em> Miles Egan</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00285.html">Re: rough first impressions</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00287.html">Re: rough first impressions</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00285.html">Re: rough first impressions</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00287.html">Re: rough first impressions</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00286"><strong>Date</strong></a></li>
+<li><a href="threads.html#00286"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

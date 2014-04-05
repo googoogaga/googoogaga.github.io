@@ -1,0 +1,123 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: 0.153, a few things -->
+<!--X-From-R13: Tnevrq @njnm <fvyrapr&#45;tbbNavycbgrag.bet> -->
+<!--X-Date: Mon, 29 Sep 2003 15:25:58 &#45;0400 (EDT) -->
+<!--X-Message-Id: m3y8w79z58.fsf@xpf.nilpotent.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>0.153, a few things</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00330.html">Date Prev</a>][<a href="msg00332.html">Date Next</a>][<a href="msg00329.html">Thread Prev</a>][<a href="msg00332.html">Thread Next</a>][<a href="index.html#00331">Date Index</a>][<a href="threads.html#00331">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>0.153, a few things</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: 0.153, a few things</li>
+<li><em>From</em>: Faried Nawaz &lt;<A HREF="mailto:silence-goo@DOMAIN.HIDDEN">silence-goo@xxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Tue, 30 Sep 2003 00:24:03 +0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+Hello,
+
+The gremlins appear to have taken cvs down again.
+
+I'm running goo on FreeBSD.  FreeBSD's &quot;install&quot; doesn't have the -D flag,
+which is used in c/Makefile and src/Makefile.  -D creates subdirectories, so
+if you have an empty /dest/dir and you do
+
+install -c -D foo/bar/blah/thing.c /dest/dir/foo/bar/blah/thing.c
+
+The install code creates /dest/dir/foo/bar/blah before copying thing.c over.
+
+It appears that the install-sh script that ships with goo has code that
+obviates the need for -D:
+
+% ls /tmp/foo
+ls: /tmp/foo: No such file or directory
+% ./install-sh -c -m 0644 install-sh /tmp/foo/bar/goo/install-me
+% ls /tmp/foo/bar/goo
+install-me
+% 
+
+I'm willing to bet most other &quot;install&quot;s don't have -D either.  Something
+like this in configure.in might help:
+
+--- configure.in~       Mon Sep 29 23:40:19 2003
++++ configure.in        Tue Sep 30 00:20:34 2003
+@@ -5,6 +5,12 @@
+ # Checks for programs.
+ AC_PROG_CC
+ AC_PROG_INSTALL
++AC_MSG_CHECKING(for fileutils install)
++AC_TRY_RUN(&quot;$ac_cv_path_install --verbose&quot;, AC_MSG_RESULT([yes]), [
++AC_MSG_RESULT([no])
++ac_cv_path_install=&quot;$ac_install_sh&quot;
++INSTALL=&quot;$ac_install_sh&quot;
++], )
+ AC_PROG_LN_S
+ GOO_CHECK_EXE_SUFFIX
+
+I'm not sure what to put in the Makefile.in files, though.
+ 
+
+
+Faried.
+-- 
+^self
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00330.html">Re: goo interoperability with c</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00332.html">more stuff.</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00329.html">goo interoperability with c</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00332.html">more stuff.</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00331"><strong>Date</strong></a></li>
+<li><a href="threads.html#00331"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

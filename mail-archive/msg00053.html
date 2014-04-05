@@ -1,0 +1,105 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Threads -->
+<!--X-From-R13: "Quevf Rbhoyr" <puevf.qbhoyrNqbhoyr.pb.am> -->
+<!--X-Date: Thu, 9 May 2002 17:50:38 &#45;0400 (EDT) -->
+<!--X-Message-Id: 20020509215025.37ADB6DA63@www.fastmail.fm -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Threads</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00052.html">Date Prev</a>][<a href="msg00054.html">Date Next</a>][<a href="msg00050.html">Thread Prev</a>][<a href="msg00054.html">Thread Next</a>][<a href="index.html#00053">Date Index</a>][<a href="threads.html#00053">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Threads</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;goo list&quot; &lt;<A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Threads</li>
+<li><em>From</em>: &quot;Chris Double&quot; &lt;<A HREF="mailto:chris.double@DOMAIN.HIDDEN">chris.double@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Thu, 9 May 2002 21:50:25 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Is there any liklihood of Goo being able to have native threading
+sometime in the future? What would be involved in making Goo
+threadsafe? 
+
+I see a global 'stack' variable used and functions push and pop items
+from the stack. I'm guessing this won't work as is because multiple
+methods being called at the same time are going to confuse that stack.
+Any other areas that are not threadsafe or reentrant that would need to
+be?
+
+For the .NET port I've can spawn multiple threads and I've got the
+functionality to run tests but they blow Goo away because of the
+problems mentioned above of course:
+
+  (dotnet-start-thread (fun ()
+  (system-windows-forms-messagebox-show-string &quot;Hello World!&quot;)))
+
+This starts a thread and displays a hello world message box on another
+thread. But Goo dies at random points (as I expected, I didn't think it
+would be magically thread aware).
+
+Chris.
+-- 
+  Chris Double
+  chris.double@double.co.nz
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00054" href="msg00054.html">Re: Threads</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00052.html">RE: Announce:  Goo Editor Plugin for Eclipse</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00054.html">Re: Threads</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00050.html">Goo .NET part 2</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00054.html">Re: Threads</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00053"><strong>Date</strong></a></li>
+<li><a href="threads.html#00053"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

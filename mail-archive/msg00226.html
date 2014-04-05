@@ -1,0 +1,95 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: gets ambiguity and enum suggestion -->
+<!--X-From-R13: Ezryyl Bbbu <cybc+tbbNerqoevpx.qph.vr> -->
+<!--X-Date: Sat, 16 Nov 2002 09:16:12 &#45;0500 (EST) -->
+<!--X-Message-Id: 20021116141609.A14412@prodigy.Redbrick.DCU.IE -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>gets ambiguity and enum suggestion</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00225.html">Date Prev</a>][<a href="msg00227.html">Date Next</a>][<a href="msg00220.html">Thread Prev</a>][<a href="msg00228.html">Thread Next</a>][<a href="index.html#00226">Date Index</a>][<a href="threads.html#00226">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>gets ambiguity and enum suggestion</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: gets ambiguity and enum suggestion</li>
+<li><em>From</em>: Smelly Pooh &lt;<A HREF="mailto:plop%2Bgoo@DOMAIN.HIDDEN">plop+goo@xxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sat, 16 Nov 2002 14:16:09 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Version .146
+
+The gets method returns an empty string &quot;&quot; whether we're at EOF or
+reading an empty line, peek never seems to return EOF and I don't want
+to mix get with gets calls.
+
+There also seems to be a bug when calling peek just before and after EOF
+is returned by get.  Each time peek is called #\ is returned, then
+calling get on the port also returns #\ instead of EOF
+
+On the topic of the enum method, can it be made to be more generic than
+taking &lt;col&gt; as its first argument?  That would allow types such as
+&lt;port&gt; to work with the enum protocol, and simplify cases where people
+want to create enums, but not necessarily a full fledged collection
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00228" href="msg00228.html">Re: gets ambiguity and enum suggestion</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00225.html">Re: Proposed numeric type hierarchy</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00227.html">enum protocol suggestion</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00220.html">Proposed numeric type hierarchy</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00228.html">Re: gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00226"><strong>Date</strong></a></li>
+<li><a href="threads.html#00226"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

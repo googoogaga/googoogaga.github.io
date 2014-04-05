@@ -1,0 +1,118 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Some more nitpicks -->
+<!--X-From-R13: Xbanguna Pnpuenpu <weoNnv.zvg.rqh> -->
+<!--X-Date: Sun, 4 Aug 2002 12:53:16 &#45;0400 (EDT) -->
+<!--X-Message-Id: uo8elded0id.fsf@djundjun.ai.mit.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20020804000159.GA8122@vomjom -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Some more nitpicks</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00128.html">Date Prev</a>][<a href="msg00130.html">Date Next</a>][<a href="msg00127.html">Thread Prev</a>][<a href="msg00132.html">Thread Next</a>][<a href="index.html#00129">Date Index</a>][<a href="threads.html#00129">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Some more nitpicks</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Jonathan Hseu &lt;<A HREF="mailto:vomjom@DOMAIN.HIDDEN">vomjom@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Some more nitpicks</li>
+<li><em>From</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 04 Aug 2002 12:58:18 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+Jonathan Hseu &lt;vomjom@vomjom.org&gt; writes:
+
+&gt; Is there an easy way to make arrays with multiple dimensions?
+
+no, suggestions?  should be easy enough to add a fab and accessors.
+
+&gt; Also, (new) is currently like:
+&gt; (new &lt;my-class&gt; prop1 value1 prop2 value2)
+&gt;
+&gt; Would it not be better to have it:
+&gt; (new &lt;my-class&gt; (prop1 value1) (prop2 value2))
+
+no, because new is not a special form.  users can write methods on new
+and take initializers as a rest argument.  as an example, consider the
+new method for threads:
+
+  (dm new (x|(t&lt; &lt;thread&gt;) args|... =&gt; &lt;thread&gt;)
+    (def t (app-sup x args))
+    (unless (== (thread-function t) main-thread-key) ...)
+    t)
+
+i accept that the prop value's run together a bit too much for my
+liking.  i'm trying to avoid using keywords instead of real generics
+for tagging the properties.  using real generics allows one to limit
+prop initialization through namespace hiding, whereas keywords don't
+have that control.
+      
+-- jrb
+
+&gt; Jonathan Hseu &lt;vomjom@vomjom.org, vomjom@debian.org, jh4@cec.wustl.edu&gt;
+&gt; GPG ID:          5228D713
+&gt; GPG fingerprint: 220B A4EF 70FE B884 CB38  F93F EA8A 1024 5228 D713
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00132" href="msg00132.html">Re: Some more nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Hseu</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00127" href="msg00127.html">Some more nitpicks</a></strong>
+<ul><li><em>From:</em> Jonathan Hseu</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00128.html">Even more nitpicks</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00130.html">Re: Even more nitpicks</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00127.html">Some more nitpicks</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00132.html">Re: Some more nitpicks</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00129"><strong>Date</strong></a></li>
+<li><a href="threads.html#00129"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

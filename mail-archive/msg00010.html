@@ -1,0 +1,139 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: Build problems on Win32 -->
+<!--X-From-R13: Yra Oaqrefba <xnaqrefbaNooa.pbz> -->
+<!--X-Date: Wed, 17 Apr 2002 09:53:40 &#45;0400 (EDT) -->
+<!--X-Message-Id: 5.0.2.1.2.20020417095122.01fe6aa0@zima.bbn.com -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: scbd5d97.074@mh_acc099 -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: Build problems on Win32</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00009.html">Date Prev</a>][<a href="msg00011.html">Date Next</a>][<a href="msg00008.html">Thread Prev</a>][<a href="msg00011.html">Thread Next</a>][<a href="index.html#00010">Date Index</a>][<a href="threads.html#00010">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: Build problems on Win32</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: &quot;Chris Double&quot; &lt;<A HREF="mailto:DoubleC@DOMAIN.HIDDEN">DoubleC@xxxxxxxxx</A>&gt;, &lt;<A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: Build problems on Win32</li>
+<li><em>From</em>: Ken Anderson &lt;<A HREF="mailto:kanderson@DOMAIN.HIDDEN">kanderson@xxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Wed, 17 Apr 2002 09:52:58 -0400</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+I can't even get the simple-install to work.
+goo-0_131-win32-dev 2&gt; make simple-install
+cd c; make
+The system cannot find the path specified.
+
+make: *** [simple-install] Error 1
+goo-0_131-win32-dev 3&gt;
+
+I think the problem is that make is using the cmd shell rather than bash.
+Any idea how to fix that?
+
+At 07:33 PM 4/16/2002, Chris Double wrote:
+&gt;I can build Goo successfully from the initial windows distribution by 
+&gt;doing a 'make simple-install' from Cygwin. But if I regenerate the sources 
+&gt;I have problems. Following the instructions in the doc file, I do:
+&gt;
+&gt;   (use eval/g2c)
+&gt;   (g2c-goo)
+&gt;
+&gt;When I then do a 'make' on the C source I get an error:
+&gt;
+&gt;   $ make
+&gt;   (cd g2c; make)
+&gt;   make[1]: Entering directory 
+&gt; `/cygdrive/e/temp/goo2/goo-0_131-win32-dev/c/g2c'
+&gt;   make[1]: *** No rule to make target `..%', needed by `g2c'.  Stop.
+&gt;   make[1]: Leaving directory 
+&gt; `/cygdrive/e/temp/goo2/goo-0_131-win32-dev/c/g2c'
+&gt;   make: *** [all] Error 2
+&gt;
+&gt;Comparing the makefile in GOO_BUILD_ROOT/c/g2c to the one in the original 
+&gt;distribution I see that the pattern substitution line has had the '/' 
+&gt;changed to '\'. Ditto with the slash in the paths of all the .o files in 
+&gt;the makefile.
+&gt;
+&gt;Changing the '\' to '/' in the pattern substitution and the file paths 
+&gt;allowed Goo to build fine. Path separators are a pain for cross platform 
+&gt;stuff, aren't they!
+&gt;
+&gt;Chris.
+&gt;
+&gt;--------------------------------------------------------------------------------------
+&gt;Disclaimer:
+&gt;&quot;The information contained in this document is confidential to the 
+&gt;addressee(s) and
+&gt;  may be legally privileged.   Any view or opinions expressed are those of 
+&gt; the author
+&gt;  and may not be those of the organisation to which the author 
+&gt; belongs.  If you have
+&gt;  received this e-mail message in error please delete it and notify me. 
+&gt; Thank you.&quot;
+&gt;--------------------------------------------------------------------------------------
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00011" href="msg00011.html">Re: Build problems on Win32</a></strong>
+<ul><li><em>From:</em> Ken Anderson</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00008" href="msg00008.html">Build problems on Win32</a></strong>
+<ul><li><em>From:</em> Chris Double</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00009.html">Sockets</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00011.html">Re: Build problems on Win32</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00008.html">Build problems on Win32</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00011.html">Re: Build problems on Win32</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00010"><strong>Date</strong></a></li>
+<li><a href="threads.html#00010"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: enum protocol suggestion -->
+<!--X-From-R13: Xnzrf Yavtug <wxavtugNshuz.arg> -->
+<!--X-Date: Wed, 20 Nov 2002 03:42:16 &#45;0500 (EST) -->
+<!--X-Message-Id: F73BA91E&#45;FC63&#45;11D6&#45;BC87&#45;003065F305CC@fuhm.net -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20021120071851.A23701@prodigy.Redbrick.DCU.IE -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: enum protocol suggestion</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00236.html">Date Prev</a>][<a href="msg00238.html">Date Next</a>][<a href="msg00236.html">Thread Prev</a>][<a href="msg00238.html">Thread Next</a>][<a href="index.html#00237">Date Index</a>][<a href="threads.html#00237">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: enum protocol suggestion</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: enum protocol suggestion</li>
+<li><em>From</em>: James Knight &lt;<A HREF="mailto:jknight@DOMAIN.HIDDEN">jknight@xxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Wed, 20 Nov 2002 03:42:13 -0500</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+
+On Wednesday, November 20, 2002, at 02:18  AM, Smelly Pooh wrote:
+&gt; I think nxt and now should be the one method unless there's a reason to
+&gt; split them
+&gt;
+&gt; (rep loop (enum)
+&gt;   (unless (fin? enum)
+&gt;     (nxt enum)
+&gt;     (post &quot;%s\n&quot; (now enum)) ) )
+&gt;
+&gt; is less elegant than
+&gt;
+&gt; (rep loop (enum)
+&gt;   (unless (fin? enum)
+&gt;     (post &quot;%s\n&quot; (nxt enum)) ) )
+
+Two reasons not to combine them:
+1) There is often a need to look at the current object without using it 
+up.
+2) The reason nxt doesn't return the current object is that we thought 
+it'd be nice if enumerators weren't mutable but rather returned a new 
+object each time. However, that is clearly not feasable to do unless 
+the optimizer is smart enough to optimize away all the extra 
+allocations (which, of course, is a hard problem), so currently the 
+enumerators mutate. However, the interface is still defined *as if* 
+enumerators did not mutate themselves. This means that nxt is defined 
+to return the enumerator pointing to the next element (which of course 
+really means it returns itself currently). It could return a tup of 
+both the current element AND the new enumerator, but that would not be 
+easier to deal with in any way.
+
+I don't see it as a big problem, because, even better than either of 
+those examples is:
+(for ((x some-collection))
+   (post &quot;%s\n&quot; x))
+
+BTW, the correct way to write it without the for macro is (you can also 
+see this by pasting the previous code into the listener wrapped by 
+(macro-expand ...))
+
+(rep loop ((e (enum some-collection)))
+   (unless (fin? e)
+     (post &quot;%s\n&quot; (now e))
+     (loop (nxt e))))
+
+james
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00236" href="msg00236.html">Re: enum protocol suggestion</a></strong>
+<ul><li><em>From:</em> Smelly Pooh</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00236.html">Re: enum protocol suggestion</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00238.html">Re: enum protocol suggestion</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00236.html">Re: enum protocol suggestion</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00238.html">Re: enum protocol suggestion</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00237"><strong>Date</strong></a></li>
+<li><a href="threads.html#00237"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

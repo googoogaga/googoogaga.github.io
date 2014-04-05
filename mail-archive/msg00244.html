@@ -1,0 +1,177 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: goo 0_153 now available -->
+<!--X-From-R13: Quevf Rbhoyr <puevfNqbhoyr.pb.am> -->
+<!--X-Date: Tue, 4 Feb 2003 02:18:25 &#45;0500 (EST) -->
+<!--X-Message-Id: uisw0cy4r.fsf@double.co.nz -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: uo8fzrserc6.fsf@djundjun.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: goo 0_153 now available</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00243.html">Date Prev</a>][<a href="msg00245.html">Date Next</a>][<a href="msg00241.html">Thread Prev</a>][<a href="msg00245.html">Thread Next</a>][<a href="index.html#00244">Date Index</a>][<a href="threads.html#00244">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: goo 0_153 now available</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: <A HREF="mailto:googoogaga@DOMAIN.HIDDEN">googoogaga@xxxxxxxxxx</A></li>
+<li><em>Subject</em>: Re: goo 0_153 now available</li>
+<li><em>From</em>: Chris Double &lt;<A HREF="mailto:chris@DOMAIN.HIDDEN">chris@xxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: 04 Feb 2003 20:18:12 +1300</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+I've got goo 0_153 working under Windows and will release the binaries
+shortly. I've managed to work around the lack of VARARG macros in
+VC. It's ugly but works.
+
+In grt.h add an #else to the block that defines the XCALLN, etc
+macros:
+
+--------------8&lt;----------------
+#if !defined(_MSC_VER)
+#define CALLN(...) _CALLN(regs, __VA_ARGS__)
+#define XCALL0(...) _CALL0(REGSCREF(), __VA_ARGS__)
+#define XCALL1(...) _CALL1(REGSCREF(), __VA_ARGS__)
+#define XCALL2(...) _CALL2(REGSCREF(), __VA_ARGS__)
+#define XCALL3(...) _CALL3(REGSCREF(), __VA_ARGS__)
+#define XCALL4(...) _CALL4(REGSCREF(), __VA_ARGS__)
+#define XCALL5(...) _CALL5(REGSCREF(), __VA_ARGS__)
+#define XCALLN(...) _CALLN(REGSCREF(), __VA_ARGS__)
+#define XXCALL0(...) _CALL0(REGSREF(), __VA_ARGS__)
+#define XXCALL1(...) _CALL1(REGSREF(), __VA_ARGS__)
+#define XXCALL2(...) _CALL2(REGSREF(), __VA_ARGS__)
+#define XXCALL3(...) _CALL3(REGSREF(), __VA_ARGS__)
+#define XXCALL4(...) _CALL4(REGSREF(), __VA_ARGS__)
+#define XXCALL5(...) _CALL5(REGSREF(), __VA_ARGS__)
+#define XXCALLN(...) _CALLN(REGSREF(), __VA_ARGS__)
+#else
+IMPORTEXPORT EXTTVAR(msc_calln_regs);
+IMPORTEXPORT extern P _MSC_CALLN (int check, P fun, int n, ...);
+#define CALLN (TSET(msc_calln_regs, regs),_MSC_CALLN)
+#define XCALL0(check, fun) _CALL0(REGSCREF(), check, fun)
+#define XCALL1(check, fun, a1) _CALL1(REGSCREF(), check, fun, a1)
+#define XCALL2(check, fun, a1, a2) _CALL2(REGSCREF(), check, fun, a1, a2)
+#define XCALL3(check, fun, a1, a2, a3) _CALL3(REGSCREF(), check, fun, a1, a2, a3)
+#define XCALL4(check, fun, a1, a2, a3, a4) _CALL4(REGSCREF(), check, fun, a1, a2, a3, a4)
+#define XCALL5(check, fun, a1, a2, a3, a4, a5) _CALL5(REGSCREF(), check, fun, a1, a2, a3, a4, a5)
+#define XCALLN (TSET(msc_calln_regs, REGSCREF()),_MSC_CALLN)
+#define XXCALL0(check, fun) _CALL0(REGSREF(), check, fun)
+#define XXCALL1(check, fun, a1) _CALL1(REGSREF(), check, fun, a1)
+#define XXCALL2(check, fun, a1, a2) _CALL2(REGSREF(), check, fun, a1, a2)
+#define XXCALL3(check, fun, a1, a2, a3) _CALL3(REGSREF(), check, fun, a1, a2, a3)
+#define XXCALL4(check, fun, a1, a2, a3, a4) _CALL4(REGSREF(), check, fun, a1, a2, a3, a4)
+#define XXCALL5(check, fun, a1, a2, a3, a4, a5) _CALL5(REGSREF(), check, fun, a1, a2, a3, a4, a5)
+#define XXCALLN (TSET(msc_calln_regs,REGSREF()),_MSC_CALLN)
+#endif
+--------------8&lt;----------------
+
+Note that addition of a thread local variable, msc_calln_regs, and the
+change to the macros. The CALLN style macros now set msc_calln_regs to
+the required 'regs' value before calling the _MSC_CALLN function. This
+is done using the sequence seperator in  (the ',').
+
+In grt.c I added:
+
+--------------8&lt;----------------
+#if defined(_MSC_VER)
+DEFTVAR(msc_calln_regs);
+
+P _MSC_CALLN (int check, P fun, int n, ...) {
+  REGS regs = (REGS)TREF(msc_calln_regs);
+  int i;
+  P   res;
+  va_list ap; va_start(ap, n);
+  INC_STACK(n);
+  
+  for (i = 0; i &lt; n; i++)
+    REG(sp)[- i - 1] = va_arg(ap, P);
+
+  va_end(ap);
+  PUSH((P)(PINT)n);
+  PUSH(fun);
+  if(check)
+    YPcheck_call_types();
+  res = FUNCALL(fun);
+  DEC_STACK(n+2);
+  return res;
+}
+#endif
+--------------8&lt;----------------
+
+This adds the definition of the msc_calln_regs variable and the
+function to extract the value from it.
+
+Like I said, it's ugly, but it allows compiling Goo 0_153 under MSVC with
+no other source code changes. Previously I used to have to modify
+g2c.goo to generate the expanded macros and rebuild g2c before
+compiling under MSVC.
+
+Chris.
+-- 
+<A  HREF="http://radio.weblogs.com/0102385">http://radio.weblogs.com/0102385</A>
+
+
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00245" href="msg00245.html">Re: goo 0_153 now available</a></strong>
+<ul><li><em>From:</em> Chris Double</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00241" href="msg00241.html">goo 0_153 now available</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00243.html">Re: question about dg</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00245.html">Re: goo 0_153 now available</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00241.html">goo 0_153 now available</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00245.html">Re: goo 0_153 now available</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00244"><strong>Date</strong></a></li>
+<li><a href="threads.html#00244"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!-- MHonArc v2.5.2 -->
+<!--X-Subject: Re: gets ambiguity and enum suggestion -->
+<!--X-From-R13: Ezryyl Bbbu <cybc+tbbNerqoevpx.qph.vr> -->
+<!--X-Date: Sun, 17 Nov 2002 16:27:53 &#45;0500 (EST) -->
+<!--X-Message-Id: 20021117212746.A2266@prodigy.Redbrick.DCU.IE -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20021116141609.A14412@prodigy.Redbrick.DCU.IE -->
+<!--X-Reference: uo88yzsb0w7.fsf@djundjun.ai.mit.edu -->
+<!--X-Head-End-->
+<!doctype html public "-//W3C//DTD HTML//EN">
+<html>
+<head>
+<title>Re: gets ambiguity and enum suggestion</title>
+</head>
+<body>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<hr>
+[<a href="msg00228.html">Date Prev</a>][<a href="msg00230.html">Date Next</a>][<a href="msg00228.html">Thread Prev</a>][<a href="msg00230.html">Thread Next</a>][<a href="index.html#00229">Date Index</a>][<a href="threads.html#00229">Thread Index</a>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<h1>Re: gets ambiguity and enum suggestion</h1>
+<hr>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<ul>
+<li><em>To</em>: Jonathan Bachrach &lt;<A HREF="mailto:jrb@DOMAIN.HIDDEN">jrb@xxxxxxxxxx</A>&gt;</li>
+<li><em>Subject</em>: Re: gets ambiguity and enum suggestion</li>
+<li><em>From</em>: Smelly Pooh &lt;<A HREF="mailto:plop%2Bgoo@DOMAIN.HIDDEN">plop+goo@xxxxxxxxxxxxxxx</A>&gt;</li>
+<li><em>Date</em>: Sun, 17 Nov 2002 21:27:46 +0000</li>
+</ul>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<hr>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<pre>
+In reply to Jonathan Bachrach's flatulent wordings, 
+&gt; Smelly Pooh &lt;plop+goo@redbrick.dcu.ie&gt; writes:
+&gt; 
+&gt; &gt; Version .146
+&gt; &gt; 
+&gt; &gt; The gets method returns an empty string &quot;&quot; whether we're at EOF or
+&gt; &gt; reading an empty line, 
+&gt; 
+&gt; gets is defined to return a &lt;str&gt;.  the protocol is set up to require
+&gt; that the user call eof? to disambiguate these cases. 
+
+eof? will have to be called on a character returned by either peek or
+get.  When peek is fixed it won't be too bad but it feels less elegant
+than other languages where gets doesn't need to be mixed with peek and
+get calls.
+
+The solutions I've seen are
+
+1) To return the string with the trailing '\n' character, EOF is then
+represented by an empty string, this is the way most people seem to be
+doing it
+
+2) Return lines with '\n' stripped as goo currently does, raise an &lt;eof&gt;
+condition when the end of the file is reached, this is how the
+input_line function works in Ocaml
+(<A  HREF="http://caml.inria.fr/ocaml/htmlman/libref/Pervasives.html">http://caml.inria.fr/ocaml/htmlman/libref/Pervasives.html</A>)
+
+&gt; &gt; peek never seems to return EOF and I don't want to mix get with gets
+&gt; &gt; calls.
+&gt; &gt;
+&gt; &gt; There also seems to be a bug when calling peek just before and after EOF
+&gt; &gt; is returned by get.  Each time peek is called #\ is returned, then
+&gt; &gt; calling get on the port also returns #\ instead of EOF
+&gt; 
+&gt; i'm not sure why this is from looking at the implementation:
+&gt; 
+&gt;   src/goo/io/port.goo and src/goo/io/%port.c
+&gt; 
+&gt; it would seem peek should return ``(eof-object)'' based on its
+&gt; ``fgetc'' implementation.  it is merely a wrapper for ``fgetc'' and
+&gt; ``ungetc''.  are you running on windows or linux?
+
+I'm running on Linux, however I think I've found the problem in %port.c
+
+P YgooSioSportYPpeek (P s) {
+  PCHR c = fgetc((FILE*)YPlu(s)); ungetc((int)c, (FILE*)YPlu(s)); return
+  (P)(PINT)c;
+  }
+
+The above PCHR should be PINT, the type demotion changes EOF from int -1
+(common EOF value) to unsigned char 255
+
+</pre>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<hr>
+<ul><li><strong>Follow-Ups</strong>:
+<ul>
+<li><strong><a name="00230" href="msg00230.html">Re: gets ambiguity and enum suggestion</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<ul><li><strong>References</strong>:
+<ul>
+<li><strong><a name="00226" href="msg00226.html">gets ambiguity and enum suggestion</a></strong>
+<ul><li><em>From:</em> Smelly Pooh</li></ul></li>
+<li><strong><a name="00228" href="msg00228.html">Re: gets ambiguity and enum suggestion</a></strong>
+<ul><li><em>From:</em> Jonathan Bachrach</li></ul></li>
+</ul></li></ul>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<ul>
+<li>Prev by Date:
+<strong><a href="msg00228.html">Re: gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Next by Date:
+<strong><a href="msg00230.html">Re: gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Previous by thread:
+<strong><a href="msg00228.html">Re: gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Next by thread:
+<strong><a href="msg00230.html">Re: gets ambiguity and enum suggestion</a></strong>
+</li>
+<li>Index(es):
+<ul>
+<li><a href="index.html#00229"><strong>Date</strong></a></li>
+<li><a href="threads.html#00229"><strong>Thread</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</body>
+</html>
